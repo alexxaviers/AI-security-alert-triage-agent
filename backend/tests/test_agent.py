@@ -80,3 +80,22 @@ def test_tool_errors_are_returned_to_the_model_not_raised():
                         summary="x", reasoning="x", next_steps=["x"]),
     ])
     assert "error" in result.tool_audit[0]["output"]
+
+
+def test_thinking_blocks_are_not_replayed_into_the_verdict_call():
+    # Signed thinking blocks are bound to the tools list they were made with; the verdict call has
+    # no tools, so the API rejects them if they are sent back.
+    result, llm = _run([
+        AIMessage(content=[
+            {"type": "thinking", "thinking": "Check the IP first.", "signature": "sig"},
+            {"type": "tool_use", "id": "c1", "name": "check_ip_reputation", "input": {"ip": "185.220.101.20"}},
+        ], tool_calls=[tool_call("check_ip_reputation", {"ip": "185.220.101.20"}, "c1")]),
+        AIMessage(content=[{"type": "thinking", "thinking": "Tor exit.", "signature": "sig"},
+                           {"type": "text", "text": "Brute force from a Tor exit."}]),
+        verdict_message(severity="high", attack_technique="T1110.001", confidence=0.85,
+                        summary="Brute force.", reasoning="Tor exit.", next_steps=["Block the IP"]),
+    ])
+    assert result.verdict["severity"] == "high"
+    decide_msgs = llm.calls[-1]
+    blocks = [b for m in decide_msgs if isinstance(m.content, list) for b in m.content]
+    assert blocks and not any(b.get("type") in ("thinking", "redacted_thinking") for b in blocks)

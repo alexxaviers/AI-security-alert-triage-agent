@@ -59,6 +59,14 @@ def _usage(msg: Any) -> list[dict]:
     return [{"input": u.get("input_tokens", 0), "output": u.get("output_tokens", 0)}] if u else []
 
 
+def _without_thinking(msg: AnyMessage) -> AnyMessage:
+    if not isinstance(msg, AIMessage) or not isinstance(msg.content, list):
+        return msg
+    content = [b for b in msg.content
+               if not (isinstance(b, dict) and b.get("type") in ("thinking", "redacted_thinking"))]
+    return msg.model_copy(update={"content": content})
+
+
 def build_agent(llm: BaseChatModel):
     settings = get_settings()
     llm_with_tools = llm.bind_tools(TOOLS)
@@ -105,6 +113,9 @@ def build_agent(llm: BaseChatModel):
         # drop it so the conversation is valid.
         if isinstance(msgs[-1], AIMessage) and msgs[-1].tool_calls:
             msgs = msgs[:-1]
+        # Signed thinking blocks are bound to the tools list they were created with, and this call
+        # has no tools, so the API rejects them. They are only context here; drop them.
+        msgs = [_without_thinking(m) for m in msgs]
         out = llm_verdict.invoke(msgs + [HumanMessage(DECIDE_PROMPT)])
         parsed: Verdict | None = out.get("parsed")
         if parsed is None:
