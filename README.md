@@ -8,7 +8,9 @@ dashboard shows every decision with the agent's reasoning and the exact tool cal
 an evaluation suite of 206 labeled alerts (including real attack telemetry from OTRF) measures
 how often it's right, tracked across prompt and model changes.
 
-<!-- Add a demo GIF here: docs/demo.gif -->
+![Dashboard: alerts sorted by severity with the agent's verdict, ATT&CK technique and confidence](docs/dashboard.png)
+
+![Alert detail: triage summary, agent reasoning, next steps and the audited tool calls](docs/alert-detail.png)
 
 ## Architecture
 
@@ -58,13 +60,29 @@ the outside world.
 | Rules baseline (keyword + intel, no LLM) | 64.6% | 80.1% | 9 / 45 | $0 |
 | LLM agent (`claude-sonnet-5-5`) | 94.7% | 98.5% | 5 / 45 | $0.041 |
 
-Every agent severity mistake was off by one level (high ↔ critical), and none of the missed
-criticals was called low or medium. Full breakdown in [`results.md`](backend/evals/results.md).
+What the first full run (206 alerts) shows. Full breakdown in
+[`results.md`](backend/evals/results.md).
 
-**About the labels:** labels are proposed by the scenario generator and need a human review pass
-(`python backend/scripts/review_labels.py`) before calling them hand-labeled. The agent and the
-labels share one written severity rubric, the way a SOC grades analysts against its policy. See
-[`backend/evals/LABELING.md`](backend/evals/LABELING.md).
+- **Every mistake is off by one level, and only between high and critical.** Low and medium are
+  100% correct, and no critical alert was called low or medium (0 silent misses).
+- **All 5 missed criticals are the same pattern:** Word spawning hidden, encoded PowerShell that
+  downloads a script from a known-malicious IP. The agent gets the technique right (T1059.001)
+  but calls it high because "the payload isn't confirmed to have run", while the rubric treats a
+  malicious document executing as critical. This makes PowerShell the weakest scenario (68.8%)
+  and the clearest target for the next prompt change.
+- **Most false criticals are impossible travel:** 4 of 6 are impossible-travel alerts (T1078)
+  escalated from high to critical, which makes it the second-weakest scenario at 71.4%.
+- **The confidence guardrail doesn't catch these mistakes yet.** All 11 wrong verdicts had
+  confidence 0.70–0.85, above the 0.6 review threshold, so only 0.5% of alerts were sent to a
+  human. Confidence is not yet calibrated well enough to route the borderline high/critical calls.
+- **Versus the rules baseline:** +30 points severity accuracy, +18 points ATT&CK accuracy, 4 fewer
+  missed criticals, and the review queue drops from 86% of alerts to under 1%.
+- **Cost and speed:** $0.041 per alert (about 9k tokens, 1.4 tool calls), 11.6s average, 15.1s p95.
+
+**About the labels:** labels were proposed by the scenario generator, then reviewed by hand
+(`python backend/scripts/review_labels.py`; every label carries `"reviewed": true`). The agent and
+the labels share one written severity rubric, the way a SOC grades analysts against its policy.
+See [`backend/evals/LABELING.md`](backend/evals/LABELING.md).
 
 ## The dataset
 
@@ -102,7 +120,7 @@ python -m venv .venv && source .venv/bin/activate
 pip install -r requirements-dev.txt
 pip install torch --index-url https://download.pytorch.org/whl/cpu && pip install -r requirements-embeddings.txt  # optional
 uvicorn app.main:app --reload       # uses SQLite unless DATABASE_URL is set
-pytest -q                           # 33 tests: tools with mocked APIs, agent with a scripted LLM, API, metrics
+pytest -q                           # 35 tests: tools with mocked APIs, agent with a scripted LLM, API, metrics
 
 python -m evals.run_evals --engine baseline        # no key needed
 python -m evals.run_evals --limit 20               # LLM agent, quick check
