@@ -73,9 +73,12 @@ def health():
     return {"status": "ok", "engine": s.anthropic_model if s.use_llm else "baseline-rules"}
 
 
+# Endpoints that start a background triage close their session when they return (scope="function").
+# With the default scope the session, and its pooled connection, stays open until the background task
+# finishes, so a burst of alerts exhausts the pool.
 @app.post("/alerts", response_model=AlertDetail, status_code=201)
 def create_alert(body: AlertIn, background: BackgroundTasks, sync: bool = False,
-                 session: Session = Depends(get_session)):
+                 session: Session = Depends(get_session, scope="function")):
     """Store an alert as pending and triage it in the background (or inline with ?sync=true)."""
     raw = body.model_dump(exclude_none=True)
     alert_id = raw.get("id") or f"ALR-{uuid.uuid4().hex[:8].upper()}"
@@ -156,7 +159,7 @@ def override_alert(alert_id: str, body: OverrideIn, session: Session = Depends(g
 
 @app.post("/alerts/{alert_id}/retriage", response_model=AlertDetail)
 def retriage(alert_id: str, background: BackgroundTasks, sync: bool = False,
-             session: Session = Depends(get_session)):
+             session: Session = Depends(get_session, scope="function")):
     _get_alert(session, alert_id)
     if sync:
         triage_alert(alert_id)

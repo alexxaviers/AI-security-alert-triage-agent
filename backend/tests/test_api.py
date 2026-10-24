@@ -88,3 +88,16 @@ def test_stats():
 
 def test_missing_alert_404():
     assert client.get("/alerts/NOPE").status_code == 404
+
+
+def test_request_session_is_released_before_background_triage(monkeypatch):
+    # A background triage takes seconds; if the request's session still holds a pooled connection
+    # while it runs, a burst of alerts exhausts the pool.
+    from app import main
+    from app.db import engine
+
+    checked_out = []
+    monkeypatch.setattr(main, "triage_alert", lambda alert_id: checked_out.append(engine.pool.checkedout()))
+    a = client.post("/alerts", json={"title": "pool check"}).json()
+    client.post(f"/alerts/{a['id']}/retriage")
+    assert checked_out == [0, 0]
