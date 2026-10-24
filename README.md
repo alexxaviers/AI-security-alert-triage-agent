@@ -56,10 +56,10 @@ the outside world.
 | Engine | Severity accuracy | ATT&CK accuracy | Missed critical | Avg cost / alert |
 |---|---|---|---|---|
 | Rules baseline (keyword + intel, no LLM) | 64.6% | 80.1% | 9 / 45 | $0 |
-| LLM agent (`claude-sonnet-5-5`) | _run it_ | _run it_ | _run it_ | _run it_ |
+| LLM agent (`claude-sonnet-5-5`) | 94.7% | 98.5% | 5 / 45 | $0.041 |
 
-> Fill in the agent row after your first run. The baseline exists so the agent's number has a
-> reference point.
+Every agent severity mistake was off by one level (high ↔ critical), and none of the missed
+criticals was called low or medium. Full breakdown in [`results.md`](backend/evals/results.md).
 
 **About the labels:** labels are proposed by the scenario generator and need a human review pass
 (`python backend/scripts/review_labels.py`) before calling them hand-labeled. The agent and the

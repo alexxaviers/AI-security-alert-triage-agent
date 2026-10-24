@@ -1,0 +1,5707 @@
+{
+  "timestamp": "20261024T040817Z",
+  "engine": "claude-sonnet-5-5",
+  "prompt_version": "7feb909b",
+  "intel": "fixtures",
+  "note": "first full run (last 37 alerts re-run after credit ran out)",
+  "wall_seconds": 612.1,
+  "metrics": {
+    "n": 206,
+    "errors": 0,
+    "confusion": {
+      "low": {
+        "low": 78,
+        "medium": 0,
+        "high": 0,
+        "critical": 0
+      },
+      "medium": {
+        "low": 0,
+        "medium": 21,
+        "high": 0,
+        "critical": 0
+      },
+      "high": {
+        "low": 0,
+        "medium": 0,
+        "high": 56,
+        "critical": 6
+      },
+      "critical": {
+        "low": 0,
+        "medium": 0,
+        "high": 5,
+        "critical": 40
+      }
+    },
+    "severity_accuracy": 0.9466019417475728,
+    "severity_within_one": 1.0,
+    "per_class": {
+      "low": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 78
+      },
+      "medium": {
+        "precision": 1.0,
+        "recall": 1.0,
+        "support": 21
+      },
+      "high": {
+        "precision": 0.9180327868852459,
+        "recall": 0.9032258064516129,
+        "support": 62
+      },
+      "critical": {
+        "precision": 0.8695652173913043,
+        "recall": 0.8888888888888888,
+        "support": 45
+      }
+    },
+    "technique_accuracy": 0.9854368932038835,
+    "technique_accuracy_parent": 0.9902912621359223,
+    "critical_total": 45,
+    "missed_critical": [
+      "ALR-0059",
+      "ALR-0071",
+      "ALR-0084",
+      "ALR-0143",
+      "ALR-0154"
+    ],
+    "silent_missed_critical": [],
+    "false_critical": [
+      "ALR-0027",
+      "ALR-0041",
+      "ALR-0045",
+      "ALR-0089",
+      "ALR-0122",
+      "OTRF-0004"
+    ],
+    "review_rate": 0.0048543689320388345,
+    "accuracy_auto": 0.9463414634146341,
+    "accuracy_flagged": 1.0,
+    "latency_avg_ms": 11601.839805825242,
+    "latency_p95_ms": 15115,
+    "cost_avg_usd": 0.04119543203883495,
+    "cost_total_usd": 8.486259,
+    "tokens_avg": 9028.02427184466,
+    "tool_calls_avg": 1.441747572815534,
+    "by_scenario": {
+      "beacon": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      },
+      "brute_force": {
+        "n": 22,
+        "severity_accuracy": 1.0
+      },
+      "exfil": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      },
+      "impossible_travel": {
+        "n": 14,
+        "severity_accuracy": 0.7142857142857143
+      },
+      "lsass": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      },
+      "malware_hash": {
+        "n": 18,
+        "severity_accuracy": 1.0
+      },
+      "mfa_fatigue": {
+        "n": 8,
+        "severity_accuracy": 1.0
+      },
+      "new_admin": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      },
+      "noise": {
+        "n": 22,
+        "severity_accuracy": 1.0
+      },
+      "otrf_real": {
+        "n": 6,
+        "severity_accuracy": 0.8333333333333334
+      },
+      "password_spray": {
+        "n": 8,
+        "severity_accuracy": 1.0
+      },
+      "port_scan": {
+        "n": 14,
+        "severity_accuracy": 1.0
+      },
+      "powershell": {
+        "n": 16,
+        "severity_accuracy": 0.6875
+      },
+      "ransomware": {
+        "n": 5,
+        "severity_accuracy": 1.0
+      },
+      "rdp": {
+        "n": 8,
+        "severity_accuracy": 0.875
+      },
+      "sched_task": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      },
+      "uac": {
+        "n": 5,
+        "severity_accuracy": 1.0
+      },
+      "web_exploit": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "ALR-0001",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "A known-malicious IP (AbuseIPDB score 85) ran a password spray against 8 Okta accounts in 10 minutes using common passwords. No successful logins were observed, so this is an active attack but not a confirmed compromise."
+      },
+      "latency_ms": 11674,
+      "cost_usd": 0.040908,
+      "input_tokens": 8196,
+      "output_tokens": 1088,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0002",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "High-volume guessing from a known-malicious IP ending in a successful login on a privileged account: likely account takeover.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "287 failed logins against da_jsmith in 4 minutes from a known-malicious IP were followed by a successful login 30 seconds later to SRV-FILE01. This is a probable compromise of what looks like a privileged account."
+      },
+      "latency_ms": 11521,
+      "cost_usd": 0.040722,
+      "input_tokens": 8204,
+      "output_tokens": 1074,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0003",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078.004",
+        "confidence": 0.6,
+        "needs_review": false,
+        "summary": "Impossible travel alert for omoore between a corporate egress IP and a Comcast residential IP, both in the US, from a known device. Likely a VPN-to-home switch, but the second session is not yet verified."
+      },
+      "latency_ms": 12711,
+      "cost_usd": 0.044718,
+      "input_tokens": 8546,
+      "output_tokens": 1272,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0004",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "On WS-FIN-004, the ms-settings registry key was hijacked to point at C:\\Users\\Public\\p.exe, and fodhelper.exe then ran it at high integrity. This is a classic fodhelper UAC bypass, likely malicious and needing action now, though no follow-on impact is confirmed."
+      },
+      "latency_ms": 12569,
+      "cost_usd": 0.042264,
+      "input_tokens": 7998,
+      "output_tokens": 1218,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0005",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "External IP 91.240.118.166, a known-malicious hosting address, port scanned the perimeter firewall (884 ports in 5 minutes). All connections were dropped, so this is blocked reconnaissance with no evidence of impact."
+      },
+      "latency_ms": 10026,
+      "cost_usd": 0.042063,
+      "input_tokens": 8021,
+      "output_tokens": 1200,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0006",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.97,
+        "needs_review": false,
+        "summary": "Ransomware has already encrypted 4,454 files on WS-OPS-004 and dropped ransom notes. Shadow copies were deleted first, so local recovery is gone."
+      },
+      "latency_ms": 16321,
+      "cost_usd": 0.057885,
+      "input_tokens": 12270,
+      "output_tokens": 1405,
+      "tool_calls": 2,
+      "tools": [
+        "map_to_attack",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0007",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "The signed Google Update installer, running as SYSTEM, created the standard GoogleUpdateTaskMachineUA scheduled task on WS-OPS-007. This is routine software-updater behavior with no attacker indicators."
+      },
+      "latency_ms": 11126,
+      "cost_usd": 0.036582,
+      "input_tokens": 7734,
+      "output_tokens": 892,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0008",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1190",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "The WAF blocked a SQL injection attempt against SRV-WEB01 from a known-malicious Tor exit node. The request returned HTTP 403, and there is no sign it succeeded."
+      },
+      "latency_ms": 8993,
+      "cost_usd": 0.038595,
+      "input_tokens": 8040,
+      "output_tokens": 965,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0009",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.65,
+        "needs_review": false,
+        "summary": "226 failed password logins against omoore on SRV-SQL01 from 73.160.141.107 in 3 minutes, an automated password-guessing pattern with no successful login. The source IP has a clean reputation, so impact is unclear and the activity needs investigation."
+      },
+      "latency_ms": 12091,
+      "cost_usd": 0.042867,
+      "input_tokens": 8089,
+      "output_tokens": 1240,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0010",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "slack_setup.exe executed from the user's Downloads folder on WS-OPS-020 matches the known-good, signed Slack installer hash with 0/72 detections. The alert fired on low fleet prevalence only, with no malicious behavior observed."
+      },
+      "latency_ms": 10284,
+      "cost_usd": 0.040302,
+      "input_tokens": 8544,
+      "output_tokens": 978,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0011",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "The scheduled task GoogleUpdateTaskMachineUA was created by SYSTEM through the signed Google Update installer. It matches normal Google Update behavior and appears to be benign IT noise."
+      },
+      "latency_ms": 9113,
+      "cost_usd": 0.03621,
+      "input_tokens": 7740,
+      "output_tokens": 866,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0012",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.92,
+        "needs_review": false,
+        "summary": "The internal port scan came from SRV-NESSUS01, the designated vulnerability scanner, during its weekly Tuesday scan window. This is authorized, scheduled scanning and not attacker activity."
+      },
+      "latency_ms": 9399,
+      "cost_usd": 0.036369,
+      "input_tokens": 7613,
+      "output_tokens": 902,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0013",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "83 failed password logins in 4 minutes against likely domain admin account da_jsmith on SRV-SQL01 from a known-malicious bulletproof-hosting IP. No successful login is observed, so this is an active attack without confirmed compromise."
+      },
+      "latency_ms": 10476,
+      "cost_usd": 0.04071,
+      "input_tokens": 8065,
+      "output_tokens": 1101,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0014",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "EDR flagged slack_setup.exe as a rare binary run from ehernandez's Downloads folder on WS-FIN-019. The hash matches the legitimate, signed Slack installer and is clean on threat intel, so this looks like a benign user install."
+      },
+      "latency_ms": 10452,
+      "cost_usd": 0.040779,
+      "input_tokens": 8573,
+      "output_tokens": 1004,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0015",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known QakBot sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.78,
+        "needs_review": false,
+        "summary": "AV quarantined scan_doc.exe, a confirmed QakBot sample, on finance workstation WS-FIN-003 before it executed. The threat is contained on this host, but the delivery vector and any related targeting still need investigation."
+      },
+      "latency_ms": 10635,
+      "cost_usd": 0.04209,
+      "input_tokens": 8415,
+      "output_tokens": 1123,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0016",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "318 failed password logins in 3 minutes against the privileged it-admin account on jump server SRV-JUMP01 from a known-malicious bulletproof-hosting IP. No successful login was observed, so no compromise is confirmed, but action is needed now."
+      },
+      "latency_ms": 9848,
+      "cost_usd": 0.039837,
+      "input_tokens": 8019,
+      "output_tokens": 1052,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0017",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "procdump64.exe was used under it-admin to dump full LSASS memory to C:\\Windows\\Temp\\l.dmp on HR workstation WS-HR-006 at an off-hours time. This is credential theft that likely exposes privileged credentials and needs immediate containment."
+      },
+      "latency_ms": 13603,
+      "cost_usd": 0.046644,
+      "input_tokens": 8218,
+      "output_tokens": 1466,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0018",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.97,
+        "needs_review": false,
+        "summary": "Ransomware has encrypted 3,800 files on WS-FIN-003 (user lchen) in 2 minutes, after shadow copies were deleted and ransom notes were dropped. This is an active, confirmed ransomware incident."
+      },
+      "latency_ms": 13717,
+      "cost_usd": 0.044691,
+      "input_tokens": 8002,
+      "output_tokens": 1379,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0019",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "Spray from a malicious IP with a successful login: a compromised account.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "A password spray from a known-malicious data-center IP against 8 Okta accounts succeeded for dnguyen, so that account is very likely compromised."
+      },
+      "latency_ms": 13504,
+      "cost_usd": 0.040269,
+      "input_tokens": 8308,
+      "output_tokens": 1023,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0020",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Defender signature update failed on WS-HR-017 (error 0x80240022), with the last successful update 26 hours ago. This looks like an IT hygiene or health event with no sign of attacker activity."
+      },
+      "latency_ms": 9739,
+      "cost_usd": 0.027816,
+      "input_tokens": 4087,
+      "output_tokens": 1037,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0021",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "A non-IT user (ehernandez) created a new local account 'support' and added it to Administrators on SRV-SQL01 at 03:14 with no change ticket. This looks like unauthorized persistence, either from a compromised account or an insider, on a database server."
+      },
+      "latency_ms": 14313,
+      "cost_usd": 0.045591,
+      "input_tokens": 7862,
+      "output_tokens": 1467,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0022",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "A known-malicious IP on bulletproof hosting sprayed common passwords against 15 Okta accounts in 10 minutes. No successful logins were recorded, so this is a likely attack without confirmed compromise."
+      },
+      "latency_ms": 9680,
+      "cost_usd": 0.040641,
+      "input_tokens": 8362,
+      "output_tokens": 1037,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0023",
+      "label": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "accepted_techniques": [
+          "T1567",
+          "T1048"
+        ],
+        "rationale": "Many GB of finance data sent to personal cloud storage at 2am: likely exfiltration.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "kwilliams uploaded 36.5 GB of Finance share data to unsanctioned personal cloud storage (mega.nz) at 02:40, well outside normal hours. This is likely data exfiltration, either by an insider or through a compromised account, and needs action now."
+      },
+      "latency_ms": 11973,
+      "cost_usd": 0.043038,
+      "input_tokens": 8071,
+      "output_tokens": 1255,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0024",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "152 failed password logins against service account svc_backup in 4 minutes from 194.26.192.75, a known-malicious bulletproof-hosting IP. No successful login was observed, so no compromise is confirmed, but the attack is active and needs action now."
+      },
+      "latency_ms": 11186,
+      "cost_usd": 0.040374,
+      "input_tokens": 8053,
+      "output_tokens": 1081,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0025",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Impossible travel alert for omoore is most likely a false positive. The second IP is a Cloudflare WARP corporate VPN egress and the first is the Acme Corp egress, both clean and US-based, on a known device."
+      },
+      "latency_ms": 10795,
+      "cost_usd": 0.043152,
+      "input_tokens": 8524,
+      "output_tokens": 1172,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0026",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known AgentTesla malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "update.exe, a confirmed AgentTesla sample (56/72 detections), executed on WS-ENG-023 from jsmith's Temp folder. AV remediation failed and the process made outbound connections, so the host is likely compromised and exfiltrating credentials."
+      },
+      "latency_ms": 13663,
+      "cost_usd": 0.049521,
+      "input_tokens": 8732,
+      "output_tokens": 1555,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0027",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "mgarcia's account signed in successfully from a Tor exit node in DE 25 minutes after a normal US sign-in, using a new unregistered device with MFA satisfied by push approval. This is likely account compromise via MFA fatigue or social engineering."
+      },
+      "latency_ms": 12088,
+      "cost_usd": 0.044946,
+      "input_tokens": 8722,
+      "output_tokens": 1252,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0028",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "The it-admin user created a local admin account 'support' on SRV-SQL01, and the alert says this matches approved change ticket CHG-63208. It looks like an authorized administrative change, not attacker persistence."
+      },
+      "latency_ms": 10842,
+      "cost_usd": 0.039795,
+      "input_tokens": 7605,
+      "output_tokens": 1132,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0029",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "Audit policy on domain controller SRV-DC01 was changed by it-admin through a Group Policy update during an approved maintenance window. This looks like routine IT administration, not attacker activity."
+      },
+      "latency_ms": 10138,
+      "cost_usd": 0.027339,
+      "input_tokens": 4028,
+      "output_tokens": 1017,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0030",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1190",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "The WAF blocked a Log4Shell JNDI exploit attempt against SRV-WEB01 from a known-malicious Tor exit node. The request returned HTTP 403 and nothing in the alert shows it succeeded, so this looks like blocked opportunistic scanning."
+      },
+      "latency_ms": 11246,
+      "cost_usd": 0.04293,
+      "input_tokens": 8210,
+      "output_tokens": 1220,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0031",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A non-IT user, cwhite, created a new local admin account 'sysadm' on domain controller SRV-DC01 at 03:14 with no change ticket. This looks like unauthorized persistence or privilege escalation on a critical asset, with no confirmed use of the account yet."
+      },
+      "latency_ms": 19514,
+      "cost_usd": 0.047901,
+      "input_tokens": 7867,
+      "output_tokens": 1620,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0032",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Defender signature update failed on WS-HR-011 with error 0x80240022, and the last successful update was 26 hours ago. This looks like an IT hygiene or connectivity issue with no sign of attacker activity."
+      },
+      "latency_ms": 8662,
+      "cost_usd": 0.026577,
+      "input_tokens": 4039,
+      "output_tokens": 964,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0033",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "ehernandez uploaded 1.8 GB from WS-FIN-017 to the company's sanctioned SharePoint tenant during work hours. This looks like routine business activity, not data exfiltration."
+      },
+      "latency_ms": 8451,
+      "cost_usd": 0.027174,
+      "input_tokens": 4243,
+      "output_tokens": 963,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0034",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Defender signature update failed on finance workstation WS-FIN-024 (error 0x80240022), with the last successful update 26 hours ago. This looks like an IT hygiene or health issue, not attacker activity."
+      },
+      "latency_ms": 9438,
+      "cost_usd": 0.027108,
+      "input_tokens": 4066,
+      "output_tokens": 994,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0035",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.92,
+        "needs_review": false,
+        "summary": "sjohnson was locked out after 5 failed logins from their usual office device and then self-unlocked with verified MFA. This is routine lockout noise with no sign of attacker activity."
+      },
+      "latency_ms": 7519,
+      "cost_usd": 0.023568,
+      "input_tokens": 3901,
+      "output_tokens": 791,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0036",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "kwilliams uploaded 0.5 GB from WS-FIN-005 to the company-sanctioned SharePoint tenant (acme.sharepoint.com). This is consistent with normal business file sharing and shows no exfiltration indicators."
+      },
+      "latency_ms": 9885,
+      "cost_usd": 0.028512,
+      "input_tokens": 4249,
+      "output_tokens": 1051,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0037",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "The EDR sensor on WS-ENG-008 has been offline for 3 days, and asset inventory shows the laptop is in repair. This is an expected IT hygiene event with no sign of attacker activity."
+      },
+      "latency_ms": 8553,
+      "cost_usd": 0.026607,
+      "input_tokens": 4044,
+      "output_tokens": 965,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0038",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "The EDR sensor on WS-SALES-013 has been offline for 3 days, and asset inventory shows the laptop is in repair. This is expected IT hygiene noise, not attacker activity."
+      },
+      "latency_ms": 8374,
+      "cost_usd": 0.025221,
+      "input_tokens": 3997,
+      "output_tokens": 882,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0039",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "EDR flagged chrome_setup.exe as a rare binary on WS-ENG-006, but the hash matches the legitimate Google LLC-signed Chrome installer with 0/72 detections. This looks like a benign user-initiated Chrome install."
+      },
+      "latency_ms": 10199,
+      "cost_usd": 0.040404,
+      "input_tokens": 8558,
+      "output_tokens": 982,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0040",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "PowerShell with -ExecutionPolicy Bypass ran as SYSTEM on WS-OPS-012, spawned by the signed SCCM client (ccmexec.exe) to run inventory.ps1 from the SCCM cache. This matches routine SCCM script deployment, not attacker behavior."
+      },
+      "latency_ms": 10130,
+      "cost_usd": 0.038748,
+      "input_tokens": 7931,
+      "output_tokens": 997,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0041",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "rbrown signed in successfully from a Tor exit node in Germany on a new, unregistered device, 32 minutes after a normal sign-in from the corporate US egress, and an MFA push was approved. This looks like a likely account compromise through an MFA bypass."
+      },
+      "latency_ms": 14957,
+      "cost_usd": 0.051318,
+      "input_tokens": 8856,
+      "output_tokens": 1650,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0042",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "kwilliams was locked out after 5 failed logins from their usual office device, then self-unlocked using verified MFA. This looks like routine password-typo or stale-credential IT hygiene, not attacker activity."
+      },
+      "latency_ms": 9737,
+      "cost_usd": 0.025995,
+      "input_tokens": 4010,
+      "output_tokens": 931,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0043",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "208 failed password logins against the admin account on domain controller SRV-DC02 in 3 minutes from 91.240.118.170, a known-abusive IP. No successful login was observed, so this is an active brute-force attempt without confirmed compromise."
+      },
+      "latency_ms": 9626,
+      "cost_usd": 0.038787,
+      "input_tokens": 7944,
+      "output_tokens": 997,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0044",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "WS-HR-001 made regular HTTP POST beacons every 300s (\u00b12s jitter) for 6 hours to 185.220.101.20, a known Tor exit relay with a 97 abuse score. The pattern looks like C2 beaconing from a likely compromised host, but nothing confirms the implant's activity or any data loss."
+      },
+      "latency_ms": 14014,
+      "cost_usd": 0.04824,
+      "input_tokens": 8330,
+      "output_tokens": 1550,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0045",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1078.004",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "mgarcia's account signed in successfully from a known-abusive Tor exit node on a new, unregistered device just 10 minutes after a normal US sign-in, and MFA was satisfied by push approval. This is near-certain cloud account compromise via MFA bypass."
+      },
+      "latency_ms": 15456,
+      "cost_usd": 0.051375,
+      "input_tokens": 8850,
+      "output_tokens": 1655,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0046",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "A rare binary, 7-zip_setup.exe, ran from the user's Downloads folder on WS-FIN-011. The SHA-256 matches the legitimate signed 7-Zip 24.08 installer and has 0/72 detections, so this looks like a benign user-initiated install."
+      },
+      "latency_ms": 18864,
+      "cost_usd": 0.042228,
+      "input_tokens": 8606,
+      "output_tokens": 1094,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0047",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "A known-malicious Tor exit relay (185.220.101.29) scanned 2,734 ports on the perimeter in 5 minutes, and every connection was dropped. This is blocked internet reconnaissance noise with no evidence of impact."
+      },
+      "latency_ms": 11375,
+      "cost_usd": 0.042528,
+      "input_tokens": 7941,
+      "output_tokens": 1247,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0048",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.6,
+        "needs_review": false,
+        "summary": "A successful RDP login as administrator to SRV-WEB01 came from external IP 73.118.80.252 (Vietnam residential ISP), even though RDP should not be internet-exposed. Legitimacy is unverified and the account is privileged, so this is treated as likely malicious pending confirmation."
+      },
+      "latency_ms": 13124,
+      "cost_usd": 0.043557,
+      "input_tokens": 8244,
+      "output_tokens": 1255,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0049",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A non-IT user, cwhite, created a local account named svc_monitor and added it to Administrators on jump server SRV-JUMP01 at 03:14 with no change ticket. This looks like persistence or privilege abuse, possibly through compromised credentials."
+      },
+      "latency_ms": 11955,
+      "cost_usd": 0.041904,
+      "input_tokens": 7723,
+      "output_tokens": 1249,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0050",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A non-IT user, mgarcia, created a local account named helpdesk2 and added it to Administrators on SRV-EXCH01 at 03:14 with no change ticket. This looks like persistence or privilege escalation on a high-value Exchange server, though use of the account is not confirmed."
+      },
+      "latency_ms": 11305,
+      "cost_usd": 0.040104,
+      "input_tokens": 7678,
+      "output_tokens": 1138,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0051",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "The signed Google Update installer created the standard GoogleUpdateTaskMachineUA scheduled task on WS-FIN-014 as SYSTEM. This is routine updater behavior, not attacker persistence."
+      },
+      "latency_ms": 10703,
+      "cost_usd": 0.036393,
+      "input_tokens": 7736,
+      "output_tokens": 879,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0052",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A fodhelper.exe UAC bypass on WS-SALES-009 hijacked the HKCU ms-settings command key to run C:\\Users\\Public\\p.exe at high integrity under user jsmith. This is likely malicious privilege escalation, but the payload's actions after elevation are not yet confirmed."
+      },
+      "latency_ms": 12080,
+      "cost_usd": 0.042558,
+      "input_tokens": 8061,
+      "output_tokens": 1225,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0053",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.96,
+        "needs_review": false,
+        "summary": "Ransomware is actively encrypting files on WS-HR-015: 854 files were renamed to .enc in 2 minutes after shadow copies were deleted, and ransom notes were dropped. This is a confirmed, high-impact compromise."
+      },
+      "latency_ms": 13021,
+      "cost_usd": 0.044421,
+      "input_tokens": 7902,
+      "output_tokens": 1381,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0054",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Audit policy on SRV-DC01 was changed by it-admin via Group Policy during the approved maintenance window. This looks like routine IT administration with no sign of attacker behavior."
+      },
+      "latency_ms": 9796,
+      "cost_usd": 0.026919,
+      "input_tokens": 4008,
+      "output_tokens": 993,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0055",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "A successful RDP logon to jump host SRV-JUMP01 as it-admin came from a known Tor exit relay (185.220.101.19) at 23:41 UTC. This is a near-certain compromise of a privileged account on a pivot-point server."
+      },
+      "latency_ms": 10801,
+      "cost_usd": 0.041703,
+      "input_tokens": 8196,
+      "output_tokens": 1141,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0056",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "HR workstation WS-HR-001 scanned 180 internal hosts on SMB, RDP, WinRM and SSH ports in 3 minutes. The scan was unscheduled and out of character for the host, so it likely reflects an attacker mapping the network for lateral movement."
+      },
+      "latency_ms": 14265,
+      "cost_usd": 0.055782,
+      "input_tokens": 12159,
+      "output_tokens": 1287,
+      "tool_calls": 2,
+      "tools": [
+        "map_to_attack",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0057",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Audit policy was changed on domain controller SRV-DC01 by it-admin via Group Policy during an approved maintenance window. This matches expected IT change activity with no attacker indicators."
+      },
+      "latency_ms": 8963,
+      "cost_usd": 0.026229,
+      "input_tokens": 4003,
+      "output_tokens": 948,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0058",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known SocGholish sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "AV quarantined setup_x64.exe on WS-SALES-012 before it ran. The file hash is known SocGholish malware (60/65 engines), so the user likely hit a fake-installer lure and the host needs a quick check for follow-on activity."
+      },
+      "latency_ms": 14583,
+      "cost_usd": 0.048198,
+      "input_tokens": 8661,
+      "output_tokens": 1481,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0059",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "Word (winword.exe) spawned hidden, encoded PowerShell on WS-ENG-004 that downloads and executes a script from 91.240.118.162, a known-malicious IP. This is a likely malicious-document execution chain, but success of the payload is not confirmed."
+      },
+      "latency_ms": 11855,
+      "cost_usd": 0.04659,
+      "input_tokens": 9150,
+      "output_tokens": 1276,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0060",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "procdump64.exe was used under svc_backup to dump full LSASS memory to C:\\Windows\\Temp\\l.dmp on finance workstation WS-FIN-016 at 02:59 UTC. This is a credential-dumping pattern, and the dump file was written, so credentials on the host should be treated as compromised."
+      },
+      "latency_ms": 13131,
+      "cost_usd": 0.044007,
+      "input_tokens": 8074,
+      "output_tokens": 1319,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0061",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1505.003",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "A path traversal exploit from a known-malicious IP succeeded against SRV-WEB01, and a web shell (shell.aspx) was dropped and is executing commands via w3wp.exe spawning cmd.exe. This is a confirmed compromise of a public-facing server."
+      },
+      "latency_ms": 10362,
+      "cost_usd": 0.041037,
+      "input_tokens": 8304,
+      "output_tokens": 1075,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0062",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "SRV-NESSUS01, the vulnerability scanner, scanned 254 hosts across 1000 ports. The alert marks it as scheduled, so this is most likely authorized scanning. One timing discrepancy remains to be verified."
+      },
+      "latency_ms": 13609,
+      "cost_usd": 0.040095,
+      "input_tokens": 4330,
+      "output_tokens": 1807,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0063",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "On WS-HR-020, the ms-settings registry key was hijacked to point to C:\\Users\\Public\\p.exe, and fodhelper.exe then ran it at high integrity. This is the classic fodhelper UAC bypass and indicates likely malicious privilege escalation, though the payload's behavior is unconfirmed."
+      },
+      "latency_ms": 11148,
+      "cost_usd": 0.042882,
+      "input_tokens": 8069,
+      "output_tokens": 1245,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0064",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078.004",
+        "confidence": 0.65,
+        "needs_review": false,
+        "summary": "kwilliams signed in from a US corporate egress IP and then from an Indian mobile ISP IP 39 minutes later, which is impossible travel. Neither IP has bad reputation and the device is known, so this needs investigation but is not confirmed compromise."
+      },
+      "latency_ms": 13088,
+      "cost_usd": 0.046332,
+      "input_tokens": 8599,
+      "output_tokens": 1369,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0065",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "PowerShell ran with -ExecutionPolicy Bypass as SYSTEM, launched by the signed SCCM client (ccmexec.exe) to run an inventory script from the SCCM cache. This is routine SCCM management activity, not attacker behavior."
+      },
+      "latency_ms": 10639,
+      "cost_usd": 0.039336,
+      "input_tokens": 7992,
+      "output_tokens": 1024,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0066",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "Inbound port scan of 1,529 ports from 162.142.125.10, a known internet research scanner (Censys/Shodan). The firewall dropped every connection, so this is blocked background noise."
+      },
+      "latency_ms": 10758,
+      "cost_usd": 0.040668,
+      "input_tokens": 8036,
+      "output_tokens": 1104,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0067",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1190",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "A SQL injection from a known-malicious Tor exit node succeeded against SRV-WEB01 and was followed by a webshell (shell.aspx) and w3wp.exe spawning cmd.exe. The server is very likely compromised and under active attacker control."
+      },
+      "latency_ms": 11467,
+      "cost_usd": 0.04302,
+      "input_tokens": 8445,
+      "output_tokens": 1179,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0068",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "64 failed password logins against omoore on domain controller SRV-DC02 from a Comcast residential IP in 3 minutes, with no successful login. Automated password guessing is likely, but the source IP has no bad reputation and no compromise is confirmed."
+      },
+      "latency_ms": 10813,
+      "cost_usd": 0.040125,
+      "input_tokens": 8005,
+      "output_tokens": 1074,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0069",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.86,
+        "needs_review": false,
+        "summary": "The it-admin account dumped LSASS memory on HR workstation WS-HR-008 using rundll32 with comsvcs.dll MiniDump, writing the dump to C:\\Temp\\d.bin. This is credential dumping, and credentials on the host should be treated as compromised."
+      },
+      "latency_ms": 21688,
+      "cost_usd": 0.04791,
+      "input_tokens": 8340,
+      "output_tokens": 1526,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0070",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "python_setup.exe run by pjackson on WS-OPS-008 is the legitimate PSF-signed Python 3.12 installer. It was flagged only because it is rare in the fleet (2 hosts), so this looks like benign software installation."
+      },
+      "latency_ms": 9186,
+      "cost_usd": 0.038001,
+      "input_tokens": 8362,
+      "output_tokens": 861,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0071",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "winword.exe spawned hidden, encoded PowerShell on WS-SALES-022 that downloads and executes a script from 45.155.205.127, a known-malicious IP. This is a likely malicious-document execution chain, but there is no confirmation yet that the payload downloaded or ran."
+      },
+      "latency_ms": 15144,
+      "cost_usd": 0.05322,
+      "input_tokens": 9370,
+      "output_tokens": 1674,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0072",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "kwilliams received 29 MFA pushes in 15 minutes from a known-malicious IP and approved the last one, so the login most likely succeeded. This is a probable account takeover through MFA fatigue."
+      },
+      "latency_ms": 19351,
+      "cost_usd": 0.041487,
+      "input_tokens": 8174,
+      "output_tokens": 1131,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0073",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "WS-ENG-015 sent uniform HTTP POST beacons every 300s for 6 hours to 45.155.205.102, a known-malicious bulletproof-hosting IP. This is likely C2 communication from a compromised host; no confirmed payload or exfiltration yet."
+      },
+      "latency_ms": 11262,
+      "cost_usd": 0.041793,
+      "input_tokens": 8246,
+      "output_tokens": 1137,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0074",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Workstation WS-FIN-016 scanned 180 internal hosts on SMB, RDP, WinRM and SSH ports within 3 minutes. The host has no scanning history and the scan was not scheduled, which points to post-compromise reconnaissance ahead of lateral movement."
+      },
+      "latency_ms": 10922,
+      "cost_usd": 0.040965,
+      "input_tokens": 7910,
+      "output_tokens": 1149,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0075",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "A known-malicious VPS IP ran a password spray against 15 Okta accounts in 10 minutes using common passwords. No successful logins were recorded, so there is no confirmed compromise yet."
+      },
+      "latency_ms": 8727,
+      "cost_usd": 0.038781,
+      "input_tokens": 8257,
+      "output_tokens": 934,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0076",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "nlee uploaded 1.5 GB from WS-FIN-003 to the company's sanctioned SharePoint tenant during work hours. This looks like normal business activity, not exfiltration to an unsanctioned destination."
+      },
+      "latency_ms": 17130,
+      "cost_usd": 0.027135,
+      "input_tokens": 4205,
+      "output_tokens": 968,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0077",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "Signed Microsoft Defender (MsMpEng.exe) opened a handle to lsass.exe on WS-FIN-008 as SYSTEM during a scheduled scan. This is expected AV behavior, not credential dumping."
+      },
+      "latency_ms": 10991,
+      "cost_usd": 0.030846,
+      "input_tokens": 4222,
+      "output_tokens": 1212,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0078",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "tmartin was locked out after 5 failed logins from their usual office device, then self-service unlocked with verified MFA. This looks like a routine mistyped password and the lockout control worked as intended."
+      },
+      "latency_ms": 7997,
+      "cost_usd": 0.022956,
+      "input_tokens": 3937,
+      "output_tokens": 743,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0079",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "A scheduled task named 'OneDriveSync' was created on WS-HR-002 to run an unsigned binary from AppData at every logon as SYSTEM. This is likely malicious persistence with privilege escalation, disguised as a Microsoft component."
+      },
+      "latency_ms": 12299,
+      "cost_usd": 0.044307,
+      "input_tokens": 8214,
+      "output_tokens": 1311,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0080",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "PowerShell with -ExecutionPolicy Bypass ran as SYSTEM on WS-OPS-016, spawned by the signed SCCM client (ccmexec.exe) to run a script from the SCCM cache. This matches normal SCCM software inventory behavior and shows no sign of attacker activity."
+      },
+      "latency_ms": 10639,
+      "cost_usd": 0.040386,
+      "input_tokens": 7982,
+      "output_tokens": 1096,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0081",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "PowerShell ran with -ExecutionPolicy Bypass as SYSTEM, spawned by the signed SCCM client (ccmexec.exe) to run a script from the SCCM cache. This is routine SCCM inventory activity with no attacker behavior."
+      },
+      "latency_ms": 12582,
+      "cost_usd": 0.038709,
+      "input_tokens": 7943,
+      "output_tokens": 992,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0082",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "167 failed password logins against the administrator account on SRV-EXCH01 in 4 minutes from a known-malicious Tor exit relay. No successful login is recorded, but this is a sustained brute force against a high-value Exchange server."
+      },
+      "latency_ms": 12821,
+      "cost_usd": 0.041172,
+      "input_tokens": 8044,
+      "output_tokens": 1136,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0083",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.97,
+        "needs_review": false,
+        "summary": "Active ransomware on finance workstation WS-FIN-014: 2,192 files were encrypted to *.crypt in 2 minutes after shadow copies were deleted, and ransom notes were dropped in each folder. Compromise is confirmed and encryption may still be spreading."
+      },
+      "latency_ms": 13148,
+      "cost_usd": 0.043899,
+      "input_tokens": 7983,
+      "output_tokens": 1330,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0084",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "winword.exe spawned a hidden, encoded PowerShell command on WS-OPS-022 that downloads and executes a script from 194.26.192.62, a known-malicious IP. This is very likely a malicious-document download cradle, but the alert does not show that the payload actually ran."
+      },
+      "latency_ms": 13389,
+      "cost_usd": 0.048471,
+      "input_tokens": 9172,
+      "output_tokens": 1397,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0085",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "The signed Google Update installer, running as SYSTEM, created the standard GoogleUpdateTaskMachineUA scheduled task on WS-OPS-002. This is routine updater behavior and not attacker persistence."
+      },
+      "latency_ms": 10148,
+      "cost_usd": 0.037287,
+      "input_tokens": 7759,
+      "output_tokens": 934,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0086",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A scheduled task named 'OneDriveSync' was created on WS-SALES-003 to run an unsigned binary from AppData at every logon as SYSTEM. This looks like persistence with a masqueraded name, but no execution or network IOCs are confirmed."
+      },
+      "latency_ms": 12184,
+      "cost_usd": 0.042474,
+      "input_tokens": 8108,
+      "output_tokens": 1210,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0087",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "ehernandez received 26 MFA pushes in 15 minutes from a Tor exit relay and approved the last one, which indicates a successful MFA fatigue attack and likely account compromise."
+      },
+      "latency_ms": 9935,
+      "cost_usd": 0.041736,
+      "input_tokens": 8157,
+      "output_tokens": 1151,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0088",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "tmartin was locked out after 5 failed logins from their usual office device and then self-unlocked with verified MFA. This looks like a routine forgotten or mistyped password, not attacker activity."
+      },
+      "latency_ms": 9710,
+      "cost_usd": 0.025104,
+      "input_tokens": 3993,
+      "output_tokens": 875,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0089",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1078.004",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "User omoore signed in from a known-malicious Russian bulletproof-hosting IP 11 minutes after a US sign-in, using a new unregistered device, and MFA was satisfied by push approval. This indicates a likely account takeover with MFA bypassed."
+      },
+      "latency_ms": 13433,
+      "cost_usd": 0.049128,
+      "input_tokens": 8761,
+      "output_tokens": 1523,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0090",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "156 failed password logins against cwhite from a single Vietnam-based IP in 3 minutes indicates automated password guessing, but there was no successful login and the IP has no bad reputation. Needs investigation to rule out compromise."
+      },
+      "latency_ms": 11050,
+      "cost_usd": 0.041352,
+      "input_tokens": 8004,
+      "output_tokens": 1156,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0091",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "A scheduled task named 'OneDriveSync' was created on WS-ENG-023 to run an unsigned binary from AppData at every logon as SYSTEM. This is likely persistence with masquerading, but there is no confirmed execution or known-malicious hash."
+      },
+      "latency_ms": 11952,
+      "cost_usd": 0.041877,
+      "input_tokens": 8114,
+      "output_tokens": 1169,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0092",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "Routine IT hygiene alert: the TLS certificate for portal.acme.example on SRV-WEB01 expires in 9 days. There is no indication of malicious activity or compromise."
+      },
+      "latency_ms": 7668,
+      "cost_usd": 0.023226,
+      "input_tokens": 3887,
+      "output_tokens": 771,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0093",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "SRV-NESSUS01, the vulnerability scanner, scanned 254 internal hosts across 1000 ports, which matches its scheduled weekly scan. This looks like authorized IT activity, not attacker behavior."
+      },
+      "latency_ms": 11936,
+      "cost_usd": 0.032994,
+      "input_tokens": 4228,
+      "output_tokens": 1354,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0094",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known SocGholish malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "scan_doc.exe, a known SocGholish malware sample (57/70 detections), executed on WS-OPS-018 from the user's Temp folder. AV remediation failed and the process made outbound connections, so this is a likely active compromise."
+      },
+      "latency_ms": 12887,
+      "cost_usd": 0.047367,
+      "input_tokens": 8689,
+      "output_tokens": 1420,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0095",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1190",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "A SQL injection from a known-abusive IP succeeded against SRV-WEB01 and was followed by a webshell (shell.aspx) in the web root and w3wp.exe spawning cmd.exe. This is a confirmed compromise with active command execution on the server."
+      },
+      "latency_ms": 12861,
+      "cost_usd": 0.047652,
+      "input_tokens": 8634,
+      "output_tokens": 1450,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0096",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1190",
+        "confidence": 0.94,
+        "needs_review": false,
+        "summary": "A SQL injection from a Tor exit relay succeeded against SRV-WEB01. A webshell (shell.aspx) was then dropped and w3wp.exe spawned cmd.exe, which indicates active remote code execution on the server."
+      },
+      "latency_ms": 11662,
+      "cost_usd": 0.043968,
+      "input_tokens": 8541,
+      "output_tokens": 1223,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0097",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "4 failed Okta logins for lchen in 3 minutes from internal workstation WS-OPS-024, followed by a successful login. This most likely reflects a user mistyping or using stale credentials after a password change 1 day ago."
+      },
+      "latency_ms": 9109,
+      "cost_usd": 0.028572,
+      "input_tokens": 4264,
+      "output_tokens": 1052,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0098",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "PowerShell with -ExecutionPolicy Bypass was launched by the signed SCCM client (ccmexec.exe) as SYSTEM to run a script from the SCCM cache. This matches routine SCCM script deployment, not attacker behavior."
+      },
+      "latency_ms": 11067,
+      "cost_usd": 0.039588,
+      "input_tokens": 7971,
+      "output_tokens": 1045,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0099",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "mgarcia received 14 MFA pushes in 15 minutes from a known-malicious Tor exit IP and approved the last one, so the attacker very likely has an authenticated session. Treat this as probable account compromise."
+      },
+      "latency_ms": 11933,
+      "cost_usd": 0.042657,
+      "input_tokens": 8199,
+      "output_tokens": 1204,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0100",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "pjackson uploaded 1.4 GB from WS-ENG-003 to the company-sanctioned SharePoint tenant (acme-my.sharepoint.com) during work hours. This looks like normal engineering file activity, not exfiltration to personal storage."
+      },
+      "latency_ms": 9776,
+      "cost_usd": 0.028866,
+      "input_tokens": 4272,
+      "output_tokens": 1070,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0101",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "The EDR sensor on WS-ENG-002 has been silent for 3 days, and asset inventory lists the laptop as in repair. This is expected IT hygiene noise with no sign of tampering."
+      },
+      "latency_ms": 7310,
+      "cost_usd": 0.024525,
+      "input_tokens": 3965,
+      "output_tokens": 842,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0102",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1105",
+          "T1027"
+        ],
+        "rationale": "Hidden encoded PowerShell download cradle to a malicious IP. Isolate and investigate.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.78,
+        "needs_review": false,
+        "summary": "Hidden, encoded PowerShell on WS-OPS-019 ran a download-and-execute cradle (IEX DownloadString) against 185.220.101.13, a Tor exit relay with a high abuse score. The behavior is almost certainly malicious, but no evidence yet confirms the payload was fetched or executed."
+      },
+      "latency_ms": 12279,
+      "cost_usd": 0.048009,
+      "input_tokens": 9118,
+      "output_tokens": 1377,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0103",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "HR workstation WS-HR-004 swept 180 internal hosts on SMB, RDP, WinRM and SSH ports in 3 minutes, which is unscheduled and out of character for the host. This looks like discovery ahead of lateral movement, but no successful access is confirmed."
+      },
+      "latency_ms": 12032,
+      "cost_usd": 0.040146,
+      "input_tokens": 7897,
+      "output_tokens": 1097,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0104",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.6,
+        "needs_review": false,
+        "summary": "A successful RDP logon to SRV-FILE01 as svc_backup came from external IP 73.122.188.125, although RDP should not be internet-exposed. The IP has a clean reputation, but the access is likely unauthorized and needs action now."
+      },
+      "latency_ms": 12596,
+      "cost_usd": 0.043344,
+      "input_tokens": 8248,
+      "output_tokens": 1240,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0105",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Impossible travel alert for omoore between corporate egress and a Cloudflare WARP corporate VPN exit, both clean US IPs on a known device. Most likely a VPN-induced geolocation artifact rather than account compromise."
+      },
+      "latency_ms": 9714,
+      "cost_usd": 0.042069,
+      "input_tokens": 8393,
+      "output_tokens": 1126,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0106",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.96,
+        "needs_review": false,
+        "summary": "Active ransomware encryption on WS-SALES-005: 1,197 files renamed to .locked in 2 minutes after shadow copies were deleted, with ransom notes dropped in each folder. This is a confirmed, in-progress compromise with no sign of remediation."
+      },
+      "latency_ms": 13093,
+      "cost_usd": 0.045261,
+      "input_tokens": 7992,
+      "output_tokens": 1419,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0107",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.78,
+        "needs_review": false,
+        "summary": "On WS-OPS-004, the ms-settings shell\\open\\command registry key was hijacked to point at C:\\Users\\Public\\p.exe, and fodhelper.exe then ran it at high integrity. This is a classic fodhelper UAC bypass that successfully elevated an unknown binary."
+      },
+      "latency_ms": 13205,
+      "cost_usd": 0.043326,
+      "input_tokens": 8007,
+      "output_tokens": 1287,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0108",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known Cobalt Strike Beacon malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "A known Cobalt Strike Beacon (update.exe) executed on WS-HR-016 under lchen, AV remediation failed, and the process made outbound connections, indicating likely active compromise with C2."
+      },
+      "latency_ms": 14212,
+      "cost_usd": 0.046257,
+      "input_tokens": 8594,
+      "output_tokens": 1365,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0109",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "7-zip_setup.exe executed on WS-FIN-011 by tmartin matches the legitimate, signed 7-Zip 24.08 installer and has 0/72 detections. The rare-binary alert fired only because of low fleet prevalence, and I found no malicious behavior."
+      },
+      "latency_ms": 16158,
+      "cost_usd": 0.042855,
+      "input_tokens": 8650,
+      "output_tokens": 1127,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0110",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.92,
+        "needs_review": false,
+        "summary": "Signed Microsoft Defender (MsMpEng.exe) opened a handle to lsass.exe as SYSTEM during a scheduled scan on WS-HR-023. This is expected AV behavior, not credential dumping."
+      },
+      "latency_ms": 10637,
+      "cost_usd": 0.040179,
+      "input_tokens": 7873,
+      "output_tokens": 1104,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0111",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "A scheduled task named 'OneDriveSync' was created on WS-FIN-010 to run an unsigned binary from AppData at every logon as SYSTEM. This looks like masqueraded persistence with privilege escalation, though execution of the binary is not yet confirmed."
+      },
+      "latency_ms": 11767,
+      "cost_usd": 0.043536,
+      "input_tokens": 8122,
+      "output_tokens": 1278,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0112",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "A known-malicious bulletproof-hosted IP (abuse score 98) scanned 909 ports on the perimeter firewall in 5 minutes, and every connection was dropped. This is blocked, opportunistic internet reconnaissance with no impact."
+      },
+      "latency_ms": 13112,
+      "cost_usd": 0.042891,
+      "input_tokens": 7982,
+      "output_tokens": 1263,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0113",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.68,
+        "needs_review": false,
+        "summary": "190 failed Okta password logins against sjohnson from a single Comcast residential IP in 3 minutes, indicating automated password guessing. No successful login followed and the IP has no bad reputation, so impact is unclear."
+      },
+      "latency_ms": 11624,
+      "cost_usd": 0.042258,
+      "input_tokens": 8116,
+      "output_tokens": 1194,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0114",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "The TLS certificate for portal.acme.example on SRV-WEB01 expires in 9 days. This is routine IT hygiene noise with no sign of attacker activity."
+      },
+      "latency_ms": 7928,
+      "cost_usd": 0.02412,
+      "input_tokens": 3990,
+      "output_tokens": 810,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0115",
+      "label": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "accepted_techniques": [
+          "T1567",
+          "T1048"
+        ],
+        "rationale": "Many GB of finance data sent to personal cloud storage at 2am: likely exfiltration.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "nlee uploaded 12.4 GB of files from the Finance share on SRV-FILE01 to unsanctioned personal Dropbox at 02:40, well outside normal hours. This is likely data exfiltration, either by an insider or through a compromised account or host."
+      },
+      "latency_ms": 11680,
+      "cost_usd": 0.042465,
+      "input_tokens": 8000,
+      "output_tokens": 1231,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0116",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "58 failed Okta password logins against sjohnson in 4 minutes from a Comcast residential IP indicate automated password guessing. No successful login followed and the IP has no bad reputation, so compromise is unconfirmed."
+      },
+      "latency_ms": 11165,
+      "cost_usd": 0.040995,
+      "input_tokens": 8020,
+      "output_tokens": 1129,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0117",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.65,
+        "needs_review": false,
+        "summary": "Impossible travel alert for mgarcia between two US IPs 20 minutes apart. Both IPs are clean, one is the company egress and the other a corporate VPN (Cloudflare WARP), and the device is known, so this is most likely a VPN or egress geolocation artifact."
+      },
+      "latency_ms": 13773,
+      "cost_usd": 0.051255,
+      "input_tokens": 8645,
+      "output_tokens": 1688,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0118",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "Signed Microsoft Defender (MsMpEng.exe) opened a read-only handle to lsass.exe as SYSTEM during a scheduled scan. This is expected security-tool behavior, not credential dumping."
+      },
+      "latency_ms": 10461,
+      "cost_usd": 0.039168,
+      "input_tokens": 7831,
+      "output_tokens": 1045,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0119",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "59 failed password logins against the administrator account on SRV-EXCH01 from 73.237.133.94 in 2 minutes, with no successful login. The source IP has no bad reputation, so this is suspicious but its impact is unclear."
+      },
+      "latency_ms": 10862,
+      "cost_usd": 0.041736,
+      "input_tokens": 8117,
+      "output_tokens": 1159,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0120",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "PowerShell ran with -ExecutionPolicy Bypass on WS-ENG-003 as SYSTEM, spawned by the signed SCCM client (ccmexec.exe) to run a script from the SCCM cache. This matches normal SCCM inventory activity and shows no attacker behavior."
+      },
+      "latency_ms": 10077,
+      "cost_usd": 0.039807,
+      "input_tokens": 7959,
+      "output_tokens": 1062,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0121",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known Emotet sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "AV quarantined invoice_10234.exe, a known Emotet sample, on WS-SALES-008 before it executed. The delivery vector is unknown, so this needs a follow-up check even though the threat was contained."
+      },
+      "latency_ms": 12972,
+      "cost_usd": 0.045831,
+      "input_tokens": 8562,
+      "output_tokens": 1343,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0122",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A successful RDP logon as administrator to domain controller SRV-DC02 came from external IP 73.118.80.252, even though RDP is not supposed to be internet-exposed. This is a likely compromise of a Tier-0 asset with potential domain-wide impact."
+      },
+      "latency_ms": 13150,
+      "cost_usd": 0.045351,
+      "input_tokens": 8287,
+      "output_tokens": 1366,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0123",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "The TLS certificate for portal.acme.example on SRV-WEB01 expires in 9 days. This is an IT hygiene notice with no sign of attacker activity."
+      },
+      "latency_ms": 6263,
+      "cost_usd": 0.021909,
+      "input_tokens": 3848,
+      "output_tokens": 691,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0124",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known IcedID sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "AV quarantined setup_x64.exe on WS-SALES-001 before it ran. The hash is known IcedID malware, and the file was downloaded by user nlee."
+      },
+      "latency_ms": 12640,
+      "cost_usd": 0.045483,
+      "input_tokens": 8526,
+      "output_tokens": 1327,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0125",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1190",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "WAF blocked a Log4Shell JNDI exploit attempt against SRV-WEB01 from a known-malicious IP (45.155.205.124) and returned HTTP 403. The attempt was stopped at the perimeter, and nothing in the alert shows it reached the application."
+      },
+      "latency_ms": 10528,
+      "cost_usd": 0.041763,
+      "input_tokens": 8181,
+      "output_tokens": 1148,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0126",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "sjohnson received 29 MFA pushes in 15 minutes from a known-malicious IP and approved the last one, so the attacker likely has an authenticated session. This is a probable account compromise via MFA fatigue."
+      },
+      "latency_ms": 11903,
+      "cost_usd": 0.04233,
+      "input_tokens": 8230,
+      "output_tokens": 1176,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0127",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "EDR sensor on finance laptop WS-FIN-012 has been offline for 3 days, which matches asset inventory showing the device is in repair. No evidence of tampering or attacker activity."
+      },
+      "latency_ms": 8544,
+      "cost_usd": 0.025803,
+      "input_tokens": 4036,
+      "output_tokens": 913,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0128",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "Inbound port scan of 474 ports from 162.142.125.10, an internet research scanner (Censys/Shodan). All connections were dropped at the perimeter, so this is blocked internet background noise."
+      },
+      "latency_ms": 10953,
+      "cost_usd": 0.039657,
+      "input_tokens": 7919,
+      "output_tokens": 1060,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0129",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "confidence": 0.78,
+        "needs_review": false,
+        "summary": "A scheduled task named 'OneDriveSync' was created to run an unsigned binary from AppData at every logon as SYSTEM. This looks like masqueraded persistence with privilege escalation, but nothing yet confirms the binary executed or caused further compromise."
+      },
+      "latency_ms": 15115,
+      "cost_usd": 0.04311,
+      "input_tokens": 8080,
+      "output_tokens": 1258,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0130",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "sjohnson uploaded 2.0 GB from WS-ENG-017 to the company-sanctioned SharePoint tenant (acme.sharepoint.com) during work hours. This looks like expected business activity, not exfiltration."
+      },
+      "latency_ms": 7914,
+      "cost_usd": 0.027117,
+      "input_tokens": 4204,
+      "output_tokens": 967,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0131",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "247 failed Okta password logins against dnguyen from 73.54.50.124 in 5 minutes indicate automated password guessing. There was no successful login and the source IP has a clean reputation, so impact is unclear."
+      },
+      "latency_ms": 10114,
+      "cost_usd": 0.04005,
+      "input_tokens": 7930,
+      "output_tokens": 1084,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0132",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known QakBot sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "AV quarantined invoice_10234.exe, a known QakBot sample, on WS-HR-019 before it executed. Delivery vector is unknown and needs investigation, but there is no evidence of execution or compromise."
+      },
+      "latency_ms": 13004,
+      "cost_usd": 0.044385,
+      "input_tokens": 8410,
+      "output_tokens": 1277,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0133",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "A successful interactive RDP logon reached domain controller SRV-DC01 from an internet IP (Nigeria mobile ISP) using the service account svc_backup, even though RDP should not be internet-exposed. Compromise is not confirmed, but this needs immediate action."
+      },
+      "latency_ms": 14018,
+      "cost_usd": 0.048687,
+      "input_tokens": 8329,
+      "output_tokens": 1580,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0134",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known Remcos malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "A known Remcos RAT sample (invoice_10234.exe) executed on WS-HR-002 under bthompson, AV remediation failed, and the process made outbound network connections. This is a near-certain active compromise."
+      },
+      "latency_ms": 12187,
+      "cost_usd": 0.045156,
+      "input_tokens": 8602,
+      "output_tokens": 1290,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0135",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known AsyncRAT sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "AV quarantined invoice_10234.exe, a known AsyncRAT sample, on WS-SALES-008 before it executed. The invoice-themed file name suggests a phishing or social-engineering delivery, but nothing indicates it ran."
+      },
+      "latency_ms": 11504,
+      "cost_usd": 0.044166,
+      "input_tokens": 8417,
+      "output_tokens": 1261,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0136",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.92,
+        "needs_review": false,
+        "summary": "Signed Microsoft Defender (MsMpEng.exe) opened a handle to lsass.exe as SYSTEM during a scheduled scan on WS-HR-009. This is expected AV behavior, not credential dumping."
+      },
+      "latency_ms": 10119,
+      "cost_usd": 0.038868,
+      "input_tokens": 7751,
+      "output_tokens": 1041,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0137",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1136.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "it-admin created svc_monitor and added it to local Administrators on SRV-DC02 during business hours, and the alert says this matches change ticket CHG-51120. This looks like an approved change, not attacker persistence."
+      },
+      "latency_ms": 10026,
+      "cost_usd": 0.03645,
+      "input_tokens": 7515,
+      "output_tokens": 927,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0138",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A scheduled task named 'OneDriveSync' was created on WS-HR-001 to run an unsigned AppData binary at logon as SYSTEM, which looks like masqueraded persistence. No execution or further compromise is confirmed, so this is high and not critical."
+      },
+      "latency_ms": 11807,
+      "cost_usd": 0.04128,
+      "input_tokens": 8045,
+      "output_tokens": 1143,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0139",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "SRV-NESSUS01, the designated vulnerability scanner, scanned 254 internal hosts across 1000 ports, consistent with its authorized weekly scan. The activity looks like expected IT hygiene, though the timestamp falls on a Monday and not the stated Tuesday window."
+      },
+      "latency_ms": 13554,
+      "cost_usd": 0.044067,
+      "input_tokens": 7719,
+      "output_tokens": 1394,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0140",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A non-IT user, mgarcia, created a local account named helpdesk2 on domain controller SRV-DC02 at 03:14 and added it to Administrators with no change ticket. This looks like attacker persistence through a compromised or insider account, though no use of the new account has been confirmed."
+      },
+      "latency_ms": 13124,
+      "cost_usd": 0.041619,
+      "input_tokens": 7723,
+      "output_tokens": 1230,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0141",
+      "label": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "accepted_techniques": [
+          "T1567",
+          "T1048"
+        ],
+        "rationale": "Many GB of finance data sent to personal cloud storage at 2am: likely exfiltration.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "nlee uploaded 36.8 GB of data from the Finance file share to transfer.sh, an unsanctioned personal file-sharing service, at 02:40, well outside normal hours. This looks like likely data exfiltration, but it isn't confirmed whether it was intentional insider activity or a compromised account."
+      },
+      "latency_ms": 11132,
+      "cost_usd": 0.043089,
+      "input_tokens": 8068,
+      "output_tokens": 1259,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0142",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "sjohnson uploaded 2.0 GB from WS-ENG-003 to the company's sanctioned SharePoint tenant (acme-my.sharepoint.com). This looks like routine business activity rather than exfiltration."
+      },
+      "latency_ms": 10650,
+      "cost_usd": 0.028314,
+      "input_tokens": 4253,
+      "output_tokens": 1037,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0143",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "Word (winword.exe) spawned a hidden, encoded PowerShell command on WS-HR-004 that downloads and runs a script from 194.26.192.61, a known-malicious bulletproof-hosted IP. This is likely a malicious document delivering a payload, but execution success is not confirmed."
+      },
+      "latency_ms": 14193,
+      "cost_usd": 0.050724,
+      "input_tokens": 9263,
+      "output_tokens": 1529,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0144",
+      "label": {
+        "severity": "high",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Attacker already has the password and is spamming MFA pushes. Reset the password now.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1621",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "pjackson received 32 MFA push requests in 15 minutes from 45.155.205.103, a known-malicious IP, which indicates an active MFA fatigue attack. The user denied every push and no successful login is recorded."
+      },
+      "latency_ms": 10094,
+      "cost_usd": 0.039918,
+      "input_tokens": 8091,
+      "output_tokens": 1043,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0145",
+      "label": {
+        "severity": "high",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Attacker already has the password and is spamming MFA pushes. Reset the password now.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1621",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "ehernandez received 32 MFA push requests in 15 minutes from 194.26.192.68, a known-malicious bulletproof-hosting IP, which indicates an MFA fatigue attack by someone who likely holds the user's valid password. The user denied every push and no login succeeded, so there is no confirmed compromise yet."
+      },
+      "latency_ms": 12021,
+      "cost_usd": 0.04254,
+      "input_tokens": 8175,
+      "output_tokens": 1201,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0146",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "209 failed password logins against the svc_backup service account in 3 minutes from 194.26.192.77, a known-malicious bulletproof-hosting IP. No successful login was observed, so this is a likely-malicious brute force attempt without confirmed compromise."
+      },
+      "latency_ms": 11130,
+      "cost_usd": 0.040845,
+      "input_tokens": 8060,
+      "output_tokens": 1111,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0147",
+      "label": {
+        "severity": "medium",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Beacon-like pattern to an IP with no bad reputation. Could be an app heartbeat or new C2; investigate the process.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1071.001",
+        "confidence": 0.55,
+        "needs_review": true,
+        "summary": "WS-ENG-014 sent small, uniform HTTP POSTs to 73.251.201.8 every 300s (\u00b12s) for 6 hours using a spoofed outdated browser user agent, which strongly resembles C2 beaconing. The destination IP has no bad reputation, so compromise is unconfirmed and the alert needs investigation."
+      },
+      "latency_ms": 13994,
+      "cost_usd": 0.04677,
+      "input_tokens": 8400,
+      "output_tokens": 1438,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0148",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "Defender signature update failed on WS-SALES-024 (error 0x80240022), with the last successful update 26 hours ago. This looks like an IT hygiene/health issue with no sign of attacker activity."
+      },
+      "latency_ms": 8511,
+      "cost_usd": 0.027555,
+      "input_tokens": 4085,
+      "output_tokens": 1020,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0149",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "LSASS memory was dumped on WS-HR-006 via rundll32 comsvcs.dll MiniDump under the it-admin account, writing the dump to C:\\Temp\\d.bin. This is credential dumping with the dump file on disk, so credentials should be treated as compromised."
+      },
+      "latency_ms": 13686,
+      "cost_usd": 0.046278,
+      "input_tokens": 8231,
+      "output_tokens": 1439,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0150",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1105",
+          "T1027"
+        ],
+        "rationale": "Hidden encoded PowerShell download cradle to a malicious IP. Isolate and investigate.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.72,
+        "needs_review": false,
+        "summary": "Hidden, encoded PowerShell on WS-FIN-006 (user jsmith) decoded to an IEX download cradle fetching a script from 185.220.101.16, a Tor exit relay with a high abuse score. Likely malicious, but the alert doesn't confirm the payload downloaded or ran."
+      },
+      "latency_ms": 13000,
+      "cost_usd": 0.046782,
+      "input_tokens": 9129,
+      "output_tokens": 1293,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0151",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1190",
+        "confidence": 0.96,
+        "needs_review": false,
+        "summary": "A SQL injection from known-malicious IP 45.155.205.115 succeeded against SRV-WEB01 and was followed by a webshell (shell.aspx) drop and w3wp.exe spawning cmd.exe. This is a confirmed compromise with active command execution."
+      },
+      "latency_ms": 11212,
+      "cost_usd": 0.045039,
+      "input_tokens": 8623,
+      "output_tokens": 1278,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0152",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "A successful RDP (logon type 10) login to SRV-WEB01 as it-admin came from 91.240.118.160, an IP with a high abuse reputation. RDP should not be internet-exposed, so this is likely a compromise of a privileged account."
+      },
+      "latency_ms": 13623,
+      "cost_usd": 0.044643,
+      "input_tokens": 8271,
+      "output_tokens": 1322,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0153",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "Spray from a malicious IP with a successful login: a compromised account.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "A password spray from a known-malicious Tor exit node hit 15 accounts and successfully logged in as mgarcia. This is a near-certain account compromise."
+      },
+      "latency_ms": 9956,
+      "cost_usd": 0.04197,
+      "input_tokens": 8470,
+      "output_tokens": 1104,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0154",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "winword.exe spawned hidden, encoded PowerShell on WS-HR-021 that downloads and executes a script from 45.155.205.121, a known-malicious IP. This looks like a macro-based phishing payload, but the alert doesn't confirm the download or second stage ran."
+      },
+      "latency_ms": 10747,
+      "cost_usd": 0.045,
+      "input_tokens": 9060,
+      "output_tokens": 1188,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0155",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "WS-SALES-007 sent uniform, small HTTP POSTs every 300s (\\u00b12s jitter) for 6 hours to 91.240.118.170, a known-malicious IP, which is consistent with C2 beaconing over web protocols. No confirmed payload execution or data loss yet, so this is likely compromise needing immediate action."
+      },
+      "latency_ms": 12664,
+      "cost_usd": 0.044406,
+      "input_tokens": 8337,
+      "output_tokens": 1293,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0156",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Workstation WS-SALES-011 swept 180 internal hosts on SMB, RDP, WinRM and SSH ports in 3 minutes, unscheduled and with no scanning history. This looks like post-compromise discovery ahead of lateral movement, but no successful lateral movement is confirmed."
+      },
+      "latency_ms": 14251,
+      "cost_usd": 0.05598,
+      "input_tokens": 12120,
+      "output_tokens": 1308,
+      "tool_calls": 2,
+      "tools": [
+        "map_to_attack",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0157",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "WS-ENG-016 sent 720 uniform HTTP POSTs at 30s intervals with jitter over 6 hours to 185.220.101.18, a known-malicious Tor exit relay. This looks like C2 beaconing from a likely compromised host, though no payload or data loss is confirmed."
+      },
+      "latency_ms": 10963,
+      "cost_usd": 0.042669,
+      "input_tokens": 8233,
+      "output_tokens": 1198,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0158",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078.004",
+        "confidence": 0.6,
+        "needs_review": false,
+        "summary": "rbrown signed in from a US corporate egress IP and then from a Vietnam ISP IP 36 minutes later, which is impossible travel. Neither IP has a bad reputation, so the sign-in is suspicious but there is no confirmed compromise."
+      },
+      "latency_ms": 11922,
+      "cost_usd": 0.044469,
+      "input_tokens": 8588,
+      "output_tokens": 1247,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0159",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "WS-FIN-005 sent uniform HTTP POSTs every 300s (\\u00b12s jitter) for 6 hours to 185.220.101.25, a Tor exit relay with a high abuse score. This looks like C2 beaconing from a likely compromised finance workstation, with no confirmed post-compromise impact yet."
+      },
+      "latency_ms": 13894,
+      "cost_usd": 0.047814,
+      "input_tokens": 8343,
+      "output_tokens": 1519,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0160",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078.004",
+        "confidence": 0.6,
+        "needs_review": false,
+        "summary": "bthompson signed in from the US corporate egress and then from a Nigerian mobile ISP 21 minutes later, which is physically impossible. The second IP is clean and the device is known, so compromise is possible but unconfirmed."
+      },
+      "latency_ms": 11830,
+      "cost_usd": 0.04674,
+      "input_tokens": 8695,
+      "output_tokens": 1377,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0161",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "A TLS certificate for portal.acme.example on SRV-WEB01 expires in 9 days. This is a certificate lifecycle (IT hygiene) notice with no attacker behavior."
+      },
+      "latency_ms": 6652,
+      "cost_usd": 0.023064,
+      "input_tokens": 3888,
+      "output_tokens": 760,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0162",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known LockBit sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "AV quarantined setup_x64.exe on WS-OPS-017 before it executed. The file hash is a known LockBit ransomware sample (54/77 detections), so the delivery path needs investigation even though the attempt was blocked."
+      },
+      "latency_ms": 12799,
+      "cost_usd": 0.045339,
+      "input_tokens": 8538,
+      "output_tokens": 1315,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0163",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Impossible travel alert for omoore is most likely a VPN artifact. One IP is Acme Corp's own egress and the other is Cloudflare WARP, a corporate VPN, with no threat intel hits and no new device."
+      },
+      "latency_ms": 10272,
+      "cost_usd": 0.042597,
+      "input_tokens": 8399,
+      "output_tokens": 1160,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0164",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "WS-FIN-022 sent uniform HTTP POSTs every 30s (with jitter) for 6 hours to 185.220.101.28, a high-abuse Tor exit relay, which is consistent with C2 beaconing. No confirmed payload, exfiltration, or lateral movement yet."
+      },
+      "latency_ms": 12290,
+      "cost_usd": 0.04389,
+      "input_tokens": 8275,
+      "output_tokens": 1271,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0165",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "61 failed password logins against the privileged account it-admin in one minute from a known-malicious Tor exit node. No successful login was observed, so this is an active brute force attempt with no confirmed compromise."
+      },
+      "latency_ms": 9800,
+      "cost_usd": 0.038439,
+      "input_tokens": 7903,
+      "output_tokens": 982,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0166",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "PowerShell with -ExecutionPolicy Bypass was launched by the signed SCCM client (ccmexec.exe) as SYSTEM to run inventory.ps1 from the SCCM cache. This is routine management-tool activity, not attacker behavior."
+      },
+      "latency_ms": 11567,
+      "cost_usd": 0.039408,
+      "input_tokens": 7981,
+      "output_tokens": 1031,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0167",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Defender signature update failed on WS-OPS-017 with error 0x80240022, with the last successful update 26 hours ago. This looks like routine IT hygiene noise rather than attacker activity."
+      },
+      "latency_ms": 8802,
+      "cost_usd": 0.027513,
+      "input_tokens": 4061,
+      "output_tokens": 1022,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0168",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "jsmith was locked out after 5 failed logins from their usual office device and then self-unlocked via verified MFA. This is consistent with a user mistyping a password and is routine IT hygiene."
+      },
+      "latency_ms": 6454,
+      "cost_usd": 0.023274,
+      "input_tokens": 3918,
+      "output_tokens": 768,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0169",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "bthompson received 15 MFA pushes in 15 minutes from a known-malicious IP and approved the last one, indicating a successful MFA fatigue attack and likely account takeover."
+      },
+      "latency_ms": 10621,
+      "cost_usd": 0.039696,
+      "input_tokens": 8047,
+      "output_tokens": 1037,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0170",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "Successful RDP login to SRV-FILE01 as svc_backup from 185.220.101.12, a known Tor exit relay with a high abuse score. A successful internet-sourced admin-level RDP session from a malicious IP indicates likely host compromise."
+      },
+      "latency_ms": 12722,
+      "cost_usd": 0.042552,
+      "input_tokens": 8199,
+      "output_tokens": 1197,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0171",
+      "label": {
+        "severity": "high",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Attacker already has the password and is spamming MFA pushes. Reset the password now.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1621",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "nlee received 31 MFA push requests in 15 minutes from 45.155.205.111, a known-malicious bulletproof hosting IP, which indicates an MFA fatigue attack in progress. The user denied every push, so there is no confirmed compromise."
+      },
+      "latency_ms": 10971,
+      "cost_usd": 0.03981,
+      "input_tokens": 8010,
+      "output_tokens": 1052,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0172",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Audit policy on SRV-DC01 was changed by it-admin via a Group Policy update during the approved maintenance window. This matches authorized IT activity and shows no attacker behavior."
+      },
+      "latency_ms": 10021,
+      "cost_usd": 0.026862,
+      "input_tokens": 3974,
+      "output_tokens": 996,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0173",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1190",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "WAF blocked a SQL injection attempt against SRV-WEB01 from a known-malicious Tor exit relay. The request received HTTP 403, so there is no evidence of successful exploitation."
+      },
+      "latency_ms": 10556,
+      "cost_usd": 0.039612,
+      "input_tokens": 8079,
+      "output_tokens": 1025,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0174",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1190",
+        "confidence": 0.95,
+        "needs_review": false,
+        "summary": "A Log4Shell JNDI exploit from a known-malicious IP succeeded against SRV-WEB01, followed by a webshell drop and w3wp.exe spawning cmd.exe. This is a confirmed compromise with active attacker command execution."
+      },
+      "latency_ms": 10584,
+      "cost_usd": 0.042918,
+      "input_tokens": 8451,
+      "output_tokens": 1171,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0175",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1105",
+          "T1027"
+        ],
+        "rationale": "Hidden encoded PowerShell download cradle to a malicious IP. Isolate and investigate.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.72,
+        "needs_review": false,
+        "summary": "A hidden, encoded PowerShell command on WS-OPS-006 (user cwhite) downloads and executes a script from 185.220.101.33, a known-malicious Tor exit relay. It is likely malicious and needs action now, but the alert does not confirm that the download succeeded or that the script ran."
+      },
+      "latency_ms": 11654,
+      "cost_usd": 0.046743,
+      "input_tokens": 9116,
+      "output_tokens": 1293,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0176",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078.004",
+        "confidence": 0.65,
+        "needs_review": false,
+        "summary": "ehernandez signed in from a US corporate egress IP and then from a Brazilian ISP IP 39 minutes later, which is physically impossible travel. Neither IP has a bad reputation and the device is known, so this needs investigation but compromise is not confirmed."
+      },
+      "latency_ms": 12452,
+      "cost_usd": 0.046839,
+      "input_tokens": 8683,
+      "output_tokens": 1386,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0177",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "WS-OPS-005 sent uniform HTTP POST beacons every 30s (with jitter) for 6 hours to 194.26.192.69, a known-malicious bulletproof-hosting IP. This is consistent with active C2 communication from a likely compromised host."
+      },
+      "latency_ms": 13637,
+      "cost_usd": 0.04509,
+      "input_tokens": 8380,
+      "output_tokens": 1330,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0178",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "370 failed password logins against the likely privileged account da_jsmith in 4 minutes from a known-malicious Tor exit node. No successful login was observed, so this is a likely malicious brute force with no confirmed compromise."
+      },
+      "latency_ms": 9894,
+      "cost_usd": 0.039393,
+      "input_tokens": 7981,
+      "output_tokens": 1030,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0179",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Local admin account 'sysadm' was created on SRV-WEB01 by it-admin during business hours, and the alert states it matches change ticket CHG-32427. This looks like an approved IT change, not attacker persistence."
+      },
+      "latency_ms": 9336,
+      "cost_usd": 0.036849,
+      "input_tokens": 7578,
+      "output_tokens": 941,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0180",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "WS-OPS-001 sent small, uniform HTTP POSTs to 194.26.192.68 every 300 seconds for 6 hours, which fits C2 beaconing. The destination is a known-malicious bulletproof-hosted IP, so the host needs containment now."
+      },
+      "latency_ms": 12016,
+      "cost_usd": 0.044079,
+      "input_tokens": 8348,
+      "output_tokens": 1269,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0181",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "Spray from a malicious IP with a successful login: a compromised account.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "A password spray from a known Tor exit relay (185.220.101.29) hit 15 accounts and succeeded against bthompson, so that account is likely compromised."
+      },
+      "latency_ms": 10637,
+      "cost_usd": 0.042294,
+      "input_tokens": 8493,
+      "output_tokens": 1121,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0182",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "A rare installer, 7-zip_setup.exe, ran on WS-SALES-008 from lchen's Downloads folder. The hash matches the legitimate signed 7-Zip 24.08 build with 0/72 detections, so this looks like a benign user install."
+      },
+      "latency_ms": 10330,
+      "cost_usd": 0.041304,
+      "input_tokens": 8493,
+      "output_tokens": 1055,
+      "tool_calls": 2,
+      "tools": [
+        "check_file_hash",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0183",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "High-volume guessing from a known-malicious IP ending in a successful login on a privileged account: likely account takeover.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "92 failed logins against svc_backup in 3 minutes from a known Tor exit relay were followed 30 seconds later by a successful login from the same IP. This indicates a probable account takeover of a service account."
+      },
+      "latency_ms": 9962,
+      "cost_usd": 0.039636,
+      "input_tokens": 8062,
+      "output_tokens": 1030,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0184",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Local admin account backup_adm was created on SRV-FILE01 by it-admin during business hours and is tied to change ticket CHG-45890. This looks like an approved administrative change rather than attacker persistence."
+      },
+      "latency_ms": 8688,
+      "cost_usd": 0.036195,
+      "input_tokens": 7570,
+      "output_tokens": 899,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0185",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "The it-admin account created backup_adm and added it to local Administrators on SRV-DC02 during business hours, and the alert says this matches change ticket CHG-70806. It looks like an approved administrative change, not attacker persistence."
+      },
+      "latency_ms": 13154,
+      "cost_usd": 0.036822,
+      "input_tokens": 7509,
+      "output_tokens": 953,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0186",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "A password spray against 11 Okta accounts came from 194.26.192.68, an IP with a high abuse score on bulletproof hosting in Russia. No successful logins are recorded, so there is no confirmed compromise, but the activity is clearly malicious and needs action now."
+      },
+      "latency_ms": 11003,
+      "cost_usd": 0.040782,
+      "input_tokens": 8294,
+      "output_tokens": 1060,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0187",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1110.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "cwhite had 4 failed Okta logins in 5 minutes from an internal workstation (WS-FIN-016), then a successful login, one day after a password change. This most likely reflects a mistyped or stale cached password rather than an attack."
+      },
+      "latency_ms": 11055,
+      "cost_usd": 0.039621,
+      "input_tokens": 7747,
+      "output_tokens": 1092,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0188",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "PowerShell was run with -ExecutionPolicy Bypass by SYSTEM, spawned by the signed SCCM client (ccmexec.exe) to run a script from the SCCM cache. This is routine SCCM management activity, not attacker behavior."
+      },
+      "latency_ms": 10832,
+      "cost_usd": 0.039783,
+      "input_tokens": 7976,
+      "output_tokens": 1057,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0189",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "bthompson uploaded 2.6 GB from WS-FIN-021 to the company's sanctioned SharePoint tenant (acme-my.sharepoint.com) during work hours. This looks like normal business activity, not exfiltration."
+      },
+      "latency_ms": 8500,
+      "cost_usd": 0.027993,
+      "input_tokens": 4226,
+      "output_tokens": 1021,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0190",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.65,
+        "needs_review": false,
+        "summary": "Three failed Okta logins for it-admin from an internal workstation (WS-HR-015) followed by a success, one day after a password change. This most likely reflects a user mistyping or using a cached old password, not an attack."
+      },
+      "latency_ms": 13418,
+      "cost_usd": 0.043113,
+      "input_tokens": 7856,
+      "output_tokens": 1303,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0191",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "A successful RDP logon as 'admin' to SRV-EXCH01 came from 185.220.101.35, a Tor exit relay with a 98 abuse score. This is near-certain compromise of an Exchange server through exposed RDP."
+      },
+      "latency_ms": 10406,
+      "cost_usd": 0.040998,
+      "input_tokens": 8126,
+      "output_tokens": 1108,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0192",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "Mimikatz ran sekurlsa::logonpasswords against lsass.exe on WS-HR-018 under jsmith, which is credential dumping with full process access. Credentials cached on the host should be treated as compromised."
+      },
+      "latency_ms": 11370,
+      "cost_usd": 0.043122,
+      "input_tokens": 8014,
+      "output_tokens": 1272,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0193",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "confidence": 0.82,
+        "needs_review": false,
+        "summary": "A known-malicious bulletproof-hosted IP (abuse score 84) sprayed common passwords against 11 Okta accounts in 10 minutes. No successful logins were recorded, so there is no confirmed compromise, but the activity is deliberate and needs action now."
+      },
+      "latency_ms": 14286,
+      "cost_usd": 0.0468,
+      "input_tokens": 8375,
+      "output_tokens": 1445,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0194",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "WS-HR-006 made 72 uniform HTTP POST check-ins every 300s (\u00b12s jitter) over 6 hours to 194.26.192.60, a known-malicious bulletproof-hosted IP. This is consistent with C2 beaconing from an implant, with no confirmed follow-on impact yet."
+      },
+      "latency_ms": 14707,
+      "cost_usd": 0.046986,
+      "input_tokens": 8377,
+      "output_tokens": 1457,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0195",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "High-volume guessing from a known-malicious IP ending in a successful login on a privileged account: likely account takeover.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "confidence": 0.93,
+        "needs_review": false,
+        "summary": "152 failed logins against svc_backup from a known-malicious IP were followed 30 seconds later by a successful login from the same IP to a domain controller (SRV-DC01). This indicates a likely compromise of the service account."
+      },
+      "latency_ms": 10823,
+      "cost_usd": 0.040659,
+      "input_tokens": 8168,
+      "output_tokens": 1077,
+      "tool_calls": 2,
+      "tools": [
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0196",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "Four failed logins for rbrown from the internal workstation WS-SALES-014 were followed by a successful login. The password was changed 1 day ago, so this most likely reflects the user mistyping or using a stale credential."
+      },
+      "latency_ms": 8932,
+      "cost_usd": 0.037026,
+      "input_tokens": 7632,
+      "output_tokens": 942,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0197",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "A fodhelper.exe UAC bypass on WS-OPS-002 hijacked the ms-settings registry key to run C:\\Users\\Public\\p.exe at high integrity. This is likely malicious privilege escalation, but no follow-on compromise has been confirmed."
+      },
+      "latency_ms": 11316,
+      "cost_usd": 0.041085,
+      "input_tokens": 7925,
+      "output_tokens": 1154,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0198",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "LSASS memory was dumped on WS-OPS-005 under sjohnson using rundll32 and comsvcs.dll MiniDump, a known credential theft technique. The alert does not say the dump was blocked, so credentials should be treated as stolen."
+      },
+      "latency_ms": 11045,
+      "cost_usd": 0.041697,
+      "input_tokens": 8084,
+      "output_tokens": 1163,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0199",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078.004",
+        "confidence": 0.6,
+        "needs_review": false,
+        "summary": "sjohnson signed in from a US corporate egress IP and then from a Romanian residential IP 30 minutes later, which is physically impossible. No compromise is confirmed and the second IP has little bad reputation, so this needs investigation."
+      },
+      "latency_ms": 10499,
+      "cost_usd": 0.045237,
+      "input_tokens": 8599,
+      "output_tokens": 1296,
+      "tool_calls": 3,
+      "tools": [
+        "check_ip_reputation",
+        "check_ip_reputation",
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "ALR-0200",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "HR workstation WS-HR-007 scanned 180 internal hosts on SMB, RDP, WinRM and SSH ports in 3 minutes, which is unscheduled behavior it has never shown before. This looks like post-compromise discovery ahead of lateral movement, but no successful access is confirmed."
+      },
+      "latency_ms": 13704,
+      "cost_usd": 0.043995,
+      "input_tokens": 7990,
+      "output_tokens": 1335,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "OTRF-0001",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003",
+          "T1218.011"
+        ],
+        "rationale": "rundll32 + comsvcs MiniDump of LSASS: credential theft from memory.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.88,
+        "needs_review": false,
+        "summary": "PowerShell launched rundll32.exe with comsvcs.dll MiniDump against PID 756 (presumably LSASS), writing a full memory dump to the user's Temp folder on WORKSTATION5. This is a classic living-off-the-land LSASS credential dump."
+      },
+      "latency_ms": 12589,
+      "cost_usd": 0.048864,
+      "input_tokens": 9868,
+      "output_tokens": 1284,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "OTRF-0002",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "PowerShell (Empire) opening LSASS with read access: Mimikatz logonpasswords.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.8,
+        "needs_review": false,
+        "summary": "PowerShell opened lsass.exe with access mask 0x1010 on WORKSTATION5, which matches Mimikatz-style LSASS credential dumping. Credentials cached on the host should be treated as exposed."
+      },
+      "latency_ms": 10986,
+      "cost_usd": 0.046086,
+      "input_tokens": 8862,
+      "output_tokens": 1300,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "OTRF-0003",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.003",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "ntdsutil IFM copy of NTDS.dit dumps every domain password hash.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.003",
+        "confidence": 0.9,
+        "needs_review": false,
+        "summary": "PANDALAB\\Administrator ran ntdsutil on DC01 to create a full IFM copy of the Active Directory database (ntds.dit) in C:\\Windows\\Temp. This is credential dumping on a domain controller, and the alert shows no sign it was blocked."
+      },
+      "latency_ms": 13332,
+      "cost_usd": 0.048519,
+      "input_tokens": 9328,
+      "output_tokens": 1369,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "OTRF-0004",
+      "label": {
+        "severity": "high",
+        "technique": "T1003.002",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "esentutl copying the SAM hive to extract local account hashes.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.002",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "esentutl.exe was used with /vss to copy the SAM hive from a volume shadow copy to C:\\ProgramData\\SAM on WORKSTATION5, a known credential dumping technique. The copy appears to have completed, so local account hashes are likely exposed."
+      },
+      "latency_ms": 13728,
+      "cost_usd": 0.046938,
+      "input_tokens": 9151,
+      "output_tokens": 1299,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "OTRF-0005",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1059.005",
+          "T1059",
+          "T1027"
+        ],
+        "rationale": "VBS launcher spawning hidden encoded PowerShell: Empire stager.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.75,
+        "needs_review": false,
+        "summary": "wscript.exe running launcher.vbs on WORKSTATION5 spawned a hidden, encoded PowerShell Empire-style stager that bypasses AMSI, disables script block logging, and downloads an RC4-encrypted payload to run via IEX. This is likely malicious and needs action now, but the alert does not confirm the download succeeded."
+      },
+      "latency_ms": 17324,
+      "cost_usd": 0.187467,
+      "input_tokens": 52634,
+      "output_tokens": 1971,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    },
+    {
+      "id": "OTRF-0006",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Task Manager used over RDP to write an LSASS dump file.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.85,
+        "needs_review": false,
+        "summary": "taskmgr.exe wrote an LSASS memory dump (lsass.DMP) to the pgustavo user's Temp folder on WORKSTATION5, which indicates credential dumping. Any account that logged on to this host may now be compromised."
+      },
+      "latency_ms": 11123,
+      "cost_usd": 0.042756,
+      "input_tokens": 8432,
+      "output_tokens": 1164,
+      "tool_calls": 1,
+      "tools": [
+        "map_to_attack"
+      ]
+    }
+  ]
+}
