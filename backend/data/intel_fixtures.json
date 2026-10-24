@@ -1,0 +1,719 @@
+{
+  "hashes": {
+    "00a064a4d1cc6c3b6ba1cc08cc2e56d93f07fcd7d7559d1f4faac112182f1d75": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "Slack Setup (signed: Slack Technologies)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "07a79e2275e3cada2be752c648cf0672a9fc5dde8d5650aaf635ae1b8aff4171": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "7-Zip 24.08 (signed: Igor Pavlov)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "0c0e0d60947a92b0734bed44c3e188315ab857a1c9b42c29d3cdade89b08d083": {
+      "family": "QakBot",
+      "found": true,
+      "harmless": 0,
+      "malicious": 46,
+      "suspicious": 1,
+      "type": "Win32 EXE",
+      "undetected": 10
+    },
+    "2120a6ba07e0e44e5be4c297bbe42285a6ac7ec1bae546bce959bf35039bafda": {
+      "family": "AsyncRAT",
+      "found": true,
+      "harmless": 0,
+      "malicious": 57,
+      "suspicious": 3,
+      "type": "Win32 EXE",
+      "undetected": 7
+    },
+    "2e5db87f7d6f483a2dfc85bac70da122882a3592cb8e01df1d7e3d61b011a987": {
+      "family": "Cobalt Strike Beacon",
+      "found": true,
+      "harmless": 0,
+      "malicious": 64,
+      "suspicious": 1,
+      "type": "Win32 EXE",
+      "undetected": 11
+    },
+    "2e9855cb732ae6011db7ba77dfe5c9f40f4f6b8445e8b508deb19086f5438832": {
+      "family": "LockBit",
+      "found": true,
+      "harmless": 0,
+      "malicious": 54,
+      "suspicious": 4,
+      "type": "Win32 EXE",
+      "undetected": 19
+    },
+    "351417bee8c0766b870ab0ddaae3fe20320be0546a69294a45ead358e31dfd84": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "7-Zip 24.08 (signed: Igor Pavlov)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "40f5fefe7e3dbaa9ef1f71db2a4bc859b3a1e3fcbacbd9b607ae6e4b447f88f8": {
+      "family": "Emotet",
+      "found": true,
+      "harmless": 0,
+      "malicious": 57,
+      "suspicious": 4,
+      "type": "Win32 EXE",
+      "undetected": 19
+    },
+    "4a20cf28f01af0108e392c9a91d7e4d2281b626f8c46c76b2d84ea70b8af8e50": {
+      "family": "SocGholish",
+      "found": true,
+      "harmless": 0,
+      "malicious": 60,
+      "suspicious": 1,
+      "type": "Win32 EXE",
+      "undetected": 4
+    },
+    "63c40c5cc884812b5fdb1ee20eadee31b3c5f1190c66dc5e9380b9960bb6d5e2": {
+      "family": "AgentTesla",
+      "found": true,
+      "harmless": 0,
+      "malicious": 56,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 16
+    },
+    "656d3ebb3ef84fa183a54ac40036d34d0025c6dd15d99df29ae0700e153f50a5": {
+      "family": "QakBot",
+      "found": true,
+      "harmless": 0,
+      "malicious": 58,
+      "suspicious": 1,
+      "type": "Win32 EXE",
+      "undetected": 17
+    },
+    "82431888d333649d96e19fdf45d1de2c24f97c9d8507ace637d8e56053102855": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "Python 3.12 installer (signed: PSF)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "a0610a514d2422ab2d91d09809cf134ef00e6d2fb74ea684cb7c904996efdb9a": {
+      "family": "IcedID",
+      "found": true,
+      "harmless": 0,
+      "malicious": 42,
+      "suspicious": 2,
+      "type": "Win32 EXE",
+      "undetected": 10
+    },
+    "ae142af19a15ae941d9bfa35ef41f61d7d66c806a13c88b2e8fea5c3847d558d": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "Slack Setup (signed: Slack Technologies)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "b9e11867f0cb2c6402889a2a5832034b5013a0187ed08bdb10b6849effdd93c7": {
+      "family": "Remcos",
+      "found": true,
+      "harmless": 0,
+      "malicious": 56,
+      "suspicious": 1,
+      "type": "Win32 EXE",
+      "undetected": 4
+    },
+    "ba13366e43d30815ac52c5ada6aa822dd8ead5c06a29f207fbd88d7ce840e9e4": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "Chrome Setup (signed: Google LLC)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "ebc19ded733f9388ca3dcef9b5b7111644f8f81b10ddc9fcee3f01bf8fe2c0aa": {
+      "family": null,
+      "found": true,
+      "harmless": 0,
+      "known_good": "7-Zip 24.08 (signed: Igor Pavlov)",
+      "malicious": 0,
+      "suspicious": 0,
+      "type": "Win32 EXE",
+      "undetected": 72
+    },
+    "ec7e85bea77d255f8158f5268deb0d802ffe5f2890cc4eace4626e9756ccedda": {
+      "family": "SocGholish",
+      "found": true,
+      "harmless": 0,
+      "malicious": 57,
+      "suspicious": 4,
+      "type": "Win32 EXE",
+      "undetected": 9
+    }
+  },
+  "ips": {
+    "104.28.14.7": {
+      "abuse_confidence_score": 0,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Cloudflare WARP (corporate VPN)",
+      "total_reports": 0,
+      "usage_type": "Content Delivery Network"
+    },
+    "104.28.14.8": {
+      "abuse_confidence_score": 0,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Cloudflare WARP (corporate VPN)",
+      "total_reports": 0,
+      "usage_type": "Content Delivery Network"
+    },
+    "162.142.125.10": {
+      "abuse_confidence_score": 45,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Internet research scanner (Censys/Shodan)",
+      "total_reports": 5028,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "185.220.101.10": {
+      "abuse_confidence_score": 82,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 2351,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.11": {
+      "abuse_confidence_score": 91,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1187,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.12": {
+      "abuse_confidence_score": 93,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1201,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.13": {
+      "abuse_confidence_score": 82,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 3386,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.16": {
+      "abuse_confidence_score": 83,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 904,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.17": {
+      "abuse_confidence_score": 84,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 2874,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.18": {
+      "abuse_confidence_score": 91,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 2713,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.19": {
+      "abuse_confidence_score": 90,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1111,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.20": {
+      "abuse_confidence_score": 97,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1292,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.21": {
+      "abuse_confidence_score": 86,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1786,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.23": {
+      "abuse_confidence_score": 84,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1237,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.25": {
+      "abuse_confidence_score": 92,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 3800,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.27": {
+      "abuse_confidence_score": 83,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 3004,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.28": {
+      "abuse_confidence_score": 83,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 260,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.29": {
+      "abuse_confidence_score": 91,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 3116,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.31": {
+      "abuse_confidence_score": 85,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 950,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.33": {
+      "abuse_confidence_score": 95,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 3817,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.35": {
+      "abuse_confidence_score": 98,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 1576,
+      "usage_type": "Reserved"
+    },
+    "185.220.101.37": {
+      "abuse_confidence_score": 84,
+      "country": "DE",
+      "is_tor": true,
+      "isp": "Tor exit relay",
+      "total_reports": 2503,
+      "usage_type": "Reserved"
+    },
+    "194.26.192.60": {
+      "abuse_confidence_score": 91,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 2104,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.61": {
+      "abuse_confidence_score": 90,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 2933,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.62": {
+      "abuse_confidence_score": 91,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 674,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.68": {
+      "abuse_confidence_score": 85,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1182,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.69": {
+      "abuse_confidence_score": 99,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 3373,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.72": {
+      "abuse_confidence_score": 87,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 846,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.75": {
+      "abuse_confidence_score": 85,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1781,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.77": {
+      "abuse_confidence_score": 84,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1961,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "194.26.192.78": {
+      "abuse_confidence_score": 87,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 682,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "198.51.100.20": {
+      "abuse_confidence_score": 0,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Acme Corp egress",
+      "total_reports": 0,
+      "usage_type": "Commercial"
+    },
+    "203.0.113.10": {
+      "abuse_confidence_score": 0,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Acme Corp egress",
+      "total_reports": 0,
+      "usage_type": "Commercial"
+    },
+    "203.0.113.11": {
+      "abuse_confidence_score": 0,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Acme Corp egress",
+      "total_reports": 0,
+      "usage_type": "Commercial"
+    },
+    "45.155.205.102": {
+      "abuse_confidence_score": 90,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1813,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.103": {
+      "abuse_confidence_score": 85,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 3296,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.109": {
+      "abuse_confidence_score": 84,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 740,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.111": {
+      "abuse_confidence_score": 98,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 2100,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.115": {
+      "abuse_confidence_score": 99,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1068,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.120": {
+      "abuse_confidence_score": 96,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1018,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.121": {
+      "abuse_confidence_score": 87,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 1123,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.123": {
+      "abuse_confidence_score": 86,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 399,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.124": {
+      "abuse_confidence_score": 85,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 3510,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.127": {
+      "abuse_confidence_score": 98,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 2334,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "45.155.205.128": {
+      "abuse_confidence_score": 84,
+      "country": "RU",
+      "is_tor": false,
+      "isp": "Bulletproof hosting",
+      "total_reports": 3508,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "73.10.103.4": {
+      "abuse_confidence_score": 2,
+      "country": "NG",
+      "is_tor": false,
+      "isp": "MTN Nigeria",
+      "total_reports": 1,
+      "usage_type": "Mobile ISP"
+    },
+    "73.118.80.252": {
+      "abuse_confidence_score": 5,
+      "country": "VN",
+      "is_tor": false,
+      "isp": "Viettel",
+      "total_reports": 2,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.122.188.125": {
+      "abuse_confidence_score": 0,
+      "country": "RO",
+      "is_tor": false,
+      "isp": "RCS & RDS",
+      "total_reports": 2,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.134.238.63": {
+      "abuse_confidence_score": 0,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Comcast Cable",
+      "total_reports": 2,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.147.219.153": {
+      "abuse_confidence_score": 1,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Comcast Cable",
+      "total_reports": 2,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.149.108.46": {
+      "abuse_confidence_score": 0,
+      "country": "VN",
+      "is_tor": false,
+      "isp": "Viettel",
+      "total_reports": 2,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.160.141.107": {
+      "abuse_confidence_score": 0,
+      "country": "BR",
+      "is_tor": false,
+      "isp": "Vivo",
+      "total_reports": 0,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.164.46.4": {
+      "abuse_confidence_score": 2,
+      "country": "VN",
+      "is_tor": false,
+      "isp": "Viettel",
+      "total_reports": 0,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.183.191.167": {
+      "abuse_confidence_score": 3,
+      "country": "NG",
+      "is_tor": false,
+      "isp": "MTN Nigeria",
+      "total_reports": 2,
+      "usage_type": "Mobile ISP"
+    },
+    "73.204.164.209": {
+      "abuse_confidence_score": 3,
+      "country": "US",
+      "is_tor": false,
+      "isp": "Comcast Cable",
+      "total_reports": 0,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.237.133.94": {
+      "abuse_confidence_score": 1,
+      "country": "IN",
+      "is_tor": false,
+      "isp": "Bharti Airtel",
+      "total_reports": 0,
+      "usage_type": "Mobile ISP"
+    },
+    "73.251.201.8": {
+      "abuse_confidence_score": 2,
+      "country": "NG",
+      "is_tor": false,
+      "isp": "MTN Nigeria",
+      "total_reports": 1,
+      "usage_type": "Mobile ISP"
+    },
+    "73.47.147.88": {
+      "abuse_confidence_score": 5,
+      "country": "BR",
+      "is_tor": false,
+      "isp": "Vivo",
+      "total_reports": 0,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.54.50.124": {
+      "abuse_confidence_score": 6,
+      "country": "BR",
+      "is_tor": false,
+      "isp": "Vivo",
+      "total_reports": 1,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.63.48.228": {
+      "abuse_confidence_score": 6,
+      "country": "RO",
+      "is_tor": false,
+      "isp": "RCS & RDS",
+      "total_reports": 1,
+      "usage_type": "Fixed Line ISP"
+    },
+    "73.70.105.16": {
+      "abuse_confidence_score": 1,
+      "country": "IN",
+      "is_tor": false,
+      "isp": "Bharti Airtel",
+      "total_reports": 1,
+      "usage_type": "Mobile ISP"
+    },
+    "91.240.118.160": {
+      "abuse_confidence_score": 85,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 2429,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "91.240.118.162": {
+      "abuse_confidence_score": 91,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 3053,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "91.240.118.163": {
+      "abuse_confidence_score": 99,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 1051,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "91.240.118.166": {
+      "abuse_confidence_score": 93,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 3870,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "91.240.118.168": {
+      "abuse_confidence_score": 85,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 1639,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "91.240.118.170": {
+      "abuse_confidence_score": 92,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 1151,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    },
+    "91.240.118.176": {
+      "abuse_confidence_score": 86,
+      "country": "NL",
+      "is_tor": false,
+      "isp": "Abused VPS provider",
+      "total_reports": 3926,
+      "usage_type": "Data Center/Web Hosting/Transit"
+    }
+  }
+}

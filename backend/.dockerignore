@@ -1,0 +1,10 @@
+.venv
+__pycache__
+*.pyc
+.pytest_cache
+.ruff_cache
+triage.db
+tests/test.db
+data/.cache
+evals/runs
+.env

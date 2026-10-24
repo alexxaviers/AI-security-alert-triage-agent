@@ -1,0 +1,41 @@
+# Render Blueprint: New → Blueprint → pick this repo.
+# You'll be prompted for the values marked sync: false.
+databases:
+  - name: triage-db
+    plan: free
+    databaseName: triage
+    user: triage
+
+services:
+  - type: web
+    name: triage-api
+    runtime: docker
+    rootDir: backend
+    plan: free
+    healthCheckPath: /health
+    envVars:
+      - key: DATABASE_URL
+        fromDatabase:
+          name: triage-db
+          property: connectionString
+      - key: ANTHROPIC_API_KEY
+        sync: false
+      - key: ABUSEIPDB_API_KEY
+        sync: false
+      - key: VIRUSTOTAL_API_KEY
+        sync: false
+      # The free plan has 512 MB RAM: build without torch and use the TF-IDF mapper.
+      # On a paid plan, set this to "true" for the sentence-transformers mapper.
+      - key: WITH_EMBEDDINGS
+        value: "false"
+      - key: CORS_ORIGINS
+        sync: false # e.g. https://triage-web.onrender.com
+
+  - type: web
+    name: triage-web
+    runtime: docker
+    rootDir: frontend
+    plan: free
+    envVars:
+      - key: NEXT_PUBLIC_API_URL
+        sync: false # e.g. https://triage-api.onrender.com

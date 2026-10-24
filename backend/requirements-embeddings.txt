@@ -1,0 +1,4 @@
+# Local sentence-transformers model for the ATT&CK mapper. Optional: without it the
+# mapper falls back to TF-IDF. Install CPU-only torch first to keep it small:
+#   pip install torch --index-url https://download.pytorch.org/whl/cpu
+sentence-transformers>=3.0

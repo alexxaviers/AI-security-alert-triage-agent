@@ -1,0 +1,5490 @@
+{
+  "timestamp": "20261024T021209Z",
+  "engine": "baseline-rules",
+  "prompt_version": "7feb909b",
+  "intel": "fixtures",
+  "note": "rules baseline (keyword + intel, no LLM)",
+  "wall_seconds": 0.0,
+  "metrics": {
+    "n": 206,
+    "errors": 0,
+    "confusion": {
+      "low": {
+        "low": 31,
+        "medium": 15,
+        "high": 28,
+        "critical": 4
+      },
+      "medium": {
+        "low": 0,
+        "medium": 21,
+        "high": 0,
+        "critical": 0
+      },
+      "high": {
+        "low": 0,
+        "medium": 6,
+        "high": 45,
+        "critical": 11
+      },
+      "critical": {
+        "low": 0,
+        "medium": 0,
+        "high": 9,
+        "critical": 36
+      }
+    },
+    "severity_accuracy": 0.6456310679611651,
+    "severity_within_one": 0.8446601941747572,
+    "per_class": {
+      "low": {
+        "precision": 1.0,
+        "recall": 0.3974358974358974,
+        "support": 78
+      },
+      "medium": {
+        "precision": 0.5,
+        "recall": 1.0,
+        "support": 21
+      },
+      "high": {
+        "precision": 0.5487804878048781,
+        "recall": 0.7258064516129032,
+        "support": 62
+      },
+      "critical": {
+        "precision": 0.7058823529411765,
+        "recall": 0.8,
+        "support": 45
+      }
+    },
+    "technique_accuracy": 0.8009708737864077,
+    "technique_accuracy_parent": 0.8058252427184466,
+    "critical_total": 45,
+    "missed_critical": [
+      "ALR-0002",
+      "ALR-0061",
+      "ALR-0067",
+      "ALR-0095",
+      "ALR-0096",
+      "ALR-0151",
+      "ALR-0174",
+      "ALR-0183",
+      "ALR-0195"
+    ],
+    "silent_missed_critical": [],
+    "false_critical": [
+      "ALR-0001",
+      "ALR-0022",
+      "ALR-0075",
+      "ALR-0077",
+      "ALR-0102",
+      "ALR-0110",
+      "ALR-0118",
+      "ALR-0136",
+      "ALR-0144",
+      "ALR-0145",
+      "ALR-0150",
+      "ALR-0171",
+      "ALR-0175",
+      "ALR-0186",
+      "ALR-0193"
+    ],
+    "review_rate": 0.8592233009708737,
+    "accuracy_auto": 1.0,
+    "accuracy_flagged": 0.5875706214689266,
+    "latency_avg_ms": 0.009708737864077669,
+    "latency_p95_ms": 0,
+    "cost_avg_usd": 0.0,
+    "cost_total_usd": 0.0,
+    "tokens_avg": 0,
+    "tool_calls_avg": 0.5825242718446602,
+    "by_scenario": {
+      "beacon": {
+        "n": 10,
+        "severity_accuracy": 1.0
+      },
+      "brute_force": {
+        "n": 22,
+        "severity_accuracy": 0.6818181818181818
+      },
+      "exfil": {
+        "n": 10,
+        "severity_accuracy": 0.3
+      },
+      "impossible_travel": {
+        "n": 14,
+        "severity_accuracy": 0.7142857142857143
+      },
+      "lsass": {
+        "n": 10,
+        "severity_accuracy": 0.6
+      },
+      "malware_hash": {
+        "n": 18,
+        "severity_accuracy": 1.0
+      },
+      "mfa_fatigue": {
+        "n": 8,
+        "severity_accuracy": 0.625
+      },
+      "new_admin": {
+        "n": 10,
+        "severity_accuracy": 0.5
+      },
+      "noise": {
+        "n": 22,
+        "severity_accuracy": 1.0
+      },
+      "otrf_real": {
+        "n": 6,
+        "severity_accuracy": 1.0
+      },
+      "password_spray": {
+        "n": 8,
+        "severity_accuracy": 0.375
+      },
+      "port_scan": {
+        "n": 14,
+        "severity_accuracy": 0.5
+      },
+      "powershell": {
+        "n": 16,
+        "severity_accuracy": 0.3125
+      },
+      "ransomware": {
+        "n": 5,
+        "severity_accuracy": 1.0
+      },
+      "rdp": {
+        "n": 8,
+        "severity_accuracy": 1.0
+      },
+      "sched_task": {
+        "n": 10,
+        "severity_accuracy": 0.0
+      },
+      "uac": {
+        "n": 5,
+        "severity_accuracy": 1.0
+      },
+      "web_exploit": {
+        "n": 10,
+        "severity_accuracy": 0.0
+      }
+    }
+  },
+  "rows": [
+    {
+      "id": "ALR-0001",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 2,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0002",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "High-volume guessing from a known-malicious IP ending in a successful login on a privileged account: likely account takeover.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0003",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0004",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'UAC Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0005",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1595.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Port Scan Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0006",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Ransomware Behavior'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0007",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0008",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0009",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0010",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0011",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0012",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0013",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0014",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0015",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known QakBot sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0016",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0017",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0018",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Ransomware Behavior'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0019",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "Spray from a malicious IP with a successful login: a compromised account.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0020",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'AV Signature Update Failed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0021",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0022",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0023",
+      "label": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "accepted_techniques": [
+          "T1567",
+          "T1048"
+        ],
+        "rationale": "Many GB of finance data sent to personal cloud storage at 2am: likely exfiltration.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0024",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0025",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0026",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known AgentTesla malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malicious File Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0027",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0028",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0029",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Audit Policy Change'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0030",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0031",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0032",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'AV Signature Update Failed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0033",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0034",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'AV Signature Update Failed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0035",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Account Locked Out'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0036",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0037",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Sensor Offline'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0038",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Sensor Offline'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0039",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0040",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0041",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0042",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Account Locked Out'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0043",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0044",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0045",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0046",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0047",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1595.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Port Scan Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0048",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0049",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0050",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0051",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0052",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'UAC Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0053",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Ransomware Behavior'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0054",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Audit Policy Change'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0055",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0056",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0057",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Audit Policy Change'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0058",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known SocGholish sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0059",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0060",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0061",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0062",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0063",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'UAC Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0064",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0065",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0066",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Port Scan Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0067",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0068",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0069",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0070",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0071",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0072",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0073",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0074",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0075",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0076",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0077",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0078",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Account Locked Out'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0079",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0080",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0081",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0082",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0083",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Ransomware Behavior'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0084",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0085",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Standard Google updater task from a signed installer.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0086",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0087",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0088",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Account Locked Out'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0089",
+      "label": {
+        "severity": "high",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004",
+          "T1621"
+        ],
+        "rationale": "Sign-in from a known-malicious IP on a new device with push MFA approval: probable credential theft.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0090",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0091",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0092",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Certificate Expiring'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0093",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0094",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known SocGholish malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malicious File Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0095",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0096",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0097",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Multiple Failed Logins'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0098",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0099",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0100",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0101",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Sensor Offline'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0102",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1105",
+          "T1027"
+        ],
+        "rationale": "Hidden encoded PowerShell download cradle to a malicious IP. Isolate and investigate.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0103",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0104",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0105",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0106",
+      "label": {
+        "severity": "critical",
+        "technique": "T1486",
+        "accepted_techniques": [
+          "T1490"
+        ],
+        "rationale": "Mass encryption with shadow-copy deletion and ransom notes: active ransomware. Isolate immediately.",
+        "scenario": "ransomware"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1486",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Ransomware Behavior'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0107",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'UAC Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0108",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known Cobalt Strike Beacon malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malicious File Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0109",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0110",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0111",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0112",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1595.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Port Scan Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0113",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0114",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Certificate Expiring'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0115",
+      "label": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "accepted_techniques": [
+          "T1567",
+          "T1048"
+        ],
+        "rationale": "Many GB of finance data sent to personal cloud storage at 2am: likely exfiltration.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0116",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0117",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0118",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0119",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0120",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0121",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known Emotet sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0122",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0123",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Certificate Expiring'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0124",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known IcedID sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0125",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0126",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0127",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Sensor Offline'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0128",
+      "label": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "accepted_techniques": [
+          "T1046",
+          "T1595.002"
+        ],
+        "rationale": "Internet background scanning against the perimeter, fully blocked. Common noise.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "T1595.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Port Scan Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0129",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0130",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0131",
+      "label": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Brute force from an IP with no bad reputation and no success. Worth blocking and watching.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0132",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known QakBot sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0133",
+      "label": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from the open internet to a server that should not expose RDP. Verify immediately.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0134",
+      "label": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1204",
+          "T1105"
+        ],
+        "rationale": "Known Remcos malware executed and remediation failed: active infection. Isolate the host.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malicious File Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0135",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known AsyncRAT sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0136",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Signed Defender process reading LSASS during a scan is expected.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0137",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0138",
+      "label": {
+        "severity": "high",
+        "technique": "T1053.005",
+        "accepted_techniques": [
+          "T1053",
+          "T1036"
+        ],
+        "rationale": "Masquerading task running an unsigned AppData binary as SYSTEM at logon: persistence.",
+        "scenario": "sched_task"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1053.005",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Scheduled Task Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0139",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Authorized vulnerability scanner running its scheduled scan.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0140",
+      "label": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "accepted_techniques": [
+          "T1098",
+          "T1136"
+        ],
+        "rationale": "Off-hours admin account creation by a non-IT user with no change ticket: likely persistence.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0141",
+      "label": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "accepted_techniques": [
+          "T1567",
+          "T1048"
+        ],
+        "rationale": "Many GB of finance data sent to personal cloud storage at 2am: likely exfiltration.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0142",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0143",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0144",
+      "label": {
+        "severity": "high",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Attacker already has the password and is spamming MFA pushes. Reset the password now.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0145",
+      "label": {
+        "severity": "high",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Attacker already has the password and is spamming MFA pushes. Reset the password now.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0146",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0147",
+      "label": {
+        "severity": "medium",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Beacon-like pattern to an IP with no bad reputation. Could be an app heartbeat or new C2; investigate the process.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0148",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'AV Signature Update Failed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0149",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0150",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1105",
+          "T1027"
+        ],
+        "rationale": "Hidden encoded PowerShell download cradle to a malicious IP. Isolate and investigate.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0151",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0152",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0153",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "Spray from a malicious IP with a successful login: a compromised account.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0154",
+      "label": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1204.002",
+          "T1105"
+        ],
+        "rationale": "Word spawning hidden PowerShell that pulls a payload from a malicious IP: phishing document executing on the endpoint.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0155",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0156",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0157",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0158",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0159",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0160",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0161",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Certificate Expiring'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0162",
+      "label": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "accepted_techniques": [
+          "T1566.001",
+          "T1105"
+        ],
+        "rationale": "Known LockBit sample blocked before execution. Check how it arrived (email, web) and whether other hosts received it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1204.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Malware Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0163",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Second sign-in is from the corporate VPN egress. Location shift is an artifact of the VPN.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0164",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0165",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0166",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0167",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'AV Signature Update Failed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0168",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Account Locked Out'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0169",
+      "label": {
+        "severity": "critical",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1078"
+        ],
+        "rationale": "MFA bombing from a malicious IP that ended in an approval: the attacker has a valid session.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0170",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0171",
+      "label": {
+        "severity": "high",
+        "technique": "T1621",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Attacker already has the password and is spamming MFA pushes. Reset the password now.",
+        "scenario": "mfa_fatigue"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1621",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'MFA Push Fatigue'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0172",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Operational/IT hygiene event, not a security incident.",
+        "scenario": "noise"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Audit Policy Change'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0173",
+      "label": {
+        "severity": "low",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1595.002"
+        ],
+        "rationale": "Opportunistic exploit attempt that the WAF blocked. Normal internet noise.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0174",
+      "label": {
+        "severity": "critical",
+        "technique": "T1190",
+        "accepted_techniques": [
+          "T1505.003"
+        ],
+        "rationale": "Exploit succeeded and a webshell was dropped: the public web server is compromised.",
+        "scenario": "web_exploit"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1190",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Web Exploit Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0175",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1105",
+          "T1027"
+        ],
+        "rationale": "Hidden encoded PowerShell download cradle to a malicious IP. Isolate and investigate.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious Encoded PowerShell'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0176",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0177",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0178",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Sustained guessing against a privileged account from a known-malicious IP. No success yet, but needs blocking and account review.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0179",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0180",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0181",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "Spray from a malicious IP with a successful login: a compromised account.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0182",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Hash is a known-good signed installer with zero detections. Rare only because few users installed it.",
+        "scenario": "malware_hash"
+      },
+      "pred": {
+        "severity": "low",
+        "technique": "none",
+        "confidence": 0.7,
+        "needs_review": false,
+        "summary": "Rules baseline matched 'Unsigned/Rare Binary Executed'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_file_hash"
+      ]
+    },
+    {
+      "id": "ALR-0183",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "High-volume guessing from a known-malicious IP ending in a successful login on a privileged account: likely account takeover.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0184",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0185",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Admin account creation that matches an approved change ticket.",
+        "scenario": "new_admin"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1136.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Local Admin Account Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0186",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0187",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Multiple Failed Logins'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0188",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Execution-policy bypass by the signed SCCM agent running a script from its own cache: routine management.",
+        "scenario": "powershell"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'PowerShell Execution Policy Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0189",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Upload to the company's own sanctioned storage.",
+        "scenario": "exfil"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1567.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Large Upload to Cloud Storage'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0190",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Multiple Failed Logins'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0191",
+      "label": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "accepted_techniques": [
+          "T1133",
+          "T1078"
+        ],
+        "rationale": "Successful admin RDP from a known-malicious IP: hands-on-keyboard intrusion.",
+        "scenario": "rdp"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1021.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'External RDP Login'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0192",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0193",
+      "label": {
+        "severity": "high",
+        "technique": "T1110.003",
+        "accepted_techniques": [
+          "T1110"
+        ],
+        "rationale": "Spray across many accounts from a known-malicious IP. No success, but an active credential attack.",
+        "scenario": "password_spray"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1110.003",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Password Spray Detected'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0194",
+      "label": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "accepted_techniques": [
+          "T1071"
+        ],
+        "rationale": "Regular low-jitter beaconing to a known-malicious IP: command-and-control traffic from an infected host.",
+        "scenario": "beacon"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1071.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Periodic Beaconing'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0195",
+      "label": {
+        "severity": "critical",
+        "technique": "T1110.001",
+        "accepted_techniques": [
+          "T1110",
+          "T1078"
+        ],
+        "rationale": "High-volume guessing from a known-malicious IP ending in a successful login on a privileged account: likely account takeover.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Brute Force Login Attempt'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0196",
+      "label": {
+        "severity": "low",
+        "technique": "none",
+        "accepted_techniques": [],
+        "rationale": "Handful of failures from the user's own workstation right after a password change, then success: user error, not an attack.",
+        "scenario": "brute_force"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1110.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Multiple Failed Logins'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0197",
+      "label": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "accepted_techniques": [
+          "T1548",
+          "T1112"
+        ],
+        "rationale": "Classic fodhelper UAC bypass to gain elevated execution.",
+        "scenario": "uac"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1548.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'UAC Bypass'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0198",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Dumping LSASS memory steals credentials. Treat every account on the host as compromised.",
+        "scenario": "lsass"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "ALR-0199",
+      "label": {
+        "severity": "medium",
+        "technique": "T1078",
+        "accepted_techniques": [
+          "T1078.004"
+        ],
+        "rationale": "Unexplained sign-in from a clean residential IP abroad. Could be personal VPN or a stolen session; verify with the user.",
+        "scenario": "impossible_travel"
+      },
+      "pred": {
+        "severity": "medium",
+        "technique": "T1078",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Impossible Travel'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "ALR-0200",
+      "label": {
+        "severity": "high",
+        "technique": "T1046",
+        "accepted_techniques": [],
+        "rationale": "A user workstation sweeping admin ports across the network suggests an attacker doing discovery for lateral movement.",
+        "scenario": "port_scan"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1046",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Internal Port Scan'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 1,
+      "tools": [
+        "check_ip_reputation"
+      ]
+    },
+    {
+      "id": "OTRF-0001",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003",
+          "T1218.011"
+        ],
+        "rationale": "rundll32 + comsvcs MiniDump of LSASS: credential theft from memory.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Memory Dump via comsvcs.dll'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "OTRF-0002",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "PowerShell (Empire) opening LSASS with read access: Mimikatz logonpasswords.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Suspicious LSASS Process Access'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "OTRF-0003",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.003",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "ntdsutil IFM copy of NTDS.dit dumps every domain password hash.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'NTDS.dit Extraction via ntdsutil'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "OTRF-0004",
+      "label": {
+        "severity": "high",
+        "technique": "T1003.002",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "esentutl copying the SAM hive to extract local account hashes.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1003.002",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'SAM Hive Copy via esentutl'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "OTRF-0005",
+      "label": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "accepted_techniques": [
+          "T1059.005",
+          "T1059",
+          "T1027"
+        ],
+        "rationale": "VBS launcher spawning hidden encoded PowerShell: Empire stager.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "high",
+        "technique": "T1059.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'Encoded PowerShell from Script Host'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    },
+    {
+      "id": "OTRF-0006",
+      "label": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "accepted_techniques": [
+          "T1003"
+        ],
+        "rationale": "Task Manager used over RDP to write an LSASS dump file.",
+        "scenario": "otrf_real"
+      },
+      "pred": {
+        "severity": "critical",
+        "technique": "T1003.001",
+        "confidence": 0.5,
+        "needs_review": true,
+        "summary": "Rules baseline matched 'LSASS Dump File Created'."
+      },
+      "latency_ms": 0,
+      "cost_usd": 0.0,
+      "input_tokens": 0,
+      "output_tokens": 0,
+      "tool_calls": 0,
+      "tools": []
+    }
+  ]
+}
