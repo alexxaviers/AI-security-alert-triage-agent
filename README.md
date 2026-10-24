@@ -1,5 +1,16 @@
 # AI Security-Alert Triage Agent
 
+[![CI](https://github.com/alexxaviers/AI-security-alert-triage-agent/actions/workflows/ci.yml/badge.svg)](https://github.com/alexxaviers/AI-security-alert-triage-agent/actions/workflows/ci.yml)
+![Python](https://img.shields.io/badge/Python-3776AB?style=flat-square&logo=python&logoColor=white)
+![LangGraph](https://img.shields.io/badge/LangGraph-1C3C3C?style=flat-square&logo=langchain&logoColor=white)
+![FastAPI](https://img.shields.io/badge/FastAPI-009688?style=flat-square&logo=fastapi&logoColor=white)
+![PostgreSQL](https://img.shields.io/badge/PostgreSQL-4169E1?style=flat-square&logo=postgresql&logoColor=white)
+![Next.js](https://img.shields.io/badge/Next.js-000000?style=flat-square&logo=nextdotjs&logoColor=white)
+![Docker](https://img.shields.io/badge/Docker-2496ED?style=flat-square&logo=docker&logoColor=white)
+![MITRE ATT&CK](https://img.shields.io/badge/MITRE_ATT%26CK-C8102E?style=flat-square)
+
+**94.7% severity accuracy on 206 labeled alerts, versus 64.6% for a rules baseline, at $0.04 per alert.**
+
 A LangGraph agent that triages security alerts the way a tier-1 SOC analyst would. It reads an
 alert, pulls context from threat-intel tools (IP reputation, file-hash reputation, and a MITRE
 ATT&CK mapper built on vector embeddings), decides a severity, and writes a short triage report
